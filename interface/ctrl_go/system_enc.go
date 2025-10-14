@@ -148,7 +148,7 @@ func main() {
 				sampled_data_c, _ = encryptor.EncryptNew(sampled_data_p)
 
 				u_c = ctrl(eval, pq_c, io_c)
-				mem_update(sampled_data_c, io_c)
+				io_c = mem_update(sampled_data_c, io_c)
 
 				decryptor.Decrypt(u_c, u_p)
 				encoder.Decode(u_p, u_d)
