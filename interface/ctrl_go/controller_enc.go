@@ -23,12 +23,16 @@ func uint2int(val uint64, t uint64) int64 {
 	return temp
 }
 
-func mem_update(new_one *rlwe.Ciphertext, io []*rlwe.Ciphertext) {
+func mem_update(new_one *rlwe.Ciphertext, io []*rlwe.Ciphertext) []*rlwe.Ciphertext {
+	temp := make([]*rlwe.Ciphertext, 4)
+
 	for i := 0; i < 3; i++ {
-		io[i] = io[i+1]
+		temp[i] = io[i+1]
 	}
 
-	io[3] = new_one
+	temp[3] = new_one
+
+	return temp
 }
 
 func ctrl(eval *bgv.Evaluator, pg []*rlwe.Ciphertext, io []*rlwe.Ciphertext) *rlwe.Ciphertext {
