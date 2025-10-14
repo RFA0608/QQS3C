@@ -6,7 +6,7 @@ import (
 )
 
 func int2uint(val int64, t uint64) uint64 {
-	temp := int64(val) % int64(t)
+	temp := int64(val) % ((int64(t) + 1) / 2)
 	if temp < 0 {
 		temp += int64(t)
 	}
