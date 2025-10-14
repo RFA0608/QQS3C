@@ -16,7 +16,7 @@ func int2uint(val int64, t uint64) uint64 {
 func uint2int(val uint64, t uint64) int64 {
 	temp := int64(val % t)
 	
-	if temp > int64(t/2) {
+	if temp > int64((t - 1)/2) {
 		temp -= int64(t)
 	}
 
