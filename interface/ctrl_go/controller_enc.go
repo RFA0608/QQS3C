@@ -42,6 +42,7 @@ func ctrl(eval *bgv.Evaluator, pg []*rlwe.Ciphertext, io []*rlwe.Ciphertext) *rl
 
 	for i := 0; i < 4; i++ {
 		r_mul[i], _ = eval.MulNew(pg[i], io[i])
+		r_mul[i], _ = eval.RelinearizeNew(r_mul[i])
 	}
 
 	r_sum = r_mul[0]
