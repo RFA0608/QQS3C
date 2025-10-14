@@ -54,7 +54,7 @@ func main() {
 
 	rlk := kgen.GenRelinearizationKeyNew(sk)
 
-	rots := []uint64{1, 2}
+	rots := []uint64{params.GaloisElementForColRotation(+1), params.GaloisElementForColRotation(+2)}
 	rotkeys := kgen.GenGaloisKeysNew(rots, sk)
 
 	evk := rlwe.NewMemEvaluationKeySet(rlk, rotkeys...)
