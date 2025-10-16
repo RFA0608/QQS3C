@@ -74,13 +74,14 @@ with tcs.tcp_server(HOST, PORT) as tcsp:
 fig, axes = plt.subplots(2, 1)
 
 axes[0].plot(x_his, y_his[:,0])
-axes[0].set_title('angle?')
+axes[0].set_title('position')
 axes[0].grid(True)
 
 axes[1].plot(x_his, y_his[:,1])
-axes[1].set_title('position?')
+axes[1].set_title('angle')
 axes[1].grid(True)
 
 fig.suptitle('plant output')
 plt.tight_layout()
 plt.savefig('plant output with delayed control input as sim.png')
+
