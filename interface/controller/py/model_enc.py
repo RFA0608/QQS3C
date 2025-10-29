@@ -13,7 +13,7 @@ class crypto():
         # parameter setting
         self.parameters = CCParamsBFVRNS()
         self.parameters.SetPlaintextModulus(4294475777)
-        self.parameters.SetMultiplicativeDepth(3)
+        self.parameters.SetMultiplicativeDepth(2)
         
         # crypto context setting
         self.crypto_context = GenCryptoContext(self.parameters)
