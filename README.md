@@ -49,4 +49,8 @@ And pendulum swing-up manualy
 # Demonstration Video
 https://youtu.be/_wIs1nvavok
 
+"openfhe-python" does not reach 128 lambda bits security. Because there has no margin between sample time and ring dimension.
+
+On the other hand, Microsoft SEAL can control with 25ms sampling time to satisfy 128 lambda bits security.
+
 Recently modified: 251030-0158 (year month day - hour minute)
