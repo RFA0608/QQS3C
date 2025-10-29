@@ -17,7 +17,7 @@ import time
 
 def origianl():
     # set simulation(this section have to set same with plant)
-    sampling_time = 0.02
+    sampling_time = 0.025
     run_signal = True
 
     # get model from model description file
@@ -53,7 +53,7 @@ def origianl():
 
 def arx():
     # set simulation(this section have to set same with plant)
-    sampling_time = 0.02
+    sampling_time = 0.025
     run_signal = True
 
     # get model from model description file
@@ -90,7 +90,7 @@ def arx():
 
 def arx_q():
     # set simulation(this section have to set same with plant)
-    sampling_time = 0.02
+    sampling_time = 0.025
     run_signal = True
 
     # get model from model description file
@@ -132,7 +132,7 @@ def arx_q():
 
 def arx_enc():
     # set simulation(this section have to set same with plant)
-    sampling_time = 0.02
+    sampling_time = 0.025
     run_signal = True
 
     # get model from model description file
