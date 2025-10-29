@@ -105,7 +105,7 @@ def control_loop():
                 _, u = tcsp.recv()
 
                 # running range set
-                if alpha_deg < 10:
+                if abs(alpha_deg) < 10:
                     voltage = u
                 else:
                     voltage = 0
