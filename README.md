@@ -31,7 +31,7 @@ All about code have to launch root of file. So please launch debugger(vscode) on
 
 And pendulum swing-up manualy
 
-# Demonstraion Video
+# Demonstration Video
 https://youtu.be/_wIs1nvavok
 
 Recently modified: 251030-0158 (year month day - hour minute)
