@@ -53,4 +53,4 @@ https://youtu.be/_wIs1nvavok
 
 On the other hand, "Microsoft SEAL" can control with 25ms sampling time to satisfy 128 lambda bits security.
 
-Recently modified: 251030-0158 (year month day - hour minute)
+Recently modified: 251030-0654 (year month day - hour minute)
