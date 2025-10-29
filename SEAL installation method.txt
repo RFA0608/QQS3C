@@ -1,0 +1,12 @@
+1. Open WSL
+2. Make folder name of "seal" and move there
+3. Write "git clone https://github.com/microsoft/SEAL.git" on CMD window
+4. Write "git clone https://github.com/Microsoft/vcpkg.git" on CMD window
+5. Move folder name of "vcpkg" and write command "./bootstrap-vcpkg.sh"
+5-1. Sometime if there not exists "ninja" file, you can get a error. So write command "sudo apt-get install -y ninja-build"
+6. Write command "./vcpkg integrate install" and continuously write command "./vcpkg install seal" on CMD window
+6-1. Sometime if there not exists "clang" file, you can get a error. So write command "sudo apt install clang"
+6-2. Also can get error there not exists pkg-config, write command "sudo apt-get install pkg-config"
+7. Move directory to name of SEAL, write "cmake -S . -B build", "cmake --build build", "sudo cmake --install build" by order
+7-1. If you not have "cmake" write command "sudo apt install cmake"
+
