@@ -47,7 +47,7 @@ class ctrl:
 
         # for gain K dlqr parameters setting
         Q_k = np.array([[5000, 0, 0, 0],
-                        [0, 100, 0, 0],
+                        [0, 400, 0, 0],
                         [0, 0, 1, 0],
                         [0, 0, 0, 1]], dtype=float)
         R_k = np.array([[1]], dtype=float)
