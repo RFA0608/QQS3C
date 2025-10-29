@@ -13,6 +13,7 @@ import model_enc
 
 # get other tools
 import numpy as np
+import time
 
 def origianl():
     # set simulation(this section have to set same with plant)
@@ -160,6 +161,9 @@ def arx_enc():
             _, signal = tccp.recv()
 
             if signal == "run":
+                # start clock set
+                stc = time.perf_counter_ns()
+
                 # get plant output
                 _, y0 = tccp.recv()
                 _, y1 = tccp.recv()
@@ -169,7 +173,7 @@ def arx_enc():
                 # send control input data
                 tccp.send(u[0, 0])
 
-
+                # y and u value encryption after packing
                 signal = enc_4_sys.enc_signal(y, u)
                 
                 ## controller description ##
@@ -184,6 +188,11 @@ def arx_enc():
                 int_u = enc_4_sys.dec_signal(enc_u)
 
                 u[0, 0] = float(int_u) / ctrl_arx_q.r / ctrl_arx_q.s
+
+                # end clock set
+                edc = time.perf_counter_ns()
+                duration = (edc - stc) / 1000000
+                print(f"loop time: {duration}ms")
 
                 # ------------------------------------------------ #
             elif signal == "end":
