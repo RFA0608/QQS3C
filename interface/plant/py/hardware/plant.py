@@ -9,7 +9,7 @@ sys.path.append(r"./py")
 import tcp_protocol_server as tcs
 
 # init tcp host and port
-HOST = 'localhost'
+HOST = '0.0.0.0'
 PORT = 9999
 
 # get other tools
@@ -62,7 +62,7 @@ def control_loop():
     pendulum = 1
 
     # frequency of system holder and sampler
-    frequency = 50 # hz
+    frequency = 40 # hz
 
     # for scope sampling rate
     countMax = frequency / 50
@@ -105,7 +105,7 @@ def control_loop():
                 _, u = tcsp.recv()
 
                 # running range set
-                if abs(alpha_deg) < 10:
+                if abs(alpha_deg) < 15:
                     voltage = u
                 else:
                     voltage = 0
