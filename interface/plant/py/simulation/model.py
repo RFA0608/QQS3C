@@ -38,14 +38,16 @@ class rotpen:
         # ------------------------------------------------ #
 
         # set initial point of state
-        x_init = np.array([[0.3],
-                           [0.12],
+        x_init = np.array([[0],
+                           [0],
                            [0],
                            [0]], dtype=float)
         
         # save initial point
         self.xp = x_init
 
+    def set_init(self, x_init):
+        self.xp = x_init
 
     def state_update(self, u):
         # update state on temp variable

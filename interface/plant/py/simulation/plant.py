@@ -16,13 +16,19 @@ import matplotlib.pyplot as plt
 import time
 
 def main():
-    # set simulation
-    sampling_time = 0.01
+    # set simulation(this section have to set same with controller)
+    sampling_time = 0.02
     max_time = 10
     max_iter = int(max_time / sampling_time)
 
     # get model from model description file
     plant = model.rotpen(sampling_time)
+
+    # set state initial value
+    plant.set_init(np.array([[-0.3],
+                             [-0.2],
+                             [0],
+                             [0]], dtype=float))
 
     # input/output initialization
     y = np.array([[0],
@@ -76,7 +82,7 @@ def main():
         axes[1].grid(True)
         fig.suptitle('plant output')
         plt.tight_layout()
-        plt.savefig('./interface/plant/py/plant output as sim.png')
+        plt.savefig('./interface/plant/py/simulation/result/plant output as sim.png')
 
 if __name__ == "__main__":
     main()
