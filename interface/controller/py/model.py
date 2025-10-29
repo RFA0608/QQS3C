@@ -46,8 +46,8 @@ class ctrl:
         self.D = D
 
         # for gain K dlqr parameters setting
-        Q_k = np.array([[10, 0, 0, 0],
-                        [0, 1, 0, 0],
+        Q_k = np.array([[5000, 0, 0, 0],
+                        [0, 100, 0, 0],
                         [0, 0, 1, 0],
                         [0, 0, 0, 1]], dtype=float)
         R_k = np.array([[1]], dtype=float)
@@ -56,8 +56,8 @@ class ctrl:
         # for gain L dlqr parameters setting
         Q_l = np.array([[1, 0, 0, 0],
                         [0, 1, 0, 0],
-                        [0, 0, 100, 0],
-                        [0, 0, 0, 10]], dtype=float)
+                        [0, 0, 500, 0],
+                        [0, 0, 0, 100]], dtype=float)
         R_l = np.array([[1, 0],
                         [0, 1]], dtype=float)
         L, Sl, El = ct.dlqr(self.A.T, self.C.T, Q_l, R_l)
