@@ -5,7 +5,7 @@
 >> else use observer we get state x+ and u = Hx+, H and x+ encryption.
 
 > observer based state re-encryption.
-x+ = Fx+Gy, u = Hx+, All component encryption and x+ and u re-encryption.
+>> x+ = Fx+Gy, u = Hx+, All component encryption and x+ and u re-encryption.
 
 # Before useing
 All about code have to launch root of file. So please launch debugger(vscode) on root of file.
