@@ -121,14 +121,14 @@ class enc_for_system
         int64_t s = 1000;
 
         // you can get HG_q and HL_q from controller/py/controller.py file
-        int64_t HG_q[4][2] = {{-11406, 19369},
-                              {63183, -106960},
-                              {-102891, 194108},
-                              {51786, -116493}};
-        int64_t HL_q[4][1] = {{-125},
-                              {308},
-                              {-170},
-                              {-127}};
+        int64_t HG_q[4][2] = {{-8186, 16567},
+                              {48320, -94714},
+                              {-83273, 181857},
+                              {43975, -117136}};
+        int64_t HL_q[4][1] = {{-189},
+                              {425},
+                              {-83},
+                              {-666}};
 
         // encrypted gain that packed and encrypted like PQ_enc[0] = {HG_q[0, 0], HG_q[0, 1], HL_q[0, 0]}                              
         vector<Ciphertext> PQ_enc;
