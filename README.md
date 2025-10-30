@@ -1,10 +1,10 @@
 # Future work
-1. full-state feedback encryption.
+> full-state feedback encryption.
 methond of getting full-state: ddt-fillter, observer.
 if use ddt-fillter we get state x and u = -K(A-BK)x, -K(A-BK) and x encryption.
 else use observer we get state x+ and u = Hx+, H and x+ encryption.
 
-2. observer based state re-encryption.
+> observer based state re-encryption.
 x+ = Fx+Gy, u = Hx+, All component encryption and x+ and u re-encryption.
 
 # Before useing
