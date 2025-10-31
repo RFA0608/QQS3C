@@ -22,11 +22,11 @@ int main()
 
     // get crypto model from model_enc.h
     crypto crypto_cl = crypto();
-    enc_for_system enc_4_sys = enc_for_system(crypto_cl);
-    enc_4_sys.set_level(1000, 1000);
-    ctrl_enc ctrl_enc_v = ctrl_enc(crypto_cl.get_crypto(), crypto_cl.get_relinkey(), crypto_cl.get_galoiskeys());
-    ctrl_enc_v.set_pq(enc_4_sys.get_PQ_enc());
-    ctrl_enc_v.set_io(enc_4_sys.get_Z_enc());
+    enc_for_arx enc_4_arx = enc_for_arx(crypto_cl);
+    enc_4_arx.set_level(1000, 1000);
+    arx_enc arx_enc_v = arx_enc(crypto_cl.get_crypto(), crypto_cl.get_relinkey(), crypto_cl.get_galoiskeys());
+    arx_enc_v.set_pq(enc_4_arx.get_PQ_enc());
+    arx_enc_v.set_io(enc_4_arx.get_Z_enc());
 
     // set tcp client
     tcp_client tccp = tcp_client(host, port);
@@ -62,20 +62,20 @@ int main()
             tccp.Send<double>(u[0]);
 
             // y and u value encryption after packing
-            Ciphertext signal = enc_4_sys.enc_signal(y, u);
+            Ciphertext signal = enc_4_arx.enc_signal(y, u);
 
             // -- controller description -- //
             // ========================================================== //
             // ctrl mem update on encrypted space after encryption input/output value
-            ctrl_enc_v.mem_update(signal);
+            arx_enc_v.mem_update(signal);
 
             // get control input on ciphertext space
-            Ciphertext enc_u = ctrl_enc_v.get_output();
+            Ciphertext enc_u = arx_enc_v.get_output();
             // ========================================================== //
 
-            int_u = enc_4_sys.dec_signal(enc_u); 
+            int_u = enc_4_arx.dec_signal(enc_u); 
 
-            u[0] = (double)(int_u[0]) / enc_4_sys.get_level()[0] / enc_4_sys.get_level()[1];
+            u[0] = (double)(int_u[0]) / enc_4_arx.get_level()[0] / enc_4_arx.get_level()[1];
 
             // end clock set
             edc = chrono::high_resolution_clock::now();
