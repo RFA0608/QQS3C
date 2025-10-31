@@ -72,6 +72,7 @@ def arx_enc():
 
                 dec_x, dec_u = enc_4_obs.dec_signal(enc_xn, enc_u)
 
+                # de-quantization
                 for i in range(4):
                     x[i, 0] = float(dec_x[i, 0]) / enc_4_obs.r / enc_4_obs.s 
 
