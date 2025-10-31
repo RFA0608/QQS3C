@@ -116,13 +116,15 @@ class enc_for_obs():
         self.s = s
 
     def enc_signal(self, x, y):
-        vec = [-1]
+        vec = [0, 0, 0, 0]
         for i in range(4):
-            vec[0] = int(x[i, 0] * self.r)
+            for j in range(4):
+                vec[j] = int(x[i, 0] * self.r)
             self.x_enc[i] = self.crypto_class.enc_vector(vec)
         
         for i in range(2):
-            vec[0] = int(y[i, 0] * self.r)
+            for j in range(4):
+                vec[j] = int(y[i, 0] * self.r)
             self.y_enc[i] = self.crypto_class.enc_vector(vec)
 
         return self.x_enc, self.y_enc
