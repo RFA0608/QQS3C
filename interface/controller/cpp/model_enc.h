@@ -112,7 +112,7 @@ class crypto
         };
 };
 
-class enc_for_system
+class enc_for_arx
 {
     private:
         crypto& crypto_cl;
@@ -138,7 +138,7 @@ class enc_for_system
         vector<Ciphertext> Z_enc;
     
     public:
-        enc_for_system(crypto& crypto_class): 
+        enc_for_arx(crypto& crypto_class): 
             crypto_cl(crypto_class),
             PQ_enc(4),
             Z_enc(4)
@@ -164,7 +164,7 @@ class enc_for_system
             }
         };
 
-        ~enc_for_system(){};
+        ~enc_for_arx(){};
 
         void set_level(int64_t r, int64_t s)
         {
@@ -212,7 +212,7 @@ class enc_for_system
         }
 };
 
-class ctrl_enc
+class arx_enc
 {
     private:
         SEALContext ctext;
@@ -228,12 +228,12 @@ class ctrl_enc
         vector<Ciphertext>io; // oldest -> newest
 
     public:
-        ctrl_enc(const SEALContext& context, RelinKeys relin_keys, GaloisKeys galois_keys): ctext(context), evaluator(context), pq(4), io(4) 
+        arx_enc(const SEALContext& context, RelinKeys relin_keys, GaloisKeys galois_keys): ctext(context), evaluator(context), pq(4), io(4) 
         {
             this->relin_keys = relin_keys;
             this->galois_keys = galois_keys;
         };
-        ~ctrl_enc(){};
+        ~arx_enc(){};
 
         void set_pq(const vector<Ciphertext>& pq)
         {
