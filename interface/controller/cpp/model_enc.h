@@ -28,7 +28,7 @@ class crypto
             EncryptionParameters parms(scheme_type::bgv);
             size_t poly_modulus_degree = 8192;
             parms.set_poly_modulus_degree(poly_modulus_degree);
-            parms.set_coeff_modulus(CoeffModulus::BFVDefault(poly_modulus_degree));
+            parms.set_coeff_modulus(CoeffModulus::Create(poly_modulus_degree, {46, 46, 46}));
             parms.set_plain_modulus(PlainModulus::Batching(poly_modulus_degree, 32));
             
             return parms;
@@ -121,14 +121,14 @@ class enc_for_arx
         int64_t s = 1000;
 
         // you can get HG_q and HL_q from controller/py/controller.py file
-        int64_t HG_q[4][2] = {{-8186, 16567},
-                              {48320, -94714},
-                              {-83273, 181857},
-                              {43975, -117136}};
-        int64_t HL_q[4][1] = {{-189},
-                              {425},
-                              {-83},
-                              {-666}};
+        int64_t HG_q[4][2] = {{-17780, 25231},
+                              {93311, -134518},
+                              {-144643, 230421},
+                              {69691, -128733}};
+        int64_t HL_q[4][1] = {{-78},
+                              {235},
+                              {-306},
+                              {319}};
 
         // encrypted gain that packed and encrypted like PQ_enc[0] = {HG_q[0, 0], HG_q[0, 1], HL_q[0, 0]}                              
         vector<Ciphertext> PQ_enc;
