@@ -17,7 +17,7 @@ const int port = 9999;
 int main()
 {
     // set simulation(this section have to set same with plant)
-    double samplint_time = 0.03;
+    double samplint_time = 0.02;
     bool run_signal = true;
 
     // get crypto model from model_enc.h
