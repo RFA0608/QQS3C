@@ -1,7 +1,7 @@
-# Before using
+# 0️⃣ Before using
 All about code have to launch root of file. So please launch debugger(vscode) on root of file.
 
-# Process for simulation
+# 1️⃣ Process for simulation
 ## Setting
 This require WSL enviroment for using openFHE and SEAL library.
 
@@ -64,7 +64,7 @@ Since it is in the same form as the hardware communication of the Quanser Qube S
 
 And pendulum swing-up manualy
 
-# Demonstration Video
+# 3️⃣ Demonstration Video
 https://youtu.be/_wIs1nvavok
 
 "openfhe-python" does not reach 128 lambda bits security. Because there has no margin between sampling period and calculation time related to ring dimension.
