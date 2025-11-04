@@ -3,7 +3,7 @@ All about code have to launch root of file. So please launch debugger(vscode) on
 
 # Process for simulating
 ## Setting
-This is required WSL enviroment for using openFHE and SEAL library.
+This require WSL enviroment for using openFHE and SEAL library.
 
 ### WSL
 1. WSL launch and download file copy on WSL.
