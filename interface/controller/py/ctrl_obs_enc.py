@@ -15,7 +15,7 @@ import model_enc
 import numpy as np
 import time
 
-def arx_enc():
+def obs_encrypted():
     # set simulation(this section have to set same with plant)
     sampling_time = 0.025
     run_signal = True
@@ -91,7 +91,7 @@ def arx_enc():
                 break
 
 def main():
-    arx_enc()
+    obs_encrypted()
 
 if __name__ == "__main__":
     main()

@@ -13,24 +13,21 @@ import model
 # get other tools
 import numpy as np
 
-def obs_quantized():
+def fs_quantized():
     # set simulation(this section have to set same with plant)
-    sampling_time = 0.025
+    sampling_time = 0.02
     run_signal = True
 
     # get model from model description file
     obs = model.obs(sampling_time)
-    obs_q = model.obs_q(obs.F, obs.G, obs.H)
+    fs = model.fs(obs.H)
+    fs_q = model.fs_q(fs.H)
 
     # set quantized level and quantize matrix
-    obs_q.set_level(1000, 1000)
-    obs_q.quantize()
+    fs_q.set_level(1000, 1000)
+    fs_q.quantize()
 
     # input/output initialization
-    x = np.array([[0],
-                  [0],
-                  [0],
-                  [0]], dtype=float)
     y = np.array([[0],
                   [0]], dtype=float)
     u = np.array([[0]], dtype=float)
@@ -50,16 +47,16 @@ def obs_quantized():
                 # send control input data
                 tccp.send(u[0, 0])
 
-                # arx memory update and generate output
-                x = obs_q.state_update(x, y)
-                u = obs_q.get_output()
+                # plant state update and generate output
+                obs.state_update(y)
+                u = fs_q.get_output(obs.xc)
             elif signal == "end":
                 # end of loop signal get
                 run_signal = False
                 break
 
 def main():
-    obs_quantized()
+    fs_quantized()
 
 if __name__ == "__main__":
     main()

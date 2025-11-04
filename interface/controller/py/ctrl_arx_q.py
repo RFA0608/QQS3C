@@ -9,15 +9,13 @@ PORT = 9999
 
 # get model description
 import model
-import model_enc
 
 # get other tools
 import numpy as np
-import time
 
-def arx_q():
+def arx_quantized():
     # set simulation(this section have to set same with plant)
-    sampling_time = 0.025
+    sampling_time = 0.015
     run_signal = True
 
     # get model from model description file
@@ -26,8 +24,12 @@ def arx_q():
     arx_q = model.arx_q(arx.HG, arx.HL)
 
     # set quantized level and quantize matrix
-    arx_q.set_level(1000, 1000)
+    arx_q.set_level(2000, 2000)
     arx_q.quantize()
+
+    # print matrix of HG_q and HL_q
+    print(arx_q.HG_q)
+    print(arx_q.HL_q)
 
     # input/output initialization
     y = np.array([[0],
@@ -58,7 +60,7 @@ def arx_q():
                 break
 
 def main():
-    arx_q()
+    arx_quantized()
 
 if __name__ == "__main__":
     main()

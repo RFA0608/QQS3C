@@ -17,13 +17,13 @@ const int port = 9999;
 int main()
 {
     // set simulation(this section have to set same with plant)
-    double samplint_time = 0.02;
+    double samplint_time = 0.015;
     bool run_signal = true;
 
     // get crypto model from model_enc.h
     crypto crypto_cl = crypto();
     enc_for_arx enc_4_arx = enc_for_arx(crypto_cl);
-    enc_4_arx.set_level(1000, 1000);
+    enc_4_arx.set_level(2000, 2000);
     arx_enc arx_enc_v = arx_enc(crypto_cl.get_crypto(), crypto_cl.get_relinkey(), crypto_cl.get_galoiskeys());
     arx_enc_v.set_pq(enc_4_arx.get_PQ_enc());
     arx_enc_v.set_io(enc_4_arx.get_Z_enc());

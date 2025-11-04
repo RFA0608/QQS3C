@@ -9,11 +9,9 @@ PORT = 9999
 
 # get model description
 import model
-import model_enc
 
 # get other tools
 import numpy as np
-import time
 
 def observer_based_controller():
     # set simulation(this section have to set same with plant)

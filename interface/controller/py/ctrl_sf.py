@@ -9,11 +9,9 @@ PORT = 9999
 
 # get model description
 import model
-import model_enc
 
 # get other tools
 import numpy as np
-import time
 
 # this method only can be used fast sampling time
 def state_filter():

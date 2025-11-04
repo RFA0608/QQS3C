@@ -166,8 +166,10 @@ class obs:
         self.xc = xc_next
 
     def get_output(self):
-        return self.H @ self.xc
-    
+        self.u = self.H @ self.xf
+
+        return self.u
+
 class obs_q():
     # quantized level s for matrix and r for signal
     s = 1
@@ -204,12 +206,11 @@ class obs_q():
     
     def state_update(self, x, y):
         # update state with quantization
-        self.y_q[0, 0] = int(self.r * y[0, 0])
-        self.y_q[1, 0] = int(self.r * y[1, 0])
-        self.x_q[0, 0] = int(self.r * x[0, 0])
-        self.x_q[1, 0] = int(self.r * x[1, 0])
-        self.x_q[2, 0] = int(self.r * x[2, 0])
-        self.x_q[3, 0] = int(self.r * x[3, 0])
+        for i in range(2):
+            self.y_q[i, 0] = int(self.r * y[i, 0])
+        for i in range(4):
+            self.x_q[i, 0] = int(self.r * x[i, 0])
+
         self.x_q = self.F_q @ self.x_q + self.G_q @ self.y_q
         self.x = self.x_q.astype(float) / self.r / self.s
         
@@ -220,7 +221,56 @@ class obs_q():
         self.u[0, 0] = float(self.u_q[0, 0]) / self.r / self.s / self.s
 
         return self.u
+    
+class fs():
+    # gain of x
+    H = np.zeros((1,4), dtype=float)
 
+    # output
+    u = np.zeros((1,1), dtype=float)
+
+    def __init__(self, H):
+        self.H = H
+
+    def get_output(self, x):
+        self.u = self.H @ x;
+
+        return self.u
+    
+class fs_q():
+    # quantized level s for matrix and r for signal
+    s = 1
+    r = 1
+
+    # gain of x
+    H = np.zeros((1,4), dtype=float)
+    H_q = np.zeros((1,4), dtype=int)
+
+    # input/output
+    x_q = np.zeros((4,1), dtype=int)
+    x = np.zeros((4,1), dtype=float)
+    u_q = np.zeros((1,1), dtype=int)
+    u = np.zeros((1,1), dtype=float)
+
+    def __init__(self, H):
+        self.H = H
+
+    def set_level(self, r, s):
+        self.r = r
+        self.s = s
+
+    def quantize(self):
+        self.H_q = (self.s * self.H).astype(int)
+
+    def get_output(self, x):
+        for i in range(4):
+            self.x_q[i, 0] = int(self.r * x[i, 0])
+
+        self.u_q = self.H_q @ self.x_q
+        
+        self.u[0,0] = float(self.u_q[0, 0]) / self.r / self.s
+
+        return self.u
 
 from numpy.linalg import matrix_rank, eigvals
 
@@ -355,4 +405,5 @@ class arx_q():
             self.u_q = self.u_q + self.HG_q[i,:] @ self.Ys_q[i,:].T + self.HL_q[i,:] @ self.Us_q[i,:]
         
         self.u[0,0] = float(self.u_q[0, 0]) / self.r / self.s
+
         return self.u

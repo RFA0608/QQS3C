@@ -1,0 +1,3 @@
+/home/mike590590/codedir/QQS3C/251104/interface/controller/cpp/CMakeFiles/ctrl_arx_enc.dir
+/home/mike590590/codedir/QQS3C/251104/interface/controller/cpp/CMakeFiles/edit_cache.dir
+/home/mike590590/codedir/QQS3C/251104/interface/controller/cpp/CMakeFiles/rebuild_cache.dir
