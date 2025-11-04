@@ -1,7 +1,7 @@
 # Before using
 All about code have to launch root of file. So please launch debugger(vscode) on root of file.
 
-# Process for simulating
+# Process for simulation
 ## Setting
 This require WSL enviroment for using openFHE and SEAL library.
 
