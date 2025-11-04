@@ -11,7 +11,7 @@ This require WSL enviroment for using openFHE and SEAL library.
 3. Continuously write "source ./venv/bin/activate" on same windows.
 4. After check running venv enviroment, write "pip install numpy", "pip install matplotlib", "pip install control", "pip install openfhe" on same windows.
 
-5. If you want to use cpp controller file with Microsoft SEAL, you will need install SEAL library. Check "SEAL installation method" file on git page.
+5. If you want to use cpp controller file with Microsoft SEAL, you will need install SEAL library. Check "SEAL installation method" file on this git page.
 
 ### windows
 1. Launch powershell and write "ipconfig" on there.
