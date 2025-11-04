@@ -22,7 +22,7 @@ This require WSL enviroment for using openFHE and SEAL library.
 #### py
 1. On root of file, launch vscode on windows and WSL.
 2. Find controller description code set which are located in interface/controller/py folder on vscode on WSL.
-3. Select file which is name like "ctrl_***.py", Instruction what that file mean refer bellow.
+3. Select file which is name like "ctrl_***.py", The instruction of what that means is below.
    - "ctrl_sf.py": controller made with d/dt filter. That only can use if sampling time faster than 5ms.
    - "ctrl_obs.py": controller made with observer technique.
    - "ctrl_obs_q.py": quantization "ctrl_obs.py"'s controller.
