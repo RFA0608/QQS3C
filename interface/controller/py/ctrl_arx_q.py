@@ -15,7 +15,7 @@ import numpy as np
 
 def arx_quantized():
     # set simulation(this section have to set same with plant)
-    sampling_time = 0.015
+    sampling_time = 0.02
     run_signal = True
 
     # get model from model description file
@@ -24,7 +24,7 @@ def arx_quantized():
     arx_q = model.arx_q(arx.HG, arx.HL)
 
     # set quantized level and quantize matrix
-    arx_q.set_level(2000, 2000)
+    arx_q.set_level(1000, 1000)
     arx_q.quantize()
 
     # print matrix of HG_q and HL_q
