@@ -62,7 +62,7 @@ Since it is in the same form as the hardware communication of the Quanser Qube S
 1. Run plant.py file on windows.
 2. Write command "./ctrl_arx_enc" on the path of interface/controller/cpp.
 
-And pendulum swing-up manualy
+And pendulum swing-up manualy.
 
 # 3️⃣ Demonstration Video
 https://youtu.be/_wIs1nvavok
