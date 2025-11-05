@@ -88,7 +88,7 @@ def control_loop():
             startTime = time.time()
 
             while timeStamp < simulationTime and not KILL_THREAD:
-                if !stand_run:
+                if not stand_run:
                     # read sensor information
                     myQube.read_outputs()
 
@@ -104,6 +104,8 @@ def control_loop():
                     voltage = 0
                     # write commands
                     myQube.write_voltage(voltage)
+
+                    print(f"control start: {stand_run}")
                 else:
                     # running signal send for controller
                     tcsp.send("run")
