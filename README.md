@@ -69,6 +69,6 @@ https://youtu.be/_wIs1nvavok
 
 "openfhe-python" does not reach 128 lambda bits security. Because there has no margin between sampling period and calculation time related to ring dimension / moduli.
 
-On the other hand, "Microsoft SEAL" can control with 15ms sampling time to satisfy 128 lambda bits security.
+On the other hand, "Microsoft SEAL" can control with 20ms sampling time to satisfy 128 lambda bits security.
 
-Recently modified: 251104-1926 (year month day - hour minute) [KST]
+Recently modified: 251105-1528 (year month day - hour minute) [KST]
