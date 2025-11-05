@@ -71,6 +71,9 @@ def control_loop():
     # class initialization
     QubeClass = QubeServo3
 
+    # swing-up standing gate
+    stand_run = False
+    er = 0.01
 
     # describe #
     # ------------------------------------------------ #
@@ -85,33 +88,50 @@ def control_loop():
             startTime = time.time()
 
             while timeStamp < simulationTime and not KILL_THREAD:
-                # running signal send for controller
-                tcsp.send("run")
+                if !stand_run:
+                    # read sensor information
+                    myQube.read_outputs()
 
-                # read sensor information
-                myQube.read_outputs()
+                    # calc output
+                    theta = myQube.motorPosition * -1
+                    alpha_f =  myQube.pendulumPosition
+                    alpha = np.mod(alpha_f, 2*np.pi) - np.pi
+                    alpha_deg = alpha * 180 / np.pi
 
-                # calc output
-                theta = myQube.motorPosition * -1
-                alpha_f =  myQube.pendulumPosition
-                alpha = np.mod(alpha_f, 2*np.pi) - np.pi
-                alpha_deg = alpha * 180 / np.pi
-
-                # send plant output
-                tcsp.send(-theta)
-                tcsp.send(-alpha)
-
-                # get control input
-                _, u = tcsp.recv()
-
-                # running range set
-                if abs(alpha_deg) < 15:
-                    voltage = u
-                else:
+                    if abs(alpha) < er and abs(theta) < er:
+                        stand_run = True
+                    
                     voltage = 0
-
-                # write commands
-                myQube.write_voltage(voltage)
+                    # write commands
+                    myQube.write_voltage(voltage)
+                else:
+                    # running signal send for controller
+                    tcsp.send("run")
+    
+                    # read sensor information
+                    myQube.read_outputs()
+    
+                    # calc output
+                    theta = myQube.motorPosition * -1
+                    alpha_f =  myQube.pendulumPosition
+                    alpha = np.mod(alpha_f, 2*np.pi) - np.pi
+                    alpha_deg = alpha * 180 / np.pi
+    
+                    # send plant output
+                    tcsp.send(-theta)
+                    tcsp.send(-alpha)
+    
+                    # get control input
+                    _, u = tcsp.recv()
+    
+                    # running range set
+                    if abs(alpha_deg) < 15:
+                        voltage = u
+                    else:
+                        voltage = 0
+    
+                    # write commands
+                    myQube.write_voltage(voltage)
 
                 # plot to scopes
                 count += 1
