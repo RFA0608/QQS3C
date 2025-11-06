@@ -1,5 +1,5 @@
 // The folder with go.mod must have the file "tcp_protocol_client.go" with the same package name
-package main
+package protocol
 
 import "fmt"
 
