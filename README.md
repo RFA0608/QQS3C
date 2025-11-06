@@ -1,5 +1,10 @@
 # 0️⃣ Before using
 All about code have to launch root of file. So please launch debugger(vscode) on root of file.
+This library require 
+1. go version 1.25.1 
+2. c++13 compiler
+3. 3.12.3 python
+at least.
 
 # 1️⃣ Process for simulation
 ## Setting
