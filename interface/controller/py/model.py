@@ -462,6 +462,8 @@ class intmat():
         # self.H_cv = H/T
 
         # save converted matrix manualy from MATLAB
+        # you can found the file name of "transpose_matrix2int" on /interface/controller/py/tools folder
+        # copy and paste observer state matrix F, G, H to there, get and write below invertible matrix T
         T = np.array([[1.08298117367527, -1.68154748826889, -0.00233914245960275, 0.00849834019672862],
                       [-12.3537090165341, 21.4090792063878, 1.11583734511801, -2.57875666750599],
                       [-6.57440240290518, 11.0728803774811, 0.592848488851846, -1.33743052540943],
