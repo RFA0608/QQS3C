@@ -4,7 +4,7 @@ This library require
 1. go version 1.25.1 
 2. c++13 compiler
 3. 3.12.3 python
-at least.
+at least. Ubuntu 24.04 LTS is proper version of WSL os.
 
 # 1️⃣ Process for simulation
 ## Setting
