@@ -13,13 +13,23 @@ import model
 # get other tools
 import numpy as np
 
-def observer_based_controller():
+def integer_state_matrix():
     # set simulation(this section have to set same with plant)
+    # alternatively this controller match sampling_time with MATLAB code(for transpose matrix T, cf. model.py this folder)
     sampling_time = 0.02
     run_signal = True
 
     # get model from model description file
     obs = model.obs(sampling_time)
+    print(f"controller's matrix F: \n{obs.F}")
+    print(f"controller's matrix G: \n{obs.G}")
+    print(f"controller's matrix H: \n{obs.H}\n")
+
+    intmat = model.intmat(obs.F, obs.G, obs.H, obs.J, obs.ts)
+    print(f"controller's converted matrix F: \n{intmat.F_cv}")
+    print(f"controller's converted matrix R: \n{intmat.R_cv}")
+    print(f"controller's converted matrix G: \n{intmat.G_cv}")
+    print(f"controller's converted matrix H: \n{intmat.H_cv}\n")
 
     # input/output initialization
     y = np.array([[0],
@@ -42,15 +52,15 @@ def observer_based_controller():
                 tccp.send(u[0, 0])
 
                 # plant state update and generate output
-                obs.state_update(y)
-                u = obs.get_output()
+                intmat.state_update(y, u)
+                u = intmat.get_output()
             elif signal == "end":
                 # end of loop signal get
                 run_signal = False
                 break
 
 def main():
-    observer_based_controller()
+    integer_state_matrix()
 
 if __name__ == "__main__":
     main()

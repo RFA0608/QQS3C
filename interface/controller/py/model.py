@@ -78,6 +78,9 @@ class sf:
         return -self.K @ self.es
 
 class obs:
+    # sampling peroid
+    ts = 0.1
+
     # system(state) matrix(state space linearlization - discrete model)
     A = np.zeros((4,4), dtype=float)
     B = np.zeros((4,1), dtype=float)
@@ -92,10 +95,10 @@ class obs:
     F = np.zeros((4,4), dtype=float)
     G = np.zeros((4,2), dtype=float)
     H = np.zeros((1,4), dtype=float)
-    J = np.zeros((1,1), dtype=float) 
+    J = np.zeros((1,2), dtype=float) 
 
     # state and output
-    xc = np.zeros((4,1), dtype=float)
+    x = np.zeros((4,1), dtype=float)
     u = np.zeros((1,1), dtype=float)
 
     def __init__(self, ts):
@@ -120,6 +123,7 @@ class obs:
         self.B = sys_d.B
         self.C = C
         self.D = D
+        self.ts = ts
 
         # for gain K dlqr parameters setting
         Q_k = np.array([[5000, 0, 0, 0],
@@ -156,17 +160,17 @@ class obs:
                            [0]], dtype=float)
         
         # save initial point
-        self.xc = x_init
+        self.x = x_init
 
     def state_update(self, y):
         # update state on temp variable
-        xc_next = self.F @ self.xc + self.G @ y
+        x_next = self.F @ self.x + self.G @ y
         
         # save state
-        self.xc = xc_next
+        self.x = x_next
 
     def get_output(self):
-        self.u = self.H @ self.xf
+        self.u = self.H @ self.x
 
         return self.u
 
@@ -405,5 +409,130 @@ class arx_q():
             self.u_q = self.u_q + self.HG_q[i,:] @ self.Ys_q[i,:].T + self.HL_q[i,:] @ self.Us_q[i,:]
         
         self.u[0,0] = float(self.u_q[0, 0]) / self.r / self.s
+
+        return self.u
+    
+class intmat():
+    # sampling peroid
+    ts = 0.1
+
+    # observer controller state space model
+    F = np.zeros((4,4), dtype=float)
+    G = np.zeros((4,2), dtype=float)
+    H = np.zeros((1,4), dtype=float)
+    J = np.zeros((2,1), dtype=float) 
+
+    # gain of which convert F-RH's pole to integer 
+    R = np.zeros((4,1), dtype=float)
+
+    # converted to int model
+    F_cv = np.zeros((4,4), dtype=float)
+    G_cv = np.zeros((4,2), dtype=float)
+    H_cv = np.zeros((1,4), dtype=float)
+    R_cv = np.zeros((4,1), dtype=float) 
+
+    # state and output
+    x = np.zeros((4,1), dtype=float)
+    u = np.zeros((1,1), dtype=float)
+
+    def __init__(self, F, G, H, J, ts):
+        self.F = F
+        self.G = G
+        self.H = H
+        self.J = J
+        self.ts = ts
+
+        # find gain R which convert F-RH's pole to integer
+        pole = np.array([[0, 1, 2, -1]])
+        R = ct.place(self.F.T, self.H.T, pole).T
+        
+        # save gain R
+        self.R = R
+    
+        # # This section doesn't support on python-control library
+        # # So, you change on MATLAB and save manualy
+        # # find canonical model transformed matrix T
+        # sys = ct.ss((F-R@H), G, H, J)
+        # csys, T = ct.canonical_form(sys, form='reachable')
+
+        # # save converted form
+        # self.F_cv = T@(F-R@H)/T
+        # self.R_cv = T@R
+        # self.G_cv = T@G
+        # self.H_cv = H/T
+
+        # save converted matrix manualy from MATLAB
+        T = np.array([[1.08298117367527, -1.68154748826889, -0.00233914245960275, 0.00849834019672862],
+                      [-12.3537090165341, 21.4090792063878, 1.11583734511801, -2.57875666750599],
+                      [-6.57440240290518, 11.0728803774811, 0.592848488851846, -1.33743052540943],
+                      [6.18914661548333, -10.7115627543182, -0.558907686374587, 1.28851436364236]])
+        
+        self.F_cv = (T@(F-R@H)@np.linalg.inv(T)).round()
+        self.R_cv = T@R
+        self.G_cv = T@G
+        self.H_cv = H@np.linalg.inv(T)
+        
+    def state_update(self, y, u):
+        # update state on temp variable
+        x_next = self.F_cv @ self.x + self.G_cv @ y + self.R_cv @ u
+
+        # save state
+        self.x = x_next
+
+    def get_output(self):
+        self.u = self.H_cv @ self.x
+
+        return self.u
+
+class intmat_q():
+    # quantized level s for matrix and r for signal
+    s = 1
+    r = 1
+
+    # gain of y and x 
+    F = np.zeros((4,4), dtype=float)
+    G = np.zeros((4,2), dtype=float)
+    H = np.zeros((1,4), dtype=float)
+    R = np.zeros((4,1), dtype=float) 
+    F_q = np.zeros((4,4), dtype=int)
+    G_q = np.zeros((4,2), dtype=int)
+    H_q = np.zeros((1,4), dtype=int)
+    R_q = np.zeros((4,1), dtype=int) 
+
+    # state and input/output
+    x_q = np.zeros((4,1), dtype=int)
+    x = np.zeros((4,1), dtype=float)
+    y_q = np.zeros((2,1), dtype=int)
+    u_q = np.zeros((1,1), dtype=int)
+    u = np.zeros((1,1), dtype=float)
+
+    def __init__(self, F_cv, G_cv, H_cv, R_cv):
+        self.F = F_cv
+        self.G = G_cv
+        self.H = H_cv
+        self.R = R_cv
+
+    def set_level(self, r, s):
+        self.r = r
+        self.s = s
+
+    def quantize(self):
+        self.F_q = (self.F).astype(int)
+        self.G_q = (self.s * self.G).astype(int)
+        self.H_q = (self.s * self.H).astype(int)
+        self.R_q = (self.s * self.R).astype(int)  
+
+    def state_update(self, y, u):
+        # update state with quantization
+        for i in range(2):
+            self.y_q[i, 0] = int(self.r * y[i, 0])
+        for i in range(1):
+            self.u_q[i, 0] = int(self.r * u[i, 0])
+
+        self.x_q = self.F_q @ self.x_q + self.G_q @ self.y_q + self.R_q @ self.u_q
+
+    def get_output(self):
+        self.u_q = self.H_q @ self.x_q
+        self.u[0, 0] = float(self.u_q[0, 0]) / self.r / self.s / self.s
 
         return self.u
