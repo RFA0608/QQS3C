@@ -4,7 +4,7 @@ sys.path.append(r"./py")
 import tcp_protocol_server as tcs
 
 # init tcp host and port
-HOST = 'localhost'
+HOST = '0.0.0.0'
 PORT = 9999
 
 # get model description
