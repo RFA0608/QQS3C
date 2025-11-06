@@ -1,4 +1,4 @@
-package tccp
+package main
 
 import (
 	"bytes"
