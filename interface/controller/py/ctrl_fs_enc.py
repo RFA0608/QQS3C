@@ -60,7 +60,7 @@ def fs_encrypted():
 
                 # state estimation on plant and encryption
                 obs.state_update(y)
-                x_enc = enc_4_fs.enc_signal(obs.xc)
+                x_enc = enc_4_fs.enc_signal(obs.x)
                 
                 ## controller description ##
                 # ------------------------------------------------ #
