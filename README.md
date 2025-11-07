@@ -41,6 +41,7 @@ This require WSL enviroment for using openFHE and SEAL library.
    - "ctrl_arx.py": controller made with what is transformed observer to AutoRegressive&eXogenous input model.
    - "ctrl_arx_q.py": quantization "ctrl_arx.py"'s controller.
    - "ctrl_arx_enc.py" encryption "ctrl_arx_q.py"'s controller.
+   - "ctrl_intmatrix.py"
 5. On WSL, change HOST to IPv4 address to before we saved in "ctrl_**.py" code.
 
 You can see controller decription(making method) on "model.py" and "model_enc.py"
