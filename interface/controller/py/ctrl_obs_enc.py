@@ -77,7 +77,6 @@ def obs_encrypted():
                     x[i, 0] = float(dec_x[i, 0]) / enc_4_obs.r / enc_4_obs.s 
 
                 u[0, 0] = float(dec_u[0, 0]) / enc_4_obs.r / enc_4_obs.s 
-                print(x)
 
                 # end clock set
                 edc = time.perf_counter_ns()
