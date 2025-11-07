@@ -2,9 +2,9 @@
 All about code have to launch root of file. So please launch debugger(vscode) on root of file. If you download this git file to use "git clone", you can find folder name "QQS3C". Enter that, and write "code ." on CMD. That folder is root folder.
 
 This library require 
-1. go version 1.25.1 
-2. c++13 compiler
-3. 3.12.3 python
+1. go version 1.25.1 after
+2. c++13 compiler after
+3. 3.12.3 python after
 at least. 
 
 Ubuntu 24.04 LTS is proper version of WSL os.
