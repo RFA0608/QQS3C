@@ -71,8 +71,6 @@ func main() {
 			// ------------------------------------------------ //
 			// state update on ciphertext
 			xCtPack = intmat_state_update_enc(xCtPack, yCtPack, uReEnc, info_enc)
-			x := RLWE.DecUnpack(xCtPack, 4, info_enc.tau, *crypto_cl.decryptorRLWE, 1/(info_enc.r*info_enc.s*info_enc.s*info_enc.L), info_enc.ringQ, *info_enc.params)
-			fmt.Printf("%f %f %f %f\n", x[0], x[1], x[2], x[3])
 
 			// get output on ciphertext
 			uCtPack := intmat_get_output_enc(xCtPack, info_enc)
