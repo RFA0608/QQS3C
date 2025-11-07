@@ -49,7 +49,7 @@ def fs_quantized():
 
                 # plant state update and generate output
                 obs.state_update(y)
-                u = fs_q.get_output(obs.xc)
+                u = fs_q.get_output(obs.x)
             elif signal == "end":
                 # end of loop signal get
                 run_signal = False
