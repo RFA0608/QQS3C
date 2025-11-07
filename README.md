@@ -42,7 +42,7 @@ This require WSL enviroment for using openFHE and SEAL library.
    - "ctrl_arx_q.py": quantization "ctrl_arx.py"'s controller.
    - "ctrl_arx_enc.py": encryption "ctrl_arx_q.py"'s controller.
    - "ctrl_intmat.py": controller state matrix, which is maded from observer technique, transpose to integer matrix.
-        You can get transformed matrix from MATLAB script file of name "transpose_matrix2int.m" in interface/controller/tools folder.
+        >> You can get transformed matrix from MATLAB script file of name "transpose_matrix2int.m" in interface/controller/tools folder.
    - "ctrl_intmat_q.py": quantization "ctrl_intmat.py"'s controller.
 5. On WSL, change HOST to IPv4 address to before we saved in "ctrl_**.py" code.
 
