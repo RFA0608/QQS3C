@@ -77,10 +77,10 @@ And pendulum swing-up manualy.
 If you set pendulum to origin(equilibrium) maunualy, controller automatically operate.  
 
 # 3️⃣ Demonstration Video
-https://youtu.be/_wIs1nvavok
+https://youtu.be/kVwAEByurqQ?si=HSzjDU9NrPQbe-Wl
 
 "openfhe-python" does not reach 128 lambda bits security. Because there has no margin between sampling period and calculation time related to ring dimension / moduli.
 
 On the other hand, "Microsoft SEAL" can control with 20ms sampling time to satisfy 128 lambda bits security.
 
-Recently modified: 251107-0748 (year month day - hour minute) [KST]
+Recently modified: 251107-1706 (year month day - hour minute) [KST]
