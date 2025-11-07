@@ -7,7 +7,7 @@ This library require
 3. 3.12.3 python after
 at least. 
 
-Ubuntu 24.04 LTS is proper version of WSL os.
+Ubuntu 24.04 LTS is proper version of WSL as os.
 
 # 1️⃣ Process for simulation
 ## Setting
