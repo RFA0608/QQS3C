@@ -182,7 +182,7 @@ func enc_for_intmat(crypto_cl *crypto_context) *info_enc {
 	enc4intmat := info_enc{
 		r:             1000.0,
 		s:             1000.0,
-		L:             10000.0,
+		L:             1000000.0,
 		params:        crypto_cl.params,
 		ringQ:         crypto_cl.ringQ,
 		monomials:     crypto_cl.monomials,
@@ -200,7 +200,7 @@ func enc_for_intmat(crypto_cl *crypto_context) *info_enc {
 
 func intmat_state_update_enc(x_enc *rlwe.Ciphertext, y_enc *rlwe.Ciphertext, u_enc []*rlwe.Ciphertext, info *info_enc) *rlwe.Ciphertext {
 	// Unpack state
-	xCt := RLWE.UnpackCt(x_enc, 4, info.tau, info.evaluatorRLWE, info.ringQ, info.monomials, *info.params)
+	xCt := RLWE.UnpackCt(x_enc.CopyNew(), 4, info.tau, info.evaluatorRLWE, info.ringQ, info.monomials, *info.params)
 
 	// Unpack input
 	yCt := RLWE.UnpackCt(y_enc, 2, info.tau, info.evaluatorRLWE, info.ringQ, info.monomials, *info.params)
@@ -216,7 +216,7 @@ func intmat_state_update_enc(x_enc *rlwe.Ciphertext, y_enc *rlwe.Ciphertext, u_e
 
 func intmat_get_output_enc(x_enc *rlwe.Ciphertext, info *info_enc) *rlwe.Ciphertext {
 	// Unpack state
-	xCt := RLWE.UnpackCt(x_enc, 4, info.tau, info.evaluatorRLWE, info.ringQ, info.monomials, *info.params)
+	xCt := RLWE.UnpackCt(x_enc.CopyNew(), 4, info.tau, info.evaluatorRLWE, info.ringQ, info.monomials, *info.params)
 
 	// get output
 	uCtPack := RGSW.MultPack(xCt, info.ctH, info.evaluatorRGSW, info.ringQ, *info.params)
