@@ -44,7 +44,7 @@ def full_state_feedback():
 
                 # plant state update and generate output
                 obs.state_update(y)
-                u = fs.get_output(obs.xc)
+                u = fs.get_output(obs.x)
             elif signal == "end":
                 # end of loop signal get
                 run_signal = False
