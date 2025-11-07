@@ -80,7 +80,6 @@ func main() {
 
 			u = RLWE.DecUnpack(uCtPack, 1, info_enc.tau, *crypto_cl.decryptorRLWE, 1/(info_enc.r*info_enc.s*info_enc.s*info_enc.L), info_enc.ringQ, *info_enc.params)
 
-			fmt.Println(u[0])
 			// end clock set
 			edc := time.Now()
 			duration := edc.Sub(stc)
