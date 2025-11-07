@@ -503,7 +503,6 @@ class intmat_q():
 
     # state and input/output
     x_q = np.zeros((4,1), dtype=int)
-    x = np.zeros((4,1), dtype=float)
     y_q = np.zeros((2,1), dtype=int)
     u_q = np.zeros((1,1), dtype=int)
     u = np.zeros((1,1), dtype=float)
