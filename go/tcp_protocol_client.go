@@ -10,7 +10,7 @@ import (
 )
 
 const byte_size = 1024
-const print_flag = true
+const print_flag = false
 
 func InitTCP(HOST string, PORT string) net.Conn {
 	conn, err := net.Dial("tcp", HOST+":"+PORT)
