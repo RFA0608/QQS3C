@@ -86,4 +86,4 @@ On the other hand, "Microsoft SEAL" can control with 20ms sampling time to satis
 Recently modified: 251107-1706 (year month day - hour minute) [KST]
 
 # ⚠️
-This paper doesn't accurately account the code. Ready to renewally update Readme and technical resources untill 251110
+This paper doesn't accurately account for the code. Ready to renewally update Readme and technical resources untill 251110
