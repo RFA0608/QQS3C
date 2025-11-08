@@ -18,9 +18,9 @@ func main() {
 	run_signal := true
 
 	// get crypto and controller model
-	params := get_params()
-	crypto_cl := crypto(params)
-	info_enc := enc_for_intmat(crypto_cl)
+	params := Get_params()
+	crypto_cl := Crypto(params)
+	info_enc := Enc_for_intmat(crypto_cl)
 
 	// input/output initialization
 	x_ini := []float64{
@@ -70,10 +70,10 @@ func main() {
 			// controller description //
 			// ------------------------------------------------ //
 			// state update on ciphertext
-			xCtPack = intmat_state_update_enc(xCtPack, yCtPack, uReEnc, info_enc)
+			xCtPack = Intmat_state_update_enc(xCtPack, yCtPack, uReEnc, info_enc)
 
 			// get output on ciphertext
-			uCtPack := intmat_get_output_enc(xCtPack, info_enc)
+			uCtPack := Intmat_get_output_enc(xCtPack, info_enc)
 			// ------------------------------------------------ //
 
 			u = RLWE.DecUnpack(uCtPack, 1, info_enc.tau, *crypto_cl.decryptorRLWE, 1/(info_enc.r*info_enc.s*info_enc.s*info_enc.L), info_enc.ringQ, *info_enc.params)
