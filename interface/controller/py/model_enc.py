@@ -96,26 +96,26 @@ class enc_for_fs():
     
 class fs_enc():
     # for encrypted calculation (only crypto context do not save crypto class)
-    crypto = any 
+    crypto_context = any 
     
     # encrypted gain
     H_enc = any
 
-    def __init__(self, crypto, H_enc):
-        self.crypto = crypto
+    def __init__(self, crypto_context, H_enc):
+        self.crypto_context = crypto_context
         self.H_enc = H_enc
 
     def get_output(self, x_enc):
         ciphertext_mul = any
 
-        ciphertext_mul = self.crypto.EvalMult(self.H_enc, x_enc)
+        ciphertext_mul = self.crypto_context.EvalMult(self.H_enc, x_enc)
 
         ciphertext_rot = ciphertext_mul
         ciphertext_result = ciphertext_mul
 
         for i in range(3):
-            ciphertext_rot = self.crypto.EvalRotate(ciphertext_rot, 1)
-            ciphertext_result = self.crypto.EvalAdd(ciphertext_result, ciphertext_rot)
+            ciphertext_rot = self.crypto_context.EvalRotate(ciphertext_rot, 1)
+            ciphertext_result = self.crypto_context.EvalAdd(ciphertext_result, ciphertext_rot)
 
         return ciphertext_result
     
@@ -211,15 +211,15 @@ class enc_for_obs():
     
 class obs_enc():
     # for encrypted calculation (only crypto context do not save crypto class)
-    crypto = any 
+    crypto_context = any 
 
     # encrypted gain    
     F_enc = []
     G_enc = []
     H_enc = []
 
-    def __init__(self, crypto, F_enc, G_enc, H_enc):
-        self.crypto = crypto
+    def __init__(self, crypto_context, F_enc, G_enc, H_enc):
+        self.crypto_context = crypto_context
         self.F_enc = F_enc
         self.G_enc = G_enc
         self.H_enc = H_enc
@@ -229,23 +229,23 @@ class obs_enc():
         ciphertext_u_mul = []
         
         for i in range(4):
-            ciphertext_x_mul.append(self.crypto.EvalMult(self.F_enc[i], x_enc[i]))
+            ciphertext_x_mul.append(self.crypto_context.EvalMult(self.F_enc[i], x_enc[i]))
 
         for i in range(2):
-            ciphertext_x_mul.append(self.crypto.EvalMult(self.G_enc[i], y_enc[i]))
+            ciphertext_x_mul.append(self.crypto_context.EvalMult(self.G_enc[i], y_enc[i]))
 
         for i in range(4):
-            ciphertext_u_mul.append(self.crypto.EvalMult(self.H_enc[i], x_enc[i]))
+            ciphertext_u_mul.append(self.crypto_context.EvalMult(self.H_enc[i], x_enc[i]))
 
         
         ciphertext_x_add = ciphertext_x_mul[0]
         ciphertext_u_add = ciphertext_u_mul[0]
 
         for i in range(5):
-            ciphertext_x_add = self.crypto.EvalAdd(ciphertext_x_add, ciphertext_x_mul[i+1])
+            ciphertext_x_add = self.crypto_context.EvalAdd(ciphertext_x_add, ciphertext_x_mul[i+1])
 
         for i in range(3):
-            ciphertext_u_add = self.crypto.EvalAdd(ciphertext_u_add, ciphertext_u_mul[i+1])
+            ciphertext_u_add = self.crypto_context.EvalAdd(ciphertext_u_add, ciphertext_u_mul[i+1])
 
         return ciphertext_x_add, ciphertext_u_add
 
@@ -310,7 +310,7 @@ class enc_for_arx():
             
 class arx_enc():
     # for encrypted calculation (only crypto context do not save crypto class)
-    crypto = any 
+    crypto_context = any 
 
     # encrypted gain that packed and encrypted like PQ_enc[0] = {HG_q[0, 0], HG_q[0, 1], HL_q[0, 0]}
     PQ_enc = []
@@ -318,8 +318,8 @@ class arx_enc():
     # encrypted signal sequence that packed and encrypted like S_enc[0] = {y[0, 0], y[1, 0], u[0, 0]}
     S_enc = []
 
-    def __init__(self, crypto, PQ_enc, Z_enc):
-        self.crypto = crypto
+    def __init__(self, crypto_context, PQ_enc, Z_enc):
+        self.crypto_context = crypto_context
         self.PQ_enc = PQ_enc
         self.S_enc = Z_enc
 
@@ -331,18 +331,18 @@ class arx_enc():
         ciphertext_mul = []
         
         for i in range(4):
-            ciphertext_mul.append(self.crypto.EvalMult(self.PQ_enc[i], self.S_enc[i]))
+            ciphertext_mul.append(self.crypto_context.EvalMult(self.PQ_enc[i], self.S_enc[i]))
         
         ciphertext_add = ciphertext_mul[0]
 
         for i in range(3):
-            ciphertext_add = self.crypto.EvalAdd(ciphertext_add, ciphertext_mul[i+1])
+            ciphertext_add = self.crypto_context.EvalAdd(ciphertext_add, ciphertext_mul[i+1])
 
         ciphertext_rot = ciphertext_add
         ciphertext_result = ciphertext_add
 
         for i in range(2):
-            ciphertext_rot = self.crypto.EvalRotate(ciphertext_rot, 1)
-            ciphertext_result = self.crypto.EvalAdd(ciphertext_result, ciphertext_rot)
+            ciphertext_rot = self.crypto_context.EvalRotate(ciphertext_rot, 1)
+            ciphertext_result = self.crypto_context.EvalAdd(ciphertext_result, ciphertext_rot)
 
         return ciphertext_result
