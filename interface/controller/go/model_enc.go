@@ -10,7 +10,7 @@ import (
 	"github.com/tuneinsight/lattigo/v6/ring"
 )
 
-type crypto_context struct {
+type crypto struct {
 	params    *rlwe.Parameters
 	levelQ    int
 	levelP    int
@@ -47,7 +47,7 @@ type info_enc struct {
 	ctR []*rgsw.Ciphertext
 }
 
-func get_params() *rlwe.Parameters {
+func Get_params() *rlwe.Parameters {
 	params, _ := rlwe.NewParametersFromLiteral(rlwe.ParametersLiteral{
 		LogN:    12,
 		LogQ:    []int{60},
@@ -58,7 +58,7 @@ func get_params() *rlwe.Parameters {
 	return &params
 }
 
-func crypto(params *rlwe.Parameters) *crypto_context {
+func Crypto(params *rlwe.Parameters) *crypto {
 	// set parameters
 	n := 4
 	m := 1
@@ -128,7 +128,7 @@ func crypto(params *rlwe.Parameters) *crypto_context {
 	encryptorRGSW := rgsw.NewEncryptor(params, sk)
 	evaluatorRGSW := rgsw.NewEvaluator(params, evkRGSW)
 
-	crypto_cl := crypto_context{
+	crypto_cl := crypto{
 		params:        params,
 		levelQ:        levelQ,
 		levelP:        levelP,
@@ -148,7 +148,7 @@ func crypto(params *rlwe.Parameters) *crypto_context {
 	return &crypto_cl
 }
 
-func enc_for_intmat(crypto_cl *crypto_context) *info_enc {
+func Enc_for_intmat(crypto_cl *crypto) *info_enc {
 	F_q := [][]float64{
 		{0, 0, 0, 0},
 		{1, 0, 0, -2},
@@ -198,7 +198,7 @@ func enc_for_intmat(crypto_cl *crypto_context) *info_enc {
 	return &enc4intmat
 }
 
-func intmat_state_update_enc(x_enc *rlwe.Ciphertext, y_enc *rlwe.Ciphertext, u_enc []*rlwe.Ciphertext, info *info_enc) *rlwe.Ciphertext {
+func Intmat_state_update_enc(x_enc *rlwe.Ciphertext, y_enc *rlwe.Ciphertext, u_enc []*rlwe.Ciphertext, info *info_enc) *rlwe.Ciphertext {
 	// Unpack state
 	xCt := RLWE.UnpackCt(x_enc.CopyNew(), 4, info.tau, info.evaluatorRLWE, info.ringQ, info.monomials, *info.params)
 
@@ -214,7 +214,7 @@ func intmat_state_update_enc(x_enc *rlwe.Ciphertext, y_enc *rlwe.Ciphertext, u_e
 	return xCtPack
 }
 
-func intmat_get_output_enc(x_enc *rlwe.Ciphertext, info *info_enc) *rlwe.Ciphertext {
+func Intmat_get_output_enc(x_enc *rlwe.Ciphertext, info *info_enc) *rlwe.Ciphertext {
 	// Unpack state
 	xCt := RLWE.UnpackCt(x_enc.CopyNew(), 4, info.tau, info.evaluatorRLWE, info.ringQ, info.monomials, *info.params)
 
