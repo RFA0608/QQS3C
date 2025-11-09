@@ -152,12 +152,6 @@ If not, you should refer to the above version and install it.
      ``` bash
        pip install numpy matplotlib control openfhe
      ```
-     
-     If you get a warning that it cannot be executed, run the script below.
-     ``` bash
-       Set-ExecutionPolicy RemoteSigned -Scope Process
-     ```
-     And run it again from the beginning.
 3. You need to check the hyper-v ip for TCP/IP communication between the Windows and WSL.
    ``` bash
      ipconfig
