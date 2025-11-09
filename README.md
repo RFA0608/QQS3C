@@ -227,6 +227,8 @@ If you ran a simaulaion, a graph of the output will appear in the file "plant ou
 If you are running real hardware, manually raise the pendulum so that control start is True while looking at the output of the debugger(vscode) running in the Windows environment.
 One thing to note is that for it to work, both the pendulum and the base must be near the equilibrium point.
 
+---
+
 ## Demonstration
 https://youtu.be/kVwAEByurqQ?si=HSzjDU9NrPQbe-Wl
 (This Youtube link only supports Korean)
