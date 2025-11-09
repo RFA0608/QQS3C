@@ -96,9 +96,10 @@ Please refer to the link [WSL installation method](https://learn.microsoft.com/k
 
 This requires three essential elements:
 
-1. go version 1.25.1 after
-2. c++ 13 compiler after
-3. 3.12 python after
+1. go version 1.25.1 or later
+2. c++ 13 compiler or later
+3. 3.12 python or later
+   
 at least.
 
 If WSL is installed, the appropriate Linux OS is Ubuntu-24.04 LTS version.
