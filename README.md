@@ -186,8 +186,36 @@ There are two different executions in each enviroment.
         ``` bash
           go run .
         ```
-     
-   
+This completes the controller's preparation for operation.
+
+#### Windows environment
+1. Go to the previously downloaded QQS3C folder location and run the debugger(vscode) to write below.
+    ``` bash
+       code .
+    ```
+2. Here, it is divided depending on whether simulation is performed or actual hardware is operated.
+   * Simulation
+     1. Find plant description code set which are located in "interface/plant/py/simulation" folder on debugger(vscode).
+     2. Select the controller file named "plant.py"
+     3. Get ready to press F5 button.
+   * Hardware
+     1. Find plant description code set which are located in "interface/plant/py/hardware" folder on debugger(vscode).
+     2. Select the controller file named "plant.py"
+     3. Get ready to press F5 button.
+
+This completes the plant's preparation for operation.
+
+### Operation
+Proceed in the following order.
+1. Press F5, which is waiting for Windows environment.
+2. Press F5 or enter to launch the controller that was waiting in WSL.
+
+If you ran a simaulaion, a graph of the output will appear in the file "plant output as sim.png" in "interface/plant/py/simulation/result" folder.
+
+If you are running real hardware, manually raise the pendulum so that control start is True while looking at the output of the debugger(vscode) running in the Windows environment.
+One thing to note is that for it to work, both the pendulum and the base must be near the equilibrium point.
+
+
 # 0️⃣ Before using
 All about code have to launch root of file. So please launch debugger(vscode) on root of file. If you download this git file to use "git clone", you can find folder name "QQS3C". Enter that, and write "code ." on CMD. That folder is root folder.
 
