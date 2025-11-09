@@ -157,6 +157,7 @@ If not, you should refer to the above version and install it.
      ``` bash
        Set-ExecutionPolicy RemoteSigned -Scope Process
      ```
+     And run it again from the beginning.
 3. You need to check the hyper-v ip for TCP/IP communication between the Windows and WSL.
    ``` bash
      ipconfig
