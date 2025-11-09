@@ -42,7 +42,7 @@ def full_state_feedback():
                 # send control input data
                 tccp.send(u[0, 0])
 
-                # plant state update and generate output
+                # state update and generate output
                 obs.state_update(y)
                 u = fs.get_output(obs.x)
             elif signal == "end":
