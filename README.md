@@ -91,7 +91,7 @@ In go, only "ctrl_intmat_enc.go", which is an encrypted file of "ctrl_intmat_q.p
 It explains the preparations before use, how to use the simulation file, and how to use the actual hardware.
 
 ### Before using
-This code should work for both Windows and WSL(Windows Subsystem for Linux) environments.
+This code should work for both Windows and WSL (Windows Subsystem for Linux) environments.
 Please refer to the link [WSL installation method](https://learn.microsoft.com/ko-kr/windows/wsl/install) for instructions on installing WSL.
 
 This requires three essential elements:
@@ -162,18 +162,18 @@ If not, you should refer to the above version and install it.
 There are two different executions in each environment.
 
 #### WSL environment
-1. Go to the previously downloaded QQS3C folder location and run the debugger(vscode) to write below.
+1. Go to the previously downloaded QQS3C folder location and run the debugger (vscode) to write below.
    ``` bash
      code .
    ```
 2. Here, each file provided in three languages (py, cpp, go) has a different execution method.
    * Python
-     1. Find controller description code set which are located in "interface/controller/py" folder on debugger(vscode).
+     1. Find controller description code set which are located in "interface/controller/py" folder on debugger (vscode).
      2. Select the controller file you want to run.
      3. In that file, change 'localhost' in HOST variable to the vEthernet ip you saved earlier.
      4. Get ready to press F5 button.
    * C++
-     1. Find controller description code set which are located in "interface/controller/cpp" folder on debugger(vscode).
+     1. Find controller description code set which are located in "interface/controller/cpp" folder on debugger (vscode).
      2. Select the controller file you want to run.
      3. In that file, change 'localhost' in HOST variable to the vEthernet ip you saved earlier.
      4. In the bash window, move directory to "interface/controller/cpp".
@@ -193,7 +193,7 @@ There are two different executions in each environment.
           ./ctrl_arx_enc
         ```
    * Go
-     1. Find controller description code set which are located in "interface/controller/go" folder on debugger(vscode).
+     1. Find controller description code set which are located in "interface/controller/go" folder on debugger (vscode).
      2. Select the controller file you want to run.
      3. In that file, change 'localhost' in HOST variable to the vEthernet ip you saved earlier.
      4. In the bash window, move directory to "interface/controller/go".
@@ -215,17 +215,17 @@ There are two different executions in each environment.
 This completes the controller's preparation for operation.
 
 #### Windows environment
-1. Go to the previously downloaded QQS3C folder location and run the debugger(vscode) to write below.
+1. Go to the previously downloaded QQS3C folder location and run the debugger (vscode) to write below.
     ``` bash
        code .
     ```
 2. Here, it is divided depending on whether simulation is performed or actual hardware is operated.
    * Simulation
-     1. Find plant description code set which are located in "interface/plant/py/simulation" folder on debugger(vscode).
+     1. Find plant description code set which are located in "interface/plant/py/simulation" folder on debugger (vscode).
      2. Select the controller file named "plant.py"
      3. Get ready to press F5 button.
    * Hardware
-     1. Find plant description code set which are located in "interface/plant/py/hardware" folder on debugger(vscode).
+     1. Find plant description code set which are located in "interface/plant/py/hardware" folder on debugger (vscode).
      2. Select the controller file named "plant.py"
      3. Get ready to press F5 button.
 
@@ -238,7 +238,7 @@ Proceed in the following order.
 
 If you ran a simulation, a graph of the output will appear in the file "plant output as sim.png" in "interface/plant/py/simulation/result" folder.
 
-If you are running real hardware, manually raise the pendulum so that control start is True while looking at the output of the debugger(vscode) running in the Windows environment.
+If you are running real hardware, manually raise the pendulum so that control start is True while looking at the output of the debugger (vscode) running in the Windows environment.
 One thing to note is that for it to work, both the pendulum and the base must be near the equilibrium point.
 
 ---
