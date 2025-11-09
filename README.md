@@ -8,7 +8,7 @@ The code uses Quanser's Qube Servo 3 model [Qube Servo 3](https://github.com/qua
 ---
 
 ## Features
-dd
+The code was implemented through data communication with the Quanser API via TCP/IP in order to use Microsoft' SEAL, a C-style homomorphic cryptographic library that can be operated, lattigo (CDSL) written in GO, and OpenFHE-pytho that can be run in a Linux environment, since the hardware API provided by Quanser is only Python and runs in a Windows environment.
 
 # 0️⃣ Before using
 All about code have to launch root of file. So please launch debugger(vscode) on root of file. If you download this git file to use "git clone", you can find folder name "QQS3C". Enter that, and write "code ." on CMD. That folder is root folder.
