@@ -16,6 +16,9 @@ The code was implemented through data communication with the Quanser API via TCP
 The code implements a python version controller, a cpp version controller, and a go version controller.
 The interfacing code of the python simulator and the actual device matching the controller can be found in "interface/plant" respectively.
 The actual device consists of a single file, "plant.py" in "interface/plant/py/hardware", while the simulator consists of "model.py" and "plant.py" in "interface/plant/py/simulation".
+**Code explanation and technical interpretation can be found at the link below.**
+**[QQS3C](https://publish.obsidian.md/qqs3c)**
+
 
 ### python version controller
 You can check the "ctrl_*.py" controller file, which is written in python, in the "interface/controller/py" folder of the code.
