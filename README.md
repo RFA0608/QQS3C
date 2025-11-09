@@ -25,9 +25,16 @@ The actual device consists of a single file, "plant.py" in "interface/plant/py/h
 You can check the "ctrl_*.py" controller file, which is written in python, in the "interface/controller/py" folder of the code.
 They are implemented in four technically different forms.
 
-1. ctrl_sf.py
-   >> Using d/dt filter from Quanser Qube Servo 3. 
-2. ctrl_fs.py
+1. Using d/dt filter:
+   * ctrl_sf.py
+      > Using d/dt filter from Quanser Qube Servo 3. Not available.
+2. Using observer for full state feedback:
+   * ctrl_fs.py
+   * ctrl_fs_q.py
+   * ctrl_fs_enc.py
+     > "ctrl_fs.py" is an observer-based design, but it is a code in which the observer runs in the plant and the controller operates in full state.
+     > "ctrl_fs_q.py" is a quantized version of "ctrl_fs.py"
+     > "ctrl_fs_enc.py" is a BGV type encrypted version of "ctrl_fs_q.py"
 3. ctrl_obs.py
 4. ctrl_arx.py
 
