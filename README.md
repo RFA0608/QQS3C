@@ -113,7 +113,7 @@ If not, you should refer to the above version and install it.
    * See the "SEAL installation method.txt" file on the main page.
   
 2. Essential python package installation
-   * First, download the relevant code via git clone on WSL CMD page.
+   * First, download the relevant code via git clone on WSL bash page.
      ``` bash
        git clone "https://github.com/RFA0608/QQS3C.git"
      ```
@@ -176,7 +176,7 @@ There are two different executions in each enviroment.
      1. Find controller description code set which are located in "interface/controller/cpp" folder on debugger(vscode).
      2. Select the controller file you want to run.
      3. In that file, change 'localhost' in HOST variable to the vEthernet ip you saved earlier.
-     4. In the CMD window, move directory to "interface/controller/cpp".
+     4. In the bash window, move directory to "interface/controller/cpp".
         ``` bash
           cd /interface/controller/cpp
         ```
@@ -188,7 +188,7 @@ There are two different executions in each enviroment.
         ``` bash
           make
         ```
-     7. If you see a file called "ctrl_arx_enc" then you are done and ready to write the following in the CMD window and press enter
+     7. If you see a file called "ctrl_arx_enc" then you are done and ready to write the following in the bash window and press enter
         ``` bash
           ./ctrl_arx_enc
         ```
@@ -196,7 +196,7 @@ There are two different executions in each enviroment.
      1. Find controller description code set which are located in "interface/controller/go" folder on debugger(vscode).
      2. Select the controller file you want to run.
      3. In that file, change 'localhost' in HOST variable to the vEthernet ip you saved earlier.
-     4. In the CMD window, move directory to "interface/controller/go".
+     4. In the bash window, move directory to "interface/controller/go".
         ``` bash
           cd /interface/controller/go
         ```
