@@ -4,6 +4,10 @@ The code transforms dynamic controllers through various methods and then drives 
 The cryptographic libraries for computational homomorphism use [Microsoft SEAL](https://github.com/microsoft/SEAL), [OpenFHE-python](https://github.com/openfheorg/openfhe-python), and [CDSL-EncryptedControl](https://github.com/CDSL-EncryptedControl/CDSL/tree/main) using [lattigo](https://github.com/tuneinsight/lattigo).
 The encryption control technique uses the one implemented in [SNU](https://post.cdsl.kr/) and [SEOULTECH](http://cdslst.kr)'s CDSL.
 
+--
+
+dd
+
 # 0️⃣ Before using
 All about code have to launch root of file. So please launch debugger(vscode) on root of file. If you download this git file to use "git clone", you can find folder name "QQS3C". Enter that, and write "code ." on CMD. That folder is root folder.
 
