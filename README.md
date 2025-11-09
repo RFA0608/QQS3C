@@ -6,6 +6,7 @@ The encryption control technique uses the one implemented in [SNU](https://post.
 
 ---
 
+## Features
 dd
 
 # 0️⃣ Before using
