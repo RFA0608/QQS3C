@@ -101,14 +101,31 @@ If not, you should refer to the above version and install it.
    * See the "SEAL installation method.txt" file on the main page.
   
 2. Essential python package installation
-   * First, download the relevant code via git clone
+   * First, download the relevant code via git clone on WSL.
      ``` bash
        git clone "https://github.com/RFA0608/QQS3C.git"
      ```
-   
-     
+   * Move direction to download file.
+     ``` bash
+       cd QQS3C
+     ```
+   * Run python's virtual environment.
+     ``` bash
+       python3 -m venv venv
+       source ./venv/bin/activate
+     ```
+   * Download all required packages using pip.
+     ``` bash
+       pip install numpy matplotlib control openfhe
+     ```
+3. Lattigo installation
+   * This is automatically downloaded using go mod tidy, so no preparation is required.
      
 #### Windows environment
+You just need to download the code via git clone.
+``` bash
+  git clone "https://github.com/RFA0608/QQS3C.git"
+```
 
 # 0️⃣ Before using
 All about code have to launch root of file. So please launch debugger(vscode) on root of file. If you download this git file to use "git clone", you can find folder name "QQS3C". Enter that, and write "code ." on CMD. That folder is root folder.
