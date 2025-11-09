@@ -3,7 +3,7 @@ QQS3C provides the drive code for cryptographic control for the Quanser Qube Ser
 The code transforms dynamic controllers through various methods and then drives the system through homomorphic encryption. 
 The cryptographic libraries for computational homomorphism use [Microsoft SEAL](https://github.com/microsoft/SEAL), [OpenFHE-python](https://github.com/openfheorg/openfhe-python), and [CDSL-EncryptedControl](https://github.com/CDSL-EncryptedControl/CDSL/tree/main) using [lattigo](https://github.com/tuneinsight/lattigo).
 The encryption control technique is primarily based on the implementations from [SNU](https://post.cdsl.kr/) and [SEOULTECH](http://cdslst.kr)'s CDSL.
-The code uses Quanser's Qube Servo 3 model [Qube Servo 3](https://github.com/quanser/Quanser_Academic_Resources/tree/dev-windows) python API.
+The code uses Quanser's Qube Servo 3 model [Qube Servo 3](https://github.com/quanser/Quanser_Academic_Resources/tree/dev-windows) Python API.
 
 ---
 
@@ -18,8 +18,8 @@ The interfacing code for the Python simulator and the actual hardware, correspon
 The actual device consists of a single file, "plant.py" in "interface/plant/py/hardware", while the simulator consists of "model.py" and "plant.py" in "interface/plant/py/simulation".
 **Code explanation and technical interpretation can be found at the link [QQS3C](https://publish.obsidian.md/qqs3c)**
 
-### Python version controller
-You can check the "ctrl_*.py" controller file, which is written in python, in the "interface/controller/py" folder of the code.
+###  version controller
+You can check the "ctrl_*.py" controller file, which is written in , in the "interface/controller/py" folder of the code.
 They are implemented in five technically different forms.
 Both "model.py" and "model_enc.py" are files that implement objects for controller and encrypted control.
 
@@ -67,17 +67,17 @@ Both "model.py" and "model_enc.py" are files that implement objects for controll
 
 ### Cpp version controller
 You can check the "ctrl_arx_enc.cpp" controller file, which is written in cpp, in the "interface/controller/cpp" folder of the code.
-In C++, only the encrypted controller of "ctrl_arx_q.py" provided in python is provided.
+In C++, only the encrypted controller of "ctrl_arx_q.py" provided in Python is provided.
 "model_enc.h" contains an object of the encrypted controller.
 
 1. Using ARX:
    * ctrl_arx_enc.cpp
      
-     ↳ Unlike "ctrl_arx_enc.py" provided by python, "ctrl_arx_enc.cpp" is encrypted using Microsoft SEAL. This allow for slightly faster sampling times.
+     ↳ Unlike "ctrl_arx_enc.py" provided by Python, "ctrl_arx_enc.cpp" is encrypted using Microsoft SEAL. This allow for slightly faster sampling times.
 
 ### Go version controller
 You can check the "ctrl_intmat_enc.go" controller file, which is written in Go, in the "interface/controller/go" folder of the code.
-In go, only "ctrl_intmat_enc.go", which is an encrypted file of "ctrl_intmat_q.py" provided by python, is provided.
+In go, only "ctrl_intmat_enc.go", which is an encrypted file of "ctrl_intmat_q.py" provided by Python, is provided.
 "model_enc.go" contains a function of the encrypted controller.
 
 1. Using integer matrix:
@@ -143,7 +143,7 @@ If not, you should refer to the above version and install it.
      ``` bash
        cd QQS3C
      ```
-   * Run python's virtual environment.
+   * Run Python's virtual environment.
      ``` bash
        python3 -m venv venv
        .\venv\Scripts\Activate.ps1
