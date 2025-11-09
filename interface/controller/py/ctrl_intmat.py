@@ -51,7 +51,7 @@ def integer_state_matrix():
                 # send control input data
                 tccp.send(u[0, 0])
 
-                # plant state update and generate output
+                # state update and generate output
                 intmat.state_update(y, u)
                 u = intmat.get_output()
             elif signal == "end":
