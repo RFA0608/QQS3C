@@ -8,7 +8,7 @@ The code uses Quanser's Qube Servo 3 model [Qube Servo 3](https://github.com/qua
 ---
 
 ## Implementation Direction
-The code was implemented through data communication with the Quanser API via TCP/IP in order to use Microsoft's SEAL, a c-style homomorphic cryptographic library that can be operated, lattigo (CDSL) written in go, and openFHE-python that can be run in a Linux environment, since the hardware API provided by Quanser is only Python and runs in a Windows environment.
+The code was implemented through data communication with the Quanser API via TCP/IP in order to use Microsoft's SEAL, a c-style homomorphic cryptographic library that can be operated, lattigo (CDSL) written in go, and openFHE-python that can be run in a Linux environment, since the hardware API provided by Quanser is only python and runs in a Windows environment.
 
 ---
 
