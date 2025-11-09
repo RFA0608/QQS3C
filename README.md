@@ -207,7 +207,7 @@ There are two different executions in each environment.
         ``` bash
           cd interface/controller/go
         ```
-     5. Set GOPATH to the file.
+     5. Set GOPATH to the current directory.
         ``` bash
           pwd
         ```
