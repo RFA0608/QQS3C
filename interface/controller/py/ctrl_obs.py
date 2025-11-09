@@ -41,7 +41,7 @@ def observer_based_controller():
                 # send control input data
                 tccp.send(u[0, 0])
 
-                # plant state update and generate output
+                # state update and generate output
                 obs.state_update(y)
                 u = obs.get_output()
             elif signal == "end":
