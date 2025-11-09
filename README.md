@@ -19,7 +19,7 @@ The actual device consists of a single file, "plant.py" in "interface/plant/py/h
 **Code explanation and technical interpretation can be found at the link [QQS3C](https://publish.obsidian.md/qqs3c)**
 
 ###  version controller
-You can check the "ctrl_*.py" controller file, which is written in , in the "interface/controller/py" folder of the code.
+You can check the "ctrl_*.py" controller file, which is written in Python, in the "interface/controller/py" folder of the code.
 They are implemented in five technically different forms.
 Both "model.py" and "model_enc.py" are files that implement objects for controller and encrypted control.
 
@@ -73,7 +73,7 @@ In cpp, only the encrypted controller of "ctrl_arx_q.py" provided in Python is p
 1. Using ARX:
    * ctrl_arx_enc.cpp
      
-     ↳ Unlike "ctrl_arx_enc.py" provided by Python, "ctrl_arx_enc.cpp" is encrypted using Microsoft SEAL. This allow for slightly faster sampling times.
+     ↳ Unlike "ctrl_arx_enc.py" provided by Python, "ctrl_arx_enc.cpp" is encrypted using Microsoft SEAL. This allows for slightly faster sampling times.
 
 ### Go version controller
 You can check the "ctrl_intmat_enc.go" controller file, which is written in Go, in the "interface/controller/go" folder of the code.
@@ -98,7 +98,7 @@ This requires three essential elements:
 
 1. Go version 1.25.1 or later
 2. C++ 13 compiler or later
-3. 3.12 Python or later
+3. Python 3.12 or later
    
 at least.
 
@@ -134,27 +134,27 @@ If not, you should refer to the above version and install it.
    * This is automatically handled by go mod tidy, so no preparation is required.
      
 #### Windows environment
-1. You need to download the code via git clone on powershell page.
+1. You need to download the code via git clone on PowerShell page.
    ``` bash
      git clone "https://github.com/RFA0608/QQS3C.git"
    ```
-2. Execute the following task in Windows powershell.
-   * Move direction to download file.
+2. Execute the following task in Windows PowerShell.
+   * Navigate to the downloaded directory.
      ``` bash
        cd QQS3C
      ```
-   * Run Python's virtual environment.
+   * Activate Python's virtual environment.
      ``` bash
        py -3 -m venv venv
        .\venv\Scripts\Activate.ps1
      ```
      If the command doesn't work, try again by following these steps:
-       1. Lanch powershell as administrator.
+       1. Launch PowerShell as administrator.
        2. Set execution policy
           ``` bash
             Set-ExecutionPolicy RemoteSigned
           ```
-       3. Turn off the administrator powershell, turn on the basic powershell, and re-run the failed command.
+       3. Turn off the administrator PowerShell, open a standard (non-administrator) PowerShell, and try the command again.
    * Download all required packages using pip.
      ``` bash
        pip install numpy matplotlib control openfhe
