@@ -42,7 +42,7 @@ def state_filter():
                 # send control input data
                 tccp.send(u[0, 0])
 
-                # plant state update and generate output
+                # state update and generate output
                 sf.state_update(y)
                 u = sf.get_output()
                 
