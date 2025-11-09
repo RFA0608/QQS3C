@@ -122,10 +122,15 @@ If not, you should refer to the above version and install it.
    * This is automatically downloaded using go mod tidy, so no preparation is required.
      
 #### Windows environment
-You just need to download the code via git clone.
-``` bash
-  git clone "https://github.com/RFA0608/QQS3C.git"
-```
+1. You need to download the code via git clone.
+  ``` bash
+    git clone "https://github.com/RFA0608/QQS3C.git"
+  ```
+2. You need to check the hyper-v ip for TCP/IP communication between the Windows and WSL.
+   ``` bash
+     ipconfig
+   ```
+   Save IPv4 address of vEthernet (WSL (Hyper-V...)).
 
 # 0️⃣ Before using
 All about code have to launch root of file. So please launch debugger(vscode) on root of file. If you download this git file to use "git clone", you can find folder name "QQS3C". Enter that, and write "code ." on CMD. That folder is root folder.
