@@ -101,7 +101,7 @@ If not, you should refer to the above version and install it.
    * See the "SEAL installation method.txt" file on the main page.
   
 2. Essential python package installation
-   * First, download the relevant code via git clone on WSL.
+   * First, download the relevant code via git clone on WSL CMD page.
      ``` bash
        git clone "https://github.com/RFA0608/QQS3C.git"
      ```
@@ -122,7 +122,7 @@ If not, you should refer to the above version and install it.
    * This is automatically downloaded using go mod tidy, so no preparation is required.
      
 #### Windows environment
-1. You need to download the code via git clone.
+1. You need to download the code via git clone on powershell page.
    ``` bash
      git clone "https://github.com/RFA0608/QQS3C.git"
    ```
