@@ -138,7 +138,26 @@ If not, you should refer to the above version and install it.
    ``` bash
      git clone "https://github.com/RFA0608/QQS3C.git"
    ```
-2. You need to check the hyper-v ip for TCP/IP communication between the Windows and WSL.
+2. Execute the following task in Windwos powershell.
+   * Move direction to download file.
+     ``` bash
+       cd QQS3C
+     ```
+   * Run python's virtual environment.
+     ``` bash
+       python3 -m venv venv
+       .\venv\Scripts\Activate.ps1
+     ```
+   * Download all required packages using pip.
+     ``` bash
+       pip install numpy matplotlib control openfhe
+     ```
+     
+     If you get a warning that it cannot be executed, run the script below.
+     ``` bash
+       Set-ExecutionPolicy RemoteSigned -Scope Process
+     ```
+3. You need to check the hyper-v ip for TCP/IP communication between the Windows and WSL.
    ``` bash
      ipconfig
    ```
