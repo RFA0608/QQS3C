@@ -135,12 +135,12 @@ If not, you should refer to the above version and install it.
      
 #### Windows environment
 1. You need to download the code via git clone on PowerShell page.
-   ``` bash
+   ``` powershell
      git clone "https://github.com/RFA0608/QQS3C.git"
    ```
 2. Execute the following task in Windows PowerShell.
    * Navigate to the downloaded directory.
-     ``` bash
+     ``` powershell
        cd QQS3C
      ```
    * Activate Python's virtual environment.
@@ -151,16 +151,16 @@ If not, you should refer to the above version and install it.
      If the command doesn't work, try again by following these steps:
        1. Launch PowerShell as administrator.
        2. Set execution policy
-          ``` bash
+          ``` powershell
             Set-ExecutionPolicy RemoteSigned
           ```
        3. Turn off the administrator PowerShell, open a standard (non-administrator) PowerShell, and try the command again.
    * Download all required packages using pip.
-     ``` bash
+     ``` powershell
        pip install numpy matplotlib control openfhe
      ```
 3. You need to check the hyper-v ip for TCP/IP communication between the Windows and WSL.
-   ``` bash
+   ``` powershell
      ipconfig
    ```
    Save IPv4 address of vEthernet (WSL (Hyper-V...)).
@@ -223,7 +223,7 @@ This completes the controller's preparation for operation.
 
 #### Windows environment
 1. Go to the previously downloaded QQS3C folder location and run the debugger (vscode) to write below.
-    ``` bash
+    ``` powershell
        code .
     ```
 2. Here, it is divided depending on whether simulation is performed or actual hardware is operated.
