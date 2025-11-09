@@ -25,33 +25,45 @@ Both "model.py" and "model_enc.py" are files that implement objects for controll
 
 1. Using d/dt filter:
    * ctrl_sf.py
+     
       ↳ Using d/dt filter from Quanser Qube Servo 3. This code is not available.
 2. Using observer for full state feedback:
    * ctrl_fs.py
-     > "ctrl_fs.py" is an observer-based design, but it is a code in which the observer runs in the plant and the controller operates in full state.
+     
+     ↳ "ctrl_fs.py" is an observer-based design, but it is a code in which the observer runs in the plant and the controller operates in full state.
    * ctrl_fs_q.py
-     > "ctrl_fs_q.py" is a quantized version of "ctrl_fs.py".
+     
+     ↳ "ctrl_fs_q.py" is a quantized version of "ctrl_fs.py".
    * ctrl_fs_enc.py
-     > "ctrl_fs_enc.py" is a BGV type encrypted version of "ctrl_fs_q.py" with openFHE.
+     
+     ↳ "ctrl_fs_enc.py" is a BGV type encrypted version of "ctrl_fs_q.py" with openFHE.
 3. Using observer:
    * ctrl_obs.py
-     > "ctrl_obs.py" is a code that uses observer-based controller design.
+     
+     ↳ "ctrl_obs.py" is a code that uses observer-based controller design.
    * ctrl_obs_q.py
-     > "ctrl_obs_q.py" is a quantized version of "ctrl_obs.py".
+     
+     ↳ "ctrl_obs_q.py" is a quantized version of "ctrl_obs.py".
    * ctrl_obs_enc.py
-     > "ctrl_obs_enc.py" is a BGV type encrypted with re-encryption method of "ctrl_obs_q.py" with openFHE. This code is not available.
+     
+     ↳ "ctrl_obs_enc.py" is a BGV type encrypted with re-encryption method of "ctrl_obs_q.py" with openFHE. This code is not available.
 4. Using ARX transformed from observer:
    * ctrl_arx.py
-     > "ctrl_arx.py" is a code that uses the method of converting an observer-based controller to an AutoRegressive & eXogenous input model based on observability.
+     
+     ↳ "ctrl_arx.py" is a code that uses the method of converting an observer-based controller to an AutoRegressive & eXogenous input model based on observability.
    * ctrl_arx_q.py
-     > "ctrl_arx_q.py" is quantized version of "ctrl_arx.py".
+     
+     ↳ "ctrl_arx_q.py" is quantized version of "ctrl_arx.py".
    * ctrl_arx_enc.py
-     > "ctrl_arx_enc.py" is a BGV type encrypted with re-encryption method of "ctrl_arx_q.py" with openFHE.
+     
+     ↳ "ctrl_arx_enc.py" is a BGV type encrypted with re-encryption method of "ctrl_arx_q.py" with openFHE.
 5. Using integer matrix transformed from observer:
    * ctrl_intmat.py
-     > "ctrl_intmat.py" is a code that converts the controller state matrix into an integer based on the observability of the observer-based controller.
+     
+     ↳ "ctrl_intmat.py" is a code that converts the controller state matrix into an integer based on the observability of the observer-based controller.
    * ctrl_intmat_q.py
-     > "ctrl_intmat_q.py" is quantized version of "ctrl_intmat.py".
+     
+     ↳ "ctrl_intmat_q.py" is quantized version of "ctrl_intmat.py".
 
 ### Cpp version controller
 You can check the "ctrl_arx_enc.py" controller file, which is written in cpp, in the "interface/controller/cpp" folder of the code.
