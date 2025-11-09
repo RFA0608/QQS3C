@@ -145,9 +145,16 @@ If not, you should refer to the above version and install it.
      ```
    * Run Python's virtual environment.
      ``` bash
-       python3 -m venv venv
+       py -3 -m venv venv
        .\venv\Scripts\Activate.ps1
      ```
+     If the command doesn't work, try again by following these steps:
+       1. Lanch powershell as administrator.
+       2. Set execution policy
+          ``` bash
+            Set-ExecutionPolicy RemoteSigned
+          ```
+       3. Turn off the administrator powershell, turn on the basic powershell, and re-run the failed command.
    * Download all required packages using pip.
      ``` bash
        pip install numpy matplotlib control openfhe
