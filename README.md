@@ -72,7 +72,8 @@ In cpp, only the encrypted controller of "ctrl_arx_q.py" provided in python is p
 
 1. Using ARX:
    * ctrl_arx_enc.cpp
-     - Unlike "ctrl_arx_enc.py" provided by python, "ctrl_arx_enc.cpp" is encrpyted using Microsoft SEAL. This allow for slightly faster sampling times.
+     
+     ↳ Unlike "ctrl_arx_enc.py" provided by python, "ctrl_arx_enc.cpp" is encrpyted using Microsoft SEAL. This allow for slightly faster sampling times.
 
 ### Go version controller
 You can check the "ctrl_intmat_enc.go" controller file, which is written in cpp, in the "interface/controller/go" folder of the code.
@@ -81,7 +82,8 @@ In go, only "ctrl_intmat_enc.go", which is an encrypted file of "ctrl_intmat_q.p
 
 1. Using integer matrix:
    * ctrl_intmat_enc.go
-     - "ctrl_intmat_enc.go" is an encrypted version of "ctrl_intmat_q.py", which was not provided in python.
+     
+     ↳ "ctrl_intmat_enc.go" is an encrypted version of "ctrl_intmat_q.py", which was not provided in python.
     
 --- 
 
