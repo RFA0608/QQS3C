@@ -132,6 +132,48 @@ If not, you should refer to the above version and install it.
    ```
    Save IPv4 address of vEthernet (WSL (Hyper-V...)).
 
+### Operation
+There are two different executions in each enviroment.
+
+#### WSL environment
+1. Go to the previously downloaded QQS3C folder location and run the debugger(vscode) to write below.
+   ``` bash
+     code .
+   ```
+2. Here, each file provided in three languages(py, cpp, go) has a different execution method.
+   * Python
+     1. Find controller description code set which are located in "interface/controller/py" folder on debugger(vscode).
+     2. Select the controller file you want to run.
+     3. In that file, change 'localhost' in HOST variable to the vEthernet ip you saved earlier.
+     4. Get ready to press F5 button.
+   * Cpp
+     1. In the CMD window, move directory to "interface/controller/cpp".
+        ``` bash
+          cd /interface/controller/cpp
+        ```
+     2. Create a new make file using cmake.
+        ``` bash
+          cmake .
+        ```
+     3. Create an executable binary file using the make file.
+        ``` bash
+          make
+        ```
+     4. If you see a file called "ctrl_arx_enc" then you are done and ready to write the following in the CMD window and press enter
+        ``` bash
+          ./ctrl_arx_enc
+        ```
+   * Go
+     1. In the CMD window, move directory to "interface/controller/go".
+        ``` bash
+          cd /interface/controller/go
+        ```
+     2. At that location, write something like the following and be ready to press enter.
+        ``` bash
+          go run .
+        ```
+     
+   
 # 0️⃣ Before using
 All about code have to launch root of file. So please launch debugger(vscode) on root of file. If you download this git file to use "git clone", you can find folder name "QQS3C". Enter that, and write "code ." on CMD. That folder is root folder.
 
