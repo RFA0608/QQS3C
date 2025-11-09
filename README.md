@@ -174,7 +174,15 @@ There are two different executions in each enviroment.
         ``` bash
           cd /interface/controller/go
         ```
-     5. At that location, write something like the following and be ready to press enter.
+     5. Set GOPAHT to the file.
+        ``` bash
+          pwd
+        ```
+        Copy the result and paste it into *** below.
+        ``` bash
+          export GOPATH=***
+        ```
+     6. At that location, write something like the following and be ready to press enter.
         ``` bash
           go run .
         ```
