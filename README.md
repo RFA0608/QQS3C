@@ -223,9 +223,12 @@ The flow of the video is as follows.
 
 In the video, a simulation was run for about 30 seconds to check whether control was possible.
 
-> **[INFO] Security**\n
+> **[INFO] Security**
+> 
 > "ctrl_fs_enc.py" does not satisfy 128bits lambda bits security.
+> 
 > "ctrl_intmat_enc.go" is also like that.
+> 
 > On the other hand, "ctrl_arx_enc.cpp" sufficiently satisfies 128bits lambda bits security.
 
 # Licenses & Acknowledgements
