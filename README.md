@@ -101,9 +101,12 @@ If not, you should refer to the above version and install it.
    * See the "SEAL installation method.txt" file on the main page.
   
 2. Essential python package installation
-   * ``` bash
-       python3 -m venv venv
+   * First, download the relevant code via git clone
+     ``` bash
+       git clone "https://github.com/RFA0608/QQS3C.git"
      ```
+   
+     
      
 #### Windows environment
 
