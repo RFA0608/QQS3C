@@ -111,4 +111,4 @@ This project utilizes code from several open-source projects. We express our gra
     * Licensed under the [PSF-style License](https://github.com/matplotlib/matplotlib/blob/main/LICENSE/LICENSE)
 
 * **Python Control Systems Library (python-control)**
-    * Licensed under the [BSD 3-Clause License](https://matplotlib.org/stable/project/license.html)
+    * Licensed under the [BSD 3-Clause License](https://github.com/python-control/python-control/blob/main/LICENSE)
