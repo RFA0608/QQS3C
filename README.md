@@ -132,7 +132,7 @@ If not, you should refer to the above version and install it.
    ```
    Save IPv4 address of vEthernet (WSL (Hyper-V...)).
 
-### Operation
+### Ready to operate
 There are two different executions in each enviroment.
 
 #### WSL environment
