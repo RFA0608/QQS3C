@@ -18,7 +18,7 @@ The interfacing code of the python simulator and the actual device matching the 
 The actual device consists of a single file, "plant.py" in "interface/plant/py/hardware", while the simulator consists of "model.py" and "plant.py" in "interface/plant/py/simulation".
 **Code explanation and technical interpretation can be found at the link [QQS3C](https://publish.obsidian.md/qqs3c)**
 
-### python version controller
+### Python version controller
 You can check the "ctrl_*.py" controller file, which is written in python, in the "interface/controller/py" folder of the code.
 They are implemented in four technically different forms.
 Both "model.py" and "model_enc.py" are files that implement objects for controller and encrypted control.
@@ -53,7 +53,7 @@ Both "model.py" and "model_enc.py" are files that implement objects for controll
      - "ctrl_intmat.py" is a code that converts the controller state matrix into an integer based on the observability of the observer-based controller.
      - "ctrl_intmat_q.py" is quantized version of "ctrl_intmat.py".
 
-### cpp version controller
+### Cpp version controller
 You can check the "ctrl_arx_enc.py" controller file, which is written in cpp, in the "interface/controller/cpp" folder of the code.
 In cpp, only the encrypted controller of "ctrl_arx_q.py" provided in python is provided.
 "model_enc.h" contains an object of the encrypted controller.
@@ -62,7 +62,7 @@ In cpp, only the encrypted controller of "ctrl_arx_q.py" provided in python is p
    * ctrl_arx_enc.cpp
      - Unlike "ctrl_arx_enc.py" provided by python, "ctrl_arx_enc.cpp" is encrpyted using Microsoft SEAL. This allow for slightly faster sampling times.
 
-### go version controller
+### Go version controller
 You can check the "ctrl_intmat_enc.go" controller file, which is written in cpp, in the "interface/controller/go" folder of the code.
 In go, only "ctrl_intmat_enc.go", which is an encrypted file of "ctrl_intmat_q.py" provided by python, is provided.
 "model_enc.go" contains an function of the encrypted controller.
