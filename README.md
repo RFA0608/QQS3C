@@ -18,7 +18,7 @@ The interfacing code for the Python simulator and the actual hardware, correspon
 The actual device consists of a single file, "plant.py" in "interface/plant/py/hardware", while the simulator consists of "model.py" and "plant.py" in "interface/plant/py/simulation".
 **Code explanation and technical interpretation can be found at the link [QQS3C](https://publish.obsidian.md/qqs3c)**
 
-###  version controller
+### Python version controller
 You can check the "ctrl_*.py" controller file, which is written in Python, in the "interface/controller/py" folder of the code.
 They are implemented in five technically different forms.
 Both "model.py" and "model_enc.py" are files that implement objects for controller and encrypted control.
