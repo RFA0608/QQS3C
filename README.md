@@ -73,6 +73,25 @@ In go, only "ctrl_intmat_enc.go", which is an encrypted file of "ctrl_intmat_q.p
 1. Using integer matrix:
    * ctrl_intmat_enc.go
      - "ctrl_intmat_enc.go" is an encrypted version of "ctrl_intmat_q.py", which was not provided in python.
+    
+--- 
+
+## How to use
+It explains the preparations before use, how to use the simulation file, and how to use the actual hardware.
+
+### Before using
+This code should work for both Windows and WSL(Windows Subsystem for Linux) environments.
+Please refer to the link [WSL installation method](https://learn.microsoft.com/ko-kr/windows/wsl/install) for instructions on installing WSL.
+
+This requires three essential elements:
+
+1. go version 1.25.1 after
+2. c++ 13 compiler after
+3. 3.12 python after
+at least.
+
+If WSL is installed, the appropriate Linux OS is Ubuntu-24.04 LTS version.
+
 
 # 0️⃣ Before using
 All about code have to launch root of file. So please launch debugger(vscode) on root of file. If you download this git file to use "git clone", you can find folder name "QQS3C". Enter that, and write "code ." on CMD. That folder is root folder.
