@@ -2,7 +2,7 @@
 QQS3C provides the drive code for cryptographic control for the Quanser Qube Servo 3 model. 
 The code transforms dynamic controllers through various methods and then drives the system through computationally homomorphic cryptography. 
 The cryptographic libraries for computational homomorphism use [Microsoft SEAL](https://github.com/microsoft/SEAL), [OpenFHE-python](https://github.com/openfheorg/openfhe-python), and [CDSL-EncryptedControl](https://github.com/CDSL-EncryptedControl/CDSL/tree/main) using [lattigo](https://github.com/tuneinsight/lattigo).
-The encryption control technique uses the one implemented in [SNU](https://post.cdsl.kr/) and [SEOULTECH](http://cdslst.kr)'s CDSL.
+The encryption control technique mostly uses the one implemented in [SNU](https://post.cdsl.kr/) and [SEOULTECH](http://cdslst.kr)'s CDSL.
 The code uses Quanser's Qube Servo 3 model [Qube Servo 3](https://github.com/quanser/Quanser_Academic_Resources/tree/dev-windows) python API.
 
 ---
