@@ -4,10 +4,10 @@ from openfhe import *
 class crypto():
     # cryptocontext for encryption
     paramters = any
-    crypto_context = any
+    crypto_context = openfhe.CryptoContext
 
     # key_pair for encrption
-    key_pair = any
+    key_pair = openfhe.KeyPair
 
     def __init__(self):
         # parameter setting
@@ -50,7 +50,7 @@ class crypto():
         return vector
     
 class enc_for_fs():
-    crypto_class = any
+    crypto_class = crypto
 
     # quantization level
     r = 1000
@@ -96,7 +96,7 @@ class enc_for_fs():
     
 class fs_enc():
     # for encrypted calculation (only crypto context do not save crypto class)
-    crypto_context = any 
+    crypto_context = openfhe.CryptoContext 
     
     # encrypted gain
     H_enc = any
@@ -120,7 +120,7 @@ class fs_enc():
         return ciphertext_result
     
 class enc_for_obs():
-    crypto_class = any
+    crypto_class = crypto
 
     # quantization level
     r = 1000
@@ -211,7 +211,7 @@ class enc_for_obs():
     
 class obs_enc():
     # for encrypted calculation (only crypto context do not save crypto class)
-    crypto_context = any 
+    crypto_context = openfhe.CryptoContext
 
     # encrypted gain    
     F_enc = []
@@ -250,7 +250,7 @@ class obs_enc():
         return ciphertext_x_add, ciphertext_u_add
 
 class enc_for_arx():
-    crypto_class = any
+    crypto_class = crypto
 
     # quantization level
     r = 1000
@@ -310,7 +310,7 @@ class enc_for_arx():
             
 class arx_enc():
     # for encrypted calculation (only crypto context do not save crypto class)
-    crypto_context = any 
+    crypto_context = openfhe.CryptoContext 
 
     # encrypted gain that packed and encrypted like PQ_enc[0] = {HG_q[0, 0], HG_q[0, 1], HL_q[0, 0]}
     PQ_enc = []
