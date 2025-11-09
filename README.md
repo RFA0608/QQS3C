@@ -67,7 +67,7 @@ Both "model.py" and "model_enc.py" are files that implement objects for controll
 
 ### C++ version controller
 You can check the "ctrl_arx_enc.cpp" controller file, which is written in C++, in the "interface/controller/cpp" folder of the code.
-In C++, only the encrypted controller of "ctrl_arx_q.py" provided in Python is provided.
+In cpp, only the encrypted controller of "ctrl_arx_q.py" provided in Python is provided.
 "model_enc.h" contains an object of the encrypted controller.
 
 1. Using ARX:
