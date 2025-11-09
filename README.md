@@ -147,28 +147,34 @@ There are two different executions in each enviroment.
      3. In that file, change 'localhost' in HOST variable to the vEthernet ip you saved earlier.
      4. Get ready to press F5 button.
    * Cpp
-     1. In the CMD window, move directory to "interface/controller/cpp".
+     1. Find controller description code set which are located in "interface/controller/cpp" folder on debugger(vscode).
+     2. Select the controller file you want to run.
+     3. In that file, change 'localhost' in HOST variable to the vEthernet ip you saved earlier.
+     4. In the CMD window, move directory to "interface/controller/cpp".
         ``` bash
           cd /interface/controller/cpp
         ```
-     2. Create a new make file using cmake.
+     5. Create a new make file using cmake.
         ``` bash
           cmake .
         ```
-     3. Create an executable binary file using the make file.
+     6. Create an executable binary file using the make file.
         ``` bash
           make
         ```
-     4. If you see a file called "ctrl_arx_enc" then you are done and ready to write the following in the CMD window and press enter
+     7. If you see a file called "ctrl_arx_enc" then you are done and ready to write the following in the CMD window and press enter
         ``` bash
           ./ctrl_arx_enc
         ```
    * Go
-     1. In the CMD window, move directory to "interface/controller/go".
+     1. Find controller description code set which are located in "interface/controller/go" folder on debugger(vscode).
+     2. Select the controller file you want to run.
+     3. In that file, change 'localhost' in HOST variable to the vEthernet ip you saved earlier.
+     4. In the CMD window, move directory to "interface/controller/go".
         ``` bash
           cd /interface/controller/go
         ```
-     2. At that location, write something like the following and be ready to press enter.
+     5. At that location, write something like the following and be ready to press enter.
         ``` bash
           go run .
         ```
