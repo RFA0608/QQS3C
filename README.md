@@ -185,7 +185,7 @@ There are two different executions in each environment.
      3. In that file, change 'localhost' in HOST variable to the vEthernet ip you saved earlier.
      4. In the bash window, move directory to "interface/controller/cpp".
         ``` bash
-          cd /interface/controller/cpp
+          cd interface/controller/cpp
         ```
      5. Create a new make file using cmake.
         ``` bash
@@ -205,7 +205,7 @@ There are two different executions in each environment.
      3. In that file, change 'localhost' in HOST variable to the vEthernet ip you saved earlier.
      4. In the bash window, move directory to "interface/controller/go".
         ``` bash
-          cd /interface/controller/go
+          cd interface/controller/go
         ```
      5. Set GOPATH to the file.
         ``` bash
