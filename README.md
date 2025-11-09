@@ -42,13 +42,13 @@ They are implemented in four technically different forms.
      - "ctrl_obs.py" is a code that uses observer-based controller design.
      - "ctrl_obs_q.py" is a quantized version of "ctrl_obs.py"
      - "ctrl_obs_enc.py" is a BGV type encrypted with re-encryption method of "ctrl_obs_q.py". This code is not available.
-5. Using ARX transformed from observer:
-  * ctrl_arx.py
-  * ctrl_arx_q.py
-  * ctrl_arx_enc.py
-    - "ctrl_arx.py" is a code that uses the method of converting an observer-based controller to an AutoRegressive & eXogenous input model based on observability.
-    - "ctrl_arx_q.py" is quantized version of "ctrl_arx.py"
-    - "ctrl_arx_enc.py" is a BGV type encrypted with re-encryption method of "ctrl_arx_q.py"
+4. Using ARX transformed from observer:
+   * ctrl_arx.py
+   * ctrl_arx_q.py
+   * ctrl_arx_enc.py
+     - "ctrl_arx.py" is a code that uses the method of converting an observer-based controller to an AutoRegressive & eXogenous input model based on observability.
+     - "ctrl_arx_q.py" is quantized version of "ctrl_arx.py"
+     - "ctrl_arx_enc.py" is a BGV type encrypted with re-encryption method of "ctrl_arx_q.py"
 7. ctrl_intmat.py
 
 
