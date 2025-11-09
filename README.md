@@ -49,7 +49,11 @@ They are implemented in four technically different forms.
      - "ctrl_arx.py" is a code that uses the method of converting an observer-based controller to an AutoRegressive & eXogenous input model based on observability.
      - "ctrl_arx_q.py" is quantized version of "ctrl_arx.py"
      - "ctrl_arx_enc.py" is a BGV type encrypted with re-encryption method of "ctrl_arx_q.py"
-7. ctrl_intmat.py
+5. Using integer matrix transformed from observer:
+   * ctrl_intmat.py
+   * ctrl_intmat_q.py
+     - "ctrl_intmat.py" is a code that converts the controller state matrix into an integer based on the observability of the observer-based controller.
+     - "ctrl_intmat_q.py" is quantized version of "ctrl_intmat.py"
 
 
 
