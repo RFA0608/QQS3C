@@ -25,7 +25,7 @@ Both "model.py" and "model_enc.py" are files that implement objects for controll
 
 1. Using d/dt filter:
    * ctrl_sf.py
-      > Using d/dt filter from Quanser Qube Servo 3. This code is not available.
+      ↳ Using d/dt filter from Quanser Qube Servo 3. This code is not available.
 2. Using observer for full state feedback:
    * ctrl_fs.py
      > "ctrl_fs.py" is an observer-based design, but it is a code in which the observer runs in the plant and the controller operates in full state.
