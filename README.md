@@ -92,6 +92,20 @@ at least.
 
 If WSL is installed, the appropriate Linux OS is Ubuntu-24.04 LTS version.
 
+### Settings for operation
+#### WSL environment
+Assuming you have python and go installed.
+If not, you should refer to the above version and install it.
+
+1. Microsoft SEAL installation
+   * See the "SEAL installation method.txt" file on the main page.
+  
+2. Essential python package installation
+   * ``` bash
+       python3 -m venv venv
+     ```
+     
+#### Windows environment
 
 # 0️⃣ Before using
 All about code have to launch root of file. So please launch debugger(vscode) on root of file. If you download this git file to use "git clone", you can find folder name "QQS3C". Enter that, and write "code ." on CMD. That folder is root folder.
