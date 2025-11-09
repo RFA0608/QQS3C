@@ -1,26 +1,26 @@
 # QQS3C
 QQS3C provides the drive code for cryptographic control for the Quanser Qube Servo 3 model. 
-The code transforms dynamic controllers through various methods and then drives the system through computationally homomorphic cryptography. 
+The code transforms dynamic controllers through various methods and then drives the system through homomorphic encryption. 
 The cryptographic libraries for computational homomorphism use [Microsoft SEAL](https://github.com/microsoft/SEAL), [OpenFHE-python](https://github.com/openfheorg/openfhe-python), and [CDSL-EncryptedControl](https://github.com/CDSL-EncryptedControl/CDSL/tree/main) using [lattigo](https://github.com/tuneinsight/lattigo).
-The encryption control technique mostly uses the one implemented in [SNU](https://post.cdsl.kr/) and [SEOULTECH](http://cdslst.kr)'s CDSL.
+The encryption control technique is primarily based on the implementations from [SNU](https://post.cdsl.kr/) and [SEOULTECH](http://cdslst.kr)'s CDSL.
 The code uses Quanser's Qube Servo 3 model [Qube Servo 3](https://github.com/quanser/Quanser_Academic_Resources/tree/dev-windows) python API.
 
 ---
 
 ## Implementation Direction
-The code was implemented through data communication with the Quanser API via TCP/IP in order to use Microsoft's SEAL, a c-style homomorphic cryptographic library that can be operated, lattigo (CDSL) written in go, and openFHE-python that can be run in a Linux environment, since the hardware API provided by Quanser is only python and runs in a Windows environment.
+The code was implemented through data communication with the Quanser API via TCP/IP in order to use Microsoft's SEAL, a C++ based homomorphic encryption library that can be operated, lattigo (CDSL) written in go, and openFHE-python that can be run in a Linux environment, since the Quanser hardware API is provided only for Python and runs in a Windows environment.
 
 ---
 
 ## Features
-The code implements a python version controller, a cpp version controller, and a go version controller.
-The interfacing code of the python simulator and the actual device matching the controller can be found in "interface/plant" respectively.
+The code implements controller versions in Python, C++, and Go.
+The interfacing code for the Python simulator and the actual hardware, corresponding to each controller, can be found in the "interface/plant" directory.
 The actual device consists of a single file, "plant.py" in "interface/plant/py/hardware", while the simulator consists of "model.py" and "plant.py" in "interface/plant/py/simulation".
 **Code explanation and technical interpretation can be found at the link [QQS3C](https://publish.obsidian.md/qqs3c)**
 
 ### Python version controller
 You can check the "ctrl_*.py" controller file, which is written in python, in the "interface/controller/py" folder of the code.
-They are implemented in four technically different forms.
+They are implemented in five technically different forms.
 Both "model.py" and "model_enc.py" are files that implement objects for controller and encrypted control.
 
 1. Using d/dt filter:
@@ -36,7 +36,7 @@ Both "model.py" and "model_enc.py" are files that implement objects for controll
      ↳ "ctrl_fs_q.py" is a quantized version of "ctrl_fs.py".
    * ctrl_fs_enc.py
      
-     ↳ "ctrl_fs_enc.py" is a BGV type encrypted version of "ctrl_fs_q.py" with openFHE.
+     ↳ "ctrl_fs_enc.py" is a BGV-type encrypted version of "ctrl_fs_q.py" with openFHE.
 3. Using observer:
    * ctrl_obs.py
      
@@ -46,17 +46,17 @@ Both "model.py" and "model_enc.py" are files that implement objects for controll
      ↳ "ctrl_obs_q.py" is a quantized version of "ctrl_obs.py".
    * ctrl_obs_enc.py
      
-     ↳ "ctrl_obs_enc.py" is a BGV type encrypted with re-encryption method of "ctrl_obs_q.py" with openFHE. This code is not available.
+     ↳ "ctrl_obs_enc.py" is a BGV-type encrypted with re-encryption method of "ctrl_obs_q.py" with openFHE. This code is not available.
 4. Using ARX transformed from observer:
    * ctrl_arx.py
      
-     ↳ "ctrl_arx.py" is a code that uses the method of converting an observer-based controller to an AutoRegressive & eXogenous input model based on observability.
+     ↳ "ctrl_arx.py" implements a controller converted from an observer-based design to an AutoRegressive & eXogenous input (ARX) model based on observability.
    * ctrl_arx_q.py
      
      ↳ "ctrl_arx_q.py" is quantized version of "ctrl_arx.py".
    * ctrl_arx_enc.py
      
-     ↳ "ctrl_arx_enc.py" is a BGV type encrypted with re-encryption method of "ctrl_arx_q.py" with openFHE.
+     ↳ "ctrl_arx_enc.py" is a BGV-type encrypted with re-encryption method of "ctrl_arx_q.py" with openFHE.
 5. Using integer matrix transformed from observer:
    * ctrl_intmat.py
      
@@ -66,24 +66,24 @@ Both "model.py" and "model_enc.py" are files that implement objects for controll
      ↳ "ctrl_intmat_q.py" is quantized version of "ctrl_intmat.py".
 
 ### Cpp version controller
-You can check the "ctrl_arx_enc.py" controller file, which is written in cpp, in the "interface/controller/cpp" folder of the code.
-In cpp, only the encrypted controller of "ctrl_arx_q.py" provided in python is provided.
+You can check the "ctrl_arx_enc.cpp" controller file, which is written in cpp, in the "interface/controller/cpp" folder of the code.
+In C++, only the encrypted controller of "ctrl_arx_q.py" provided in python is provided.
 "model_enc.h" contains an object of the encrypted controller.
 
 1. Using ARX:
    * ctrl_arx_enc.cpp
      
-     ↳ Unlike "ctrl_arx_enc.py" provided by python, "ctrl_arx_enc.cpp" is encrpyted using Microsoft SEAL. This allow for slightly faster sampling times.
+     ↳ Unlike "ctrl_arx_enc.py" provided by python, "ctrl_arx_enc.cpp" is encrypted using Microsoft SEAL. This allow for slightly faster sampling times.
 
 ### Go version controller
-You can check the "ctrl_intmat_enc.go" controller file, which is written in cpp, in the "interface/controller/go" folder of the code.
+You can check the "ctrl_intmat_enc.go" controller file, which is written in Go, in the "interface/controller/go" folder of the code.
 In go, only "ctrl_intmat_enc.go", which is an encrypted file of "ctrl_intmat_q.py" provided by python, is provided.
-"model_enc.go" contains an function of the encrypted controller.
+"model_enc.go" contains a function of the encrypted controller.
 
 1. Using integer matrix:
    * ctrl_intmat_enc.go
      
-     ↳ "ctrl_intmat_enc.go" is an encrypted version of "ctrl_intmat_q.py", which was not provided in python.
+     ↳ "ctrl_intmat_enc.go" is an encrypted version of "ctrl_intmat_q.py", which was not provided in Python.
     
 --- 
 
@@ -96,9 +96,9 @@ Please refer to the link [WSL installation method](https://learn.microsoft.com/k
 
 This requires three essential elements:
 
-1. go version 1.25.1 or later
-2. c++ 13 compiler or later
-3. 3.12 python or later
+1. Go version 1.25.1 or later
+2. C++ 13 compiler or later
+3. 3.12 Python or later
    
 at least.
 
@@ -106,22 +106,22 @@ If WSL is installed, the appropriate Linux OS is Ubuntu-24.04 LTS version.
 
 ### Settings for operation
 #### WSL environment
-Assuming you have python and go installed.
+Assuming you have Python and Go installed.
 If not, you should refer to the above version and install it.
 
 1. Microsoft SEAL installation
    * See the "SEAL installation method.txt" file on the main page.
   
-2. Essential python package installation
+2. Essential Python package installation
    * First, download the relevant code via git clone on WSL bash page.
      ``` bash
        git clone "https://github.com/RFA0608/QQS3C.git"
      ```
-   * Move direction to download file.
+   * Navigate to the downloaded directory.
      ``` bash
        cd QQS3C
      ```
-   * Run python's virtual environment.
+   * Activate Python's virtual environment.
      ``` bash
        python3 -m venv venv
        source ./venv/bin/activate
@@ -131,14 +131,14 @@ If not, you should refer to the above version and install it.
        pip install numpy matplotlib control openfhe
      ```
 3. Lattigo installation
-   * This is automatically downloaded using go mod tidy, so no preparation is required.
+   * This is automatically handled by go mod tidy, so no preparation is required.
      
 #### Windows environment
 1. You need to download the code via git clone on powershell page.
    ``` bash
      git clone "https://github.com/RFA0608/QQS3C.git"
    ```
-2. Execute the following task in Windwos powershell.
+2. Execute the following task in Windows powershell.
    * Move direction to download file.
      ``` bash
        cd QQS3C
@@ -159,7 +159,7 @@ If not, you should refer to the above version and install it.
    Save IPv4 address of vEthernet (WSL (Hyper-V...)).
 
 ### Ready to operate
-There are two different executions in each enviroment.
+There are two different executions in each environment.
 
 #### WSL environment
 1. Go to the previously downloaded QQS3C folder location and run the debugger(vscode) to write below.
@@ -172,7 +172,7 @@ There are two different executions in each enviroment.
      2. Select the controller file you want to run.
      3. In that file, change 'localhost' in HOST variable to the vEthernet ip you saved earlier.
      4. Get ready to press F5 button.
-   * Cpp
+   * C++
      1. Find controller description code set which are located in "interface/controller/cpp" folder on debugger(vscode).
      2. Select the controller file you want to run.
      3. In that file, change 'localhost' in HOST variable to the vEthernet ip you saved earlier.
@@ -200,7 +200,7 @@ There are two different executions in each enviroment.
         ``` bash
           cd /interface/controller/go
         ```
-     5. Set GOPAHT to the file.
+     5. Set GOPATH to the file.
         ``` bash
           pwd
         ```
@@ -236,7 +236,7 @@ Proceed in the following order.
 1. Press F5, which is waiting for Windows environment.
 2. Press F5 or enter to launch the controller that was waiting in WSL.
 
-If you ran a simaulaion, a graph of the output will appear in the file "plant output as sim.png" in "interface/plant/py/simulation/result" folder.
+If you ran a simulation, a graph of the output will appear in the file "plant output as sim.png" in "interface/plant/py/simulation/result" folder.
 
 If you are running real hardware, manually raise the pendulum so that control start is True while looking at the output of the debugger(vscode) running in the Windows environment.
 One thing to note is that for it to work, both the pendulum and the base must be near the equilibrium point.
@@ -245,22 +245,22 @@ One thing to note is that for it to work, both the pendulum and the base must be
 
 ## Demonstration
 https://youtu.be/kVwAEByurqQ?si=HSzjDU9NrPQbe-Wl
-(This Youtube link only supports Korean)
+(This YouTube link only supports Korean)
 
 The flow of the video is as follows.
 1. "ctrl_fs_enc.py" for hardware demo
 2. "ctrl_arx_enc.cpp" for hardware demo
 3. "ctrl_intmat_enc.go" for hardware demo
 
-In the video, a simulation was run for about 30 seconds to check whether control was possible.
+In the video, each hardware demonstration is run for about 30 seconds to check whether control was possible.
 
 > **[INFO] Security**
 > 
-> - "ctrl_fs_enc.py" does not satisfy 128bits lambda bits security.
+> - "ctrl_fs_enc.py" does not satisfy 128-bit lambda security.
 > 
 > - "ctrl_intmat_enc.go" is also like that.
 > 
-> - On the other hand, "ctrl_arx_enc.cpp" sufficiently satisfies 128bits lambda bits security.
+> - On the other hand, "ctrl_arx_enc.cpp" sufficiently satisfies 128-bit lambda security.
 
 # Licenses & Acknowledgements
 
