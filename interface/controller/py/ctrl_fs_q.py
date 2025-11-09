@@ -47,7 +47,7 @@ def fs_quantized():
                 # send control input data
                 tccp.send(u[0, 0])
 
-                # plant state update and generate output
+                # state update and generate output
                 obs.state_update(y)
                 u = fs_q.get_output(obs.x)
             elif signal == "end":
