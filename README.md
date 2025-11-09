@@ -1,3 +1,6 @@
+# ⚠️
+This paper doesn't accurately account for the code. Ready to renewally update Readme and technical resources untill 251113
+
 # QQS3C
 QQS3C provides the drive code for cryptographic control for the Quanser Qube Servo 3 model. 
 The code transforms dynamic controllers through various methods and then drives the system through computationally homomorphic cryptography. 
@@ -116,9 +119,6 @@ https://youtu.be/kVwAEByurqQ?si=HSzjDU9NrPQbe-Wl
 On the other hand, "Microsoft SEAL" can control with 20ms sampling time to satisfy 128 lambda bits security.
 
 Recently modified: 251107-1706 (year month day - hour minute) [KST]
-
-# ⚠️
-This paper doesn't accurately account for the code. Ready to renewally update Readme and technical resources untill 251113
 
 # Licenses & Acknowledgements
 
