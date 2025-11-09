@@ -123,9 +123,9 @@ If not, you should refer to the above version and install it.
      
 #### Windows environment
 1. You need to download the code via git clone.
-  ``` bash
-    git clone "https://github.com/RFA0608/QQS3C.git"
-  ```
+   ``` bash
+     git clone "https://github.com/RFA0608/QQS3C.git"
+   ```
 2. You need to check the hyper-v ip for TCP/IP communication between the Windows and WSL.
    ``` bash
      ipconfig
