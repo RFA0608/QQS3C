@@ -65,8 +65,8 @@ Both "model.py" and "model_enc.py" are files that implement objects for controll
      
      ↳ "ctrl_intmat_q.py" is quantized version of "ctrl_intmat.py".
 
-### Cpp version controller
-You can check the "ctrl_arx_enc.cpp" controller file, which is written in cpp, in the "interface/controller/cpp" folder of the code.
+### C++ version controller
+You can check the "ctrl_arx_enc.cpp" controller file, which is written in C++, in the "interface/controller/cpp" folder of the code.
 In C++, only the encrypted controller of "ctrl_arx_q.py" provided in Python is provided.
 "model_enc.h" contains an object of the encrypted controller.
 
@@ -166,7 +166,7 @@ There are two different executions in each environment.
    ``` bash
      code .
    ```
-2. Here, each file provided in three languages(py, cpp, go) has a different execution method.
+2. Here, each file provided in three languages (py, cpp, go) has a different execution method.
    * Python
      1. Find controller description code set which are located in "interface/controller/py" folder on debugger(vscode).
      2. Select the controller file you want to run.
