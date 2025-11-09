@@ -61,7 +61,7 @@ def obs_encrypted():
                 # send control input data
                 tccp.send(u[0, 0])
 
-                # y and u value encryption after packing
+                # y and state value encryption after packing
                 x_enc, y_enc = enc_4_obs.enc_signal(x, y)
                 
                 ## controller description ##
