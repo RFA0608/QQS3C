@@ -83,7 +83,7 @@ In go, only "ctrl_intmat_enc.go", which is an encrypted file of "ctrl_intmat_q.p
 1. Using integer matrix:
    * ctrl_intmat_enc.go
      
-     ↳ "ctrl_intmat_enc.go" is an encrypted version of "ctrl_intmat_q.py", which was not provided in Python.
+     ↳ "ctrl_intmat_enc.go" is an encrypted version of "ctrl_intmat_q.py". (An equivalent encrypted controller was not provided in Python.)
     
 --- 
 
