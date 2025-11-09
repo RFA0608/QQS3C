@@ -65,6 +65,14 @@ In cpp, only the encrypted controller of "ctrl_arx_q.py" provided in python is p
    * ctrl_arx_enc.cpp
      - Unlike "ctrl_arx_enc.py" provided by python, "ctrl_arx_enc.cpp" is encrpyted using Microsoft SEAL. This allow for slightly faster sampling times.
 
+### go version controller
+You can check the "ctrl_intmat_enc.go" controller file, which is written in cpp, in the "interface/controller/go" folder of the code.
+In go, only "ctrl_intmat_enc.go", which is an encrypted file of "ctrl_intmat_q.py" provided by python, is provided.
+"model_enc.go" contains an function of the encrypted controller.
+
+1. Using integer matrix:
+   * ctrl_intmat_enc.go
+     - "ctrl_intmat_enc.go" is an encrypted version of "ctrl_intmat_q.py", which was not provided in python.
 
 # 0️⃣ Before using
 All about code have to launch root of file. So please launch debugger(vscode) on root of file. If you download this git file to use "git clone", you can find folder name "QQS3C". Enter that, and write "code ." on CMD. That folder is root folder.
