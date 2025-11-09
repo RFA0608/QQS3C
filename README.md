@@ -93,16 +93,16 @@ This paper doesn't accurately account for the code. Ready to renewally update Re
 This project utilizes code from several open-source projects. We express our gratitude to their developers. The licenses for these dependencies are listed below.
 
 * **Lattigo (v6)**
-    * Licensed under the [Apache License 2.0](https://github.com/tuneinsight/lattigo/blob/v6.0.0/LICENSE)
+    * Licensed under the [Apache License 2.0](https://github.com/tuneinsight/lattigo/blob/main/LICENSE)
 
 * **Microsoft SEAL**
     * Licensed under the [MIT License](https://github.com/microsoft/SEAL/blob/main/LICENSE)
 
 * **CDSL-EncryptedControl**
-    * Licensed under the MIT License (Copyright (c) 2025 CDSL-EncryptedControl)
+    * Licensed under the [MIT License](https://github.com/CDSL-EncryptedControl/CDSL/blob/main/LICENSE)
 
 * **OpenFHE (Python)**
-    * Licensed under the [BSD 2-Clause License](https://github.com/openfhe-development/openfhe-python/blob/main/LICENSE)
+    * Licensed under the [BSD 2-Clause License](https://github.com/openfheorg/openfhe-python/blob/main/LICENSE)
 
 * **Numpy**
     * Licensed under the [BSD 3-Clause License](https://github.com/numpy/numpy/blob/main/LICENSE.txt)
@@ -111,4 +111,4 @@ This project utilizes code from several open-source projects. We express our gra
     * Licensed under the [PSF-style License](https://github.com/matplotlib/matplotlib/blob/main/LICENSE/LICENSE)
 
 * **Python Control Systems Library (python-control)**
-    * Licensed under the [BSD 3-Clause License](https://github.com/python-control/python-control/blob/main/LICENSE)
+    * Licensed under the [BSD 3-Clause License](https://matplotlib.org/stable/project/license.html)
