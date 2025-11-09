@@ -50,7 +50,7 @@ def obs_quantized():
                 # send control input data
                 tccp.send(u[0, 0])
 
-                # arx memory update and generate output
+                # state update and generate output
                 x = obs_q.state_update(x, y)
                 u = obs_q.get_output()
             elif signal == "end":
