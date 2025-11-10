@@ -144,6 +144,7 @@ If not, you should refer to the above version and install it.
        cd QQS3C
      ```
    * Activate Python's virtual environment.
+     
      If the above doesn't work, try the one below.
      ``` powershell
        py -3 -m venv venv
