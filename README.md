@@ -144,8 +144,6 @@ If not, you should refer to the above version and install it.
        cd QQS3C
      ```
    * Activate Python's virtual environment.
-     
-     If the above doesn't work, try the one below.
      ``` powershell
        py -3 -m venv venv
        .\venv\Scripts\Activate.ps1
@@ -155,6 +153,7 @@ If not, you should refer to the above version and install it.
        python3 -m venv venv
        .\venv\Scripts\Activate.ps1
      ```
+     (If the above doesn't work, try the one below.)
      
      If the command doesn't work, try again by following these steps:
        1. Launch PowerShell as administrator.
