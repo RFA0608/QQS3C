@@ -23,8 +23,9 @@ poles = [0 1 2 -1]; % Must consist of n-integers!
 R = place(F.',H.',poles).';
 
 
-% Convert to modal canonical form 
+% Convert to companion canonical form 
 sys = ss(F-R*H, G, H, []);
 [csys,T] = canon(sys, 'companion');
 display(T)
+
 
