@@ -95,7 +95,7 @@ Please refer to the link [WSL installation method](https://learn.microsoft.com/k
 This requires three essential elements:
 
 1. Go version 1.25.1 or later
-2. C++ 13 compiler or later
+2. C++ 20 compiler or later
 3. Python 3.12 or later
    
 at least.
