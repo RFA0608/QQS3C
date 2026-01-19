@@ -277,9 +277,9 @@ In the video, each hardware demonstration is run for about 30 seconds to check w
 # Contact
 If you need help or explanation while using this library, please send me an email below and I will respond.
 
-- jeongmingyu@cdslst.kr
-- leesangwon@cdslst.kr
-- leedonghyun@cdslst.kr
+- jeongmingyu@cdslst.kr (Mingyu Jeong)
+- leesangwon@cdslst.kr (Sangwon Lee)
+- leedonghyun@cdslst.kr (Donghyun Lee)
 
 # Licenses & Acknowledgements
 This project utilizes code from several open-source projects. We express our gratitude to their developers. The licenses for these dependencies are listed below.
