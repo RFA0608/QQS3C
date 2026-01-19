@@ -282,7 +282,6 @@ If you need help or explanation while using this library, please send me an emai
 - leedonghyun@cdslst.kr
 
 # Licenses & Acknowledgements
-
 This project utilizes code from several open-source projects. We express our gratitude to their developers. The licenses for these dependencies are listed below.
 
 * **Lattigo (v6)**
