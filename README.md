@@ -275,6 +275,8 @@ In the video, each hardware demonstration is run for about 30 seconds to check w
 > - On the other hand, "ctrl_arx_enc.cpp" sufficiently satisfies 128-bit lambda security.
 
 # Contact
+If you need help or explanation while using this library, please send me an email below and I will respond.
+
 - jeongmingyu@cdslst.kr
 - leesangwon@cdslst.kr
 - leedonghyun@cdslst.kr
