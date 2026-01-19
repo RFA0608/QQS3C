@@ -281,6 +281,8 @@ If you need help or explanation while using this library, please send me an emai
 - leesangwon@cdslst.kr (Sangwon Lee)
 - leedonghyun@cdslst.kr (Donghyun Lee)
 
+Provided by SEOULTECH CDSL.
+
 # Licenses & Acknowledgements
 This project utilizes code from several open-source projects. We express our gratitude to their developers. The licenses for these dependencies are listed below.
 
