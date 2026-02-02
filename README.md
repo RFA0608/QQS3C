@@ -7,7 +7,7 @@ The cryptographic libraries for computational homomorphism use [Microsoft SEAL](
 > 
 > This branch is version of added C++ and Go server code, and separate encrypted controller to other computer.
 > 1. Add C++ and Go version TCP server code.
-> 2. Separate encrypted Controll code.
+> 2. Separate encrypted controller code.
 > 3. Initially launch swing-up for pendulum inverting.
 
 ---
