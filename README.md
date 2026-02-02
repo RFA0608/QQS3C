@@ -5,7 +5,7 @@ The cryptographic libraries for computational homomorphism use [Microsoft SEAL](
 
 > ℹ️ Account for branch
 > 
-> This branch is version of added C++ and Go server code, and separated encrypted controller to other computer. 
+> This branch is version of added C++ and Go server code, and separate encrypted controller to other computer. 
 
 ---
 
