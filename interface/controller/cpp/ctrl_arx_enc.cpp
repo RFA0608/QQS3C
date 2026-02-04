@@ -1,5 +1,5 @@
 // get tcp_protocol decription
-#include "../../../cpp/tcp_protocol_client.h"
+#include "../../../communication/cpp/tcp_protocol_client.h"
 
 // get other tools
 #include <iostream>
