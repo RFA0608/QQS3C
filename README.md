@@ -11,8 +11,8 @@ The cryptographic libraries for computational homomorphism use [Microsoft SEAL](
 > 3. Initially launch swing-up for pendulum inverting.
 > 4. Add Rust support.
 > 5. Add ARX only RLWE cryptography on Rust.
-
-Schedule's deadline are 02-13, 02-13, 02-20, 02-27, 02-27, respectively. (month-day format)
+>
+> Schedule's deadline are 02-13, 02-13, 02-20, 02-27, 02-27, respectively. (month-day format)
 
 ---
 
