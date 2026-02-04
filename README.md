@@ -9,6 +9,10 @@ The cryptographic libraries for computational homomorphism use [Microsoft SEAL](
 > 1. Add C++ and Go version TCP server code.
 > 2. Separate encrypted controller code.
 > 3. Initially launch swing-up for pendulum inverting.
+> 4. Add Rust support.
+> 5. Add ARX only RLWE cryptograghy on Rust.
+
+Schedule's deadline are 02-13, 02-13, 02-20, 02-27, 02-27, respectively. (month-day format)
 
 ---
 
