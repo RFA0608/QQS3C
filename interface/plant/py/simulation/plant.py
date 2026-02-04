@@ -1,6 +1,6 @@
 # get tcp_protocol description (vscode[debuger] launched at root directory)
 import sys
-sys.path.append(r".communication/py")
+sys.path.append(r"./communication/py")
 import tcp_protocol_server as tcs
 
 # init tcp host and port

@@ -3,19 +3,19 @@ module intmat_enc
 go 1.25.1
 
 require (
-	github.com/CDSL-EncryptedControl/CDSL v0.0.0-20250918033558-0c2b93fcd8a0
-	github.com/RFA0608/QQS3C/go v0.0.0-20251107002701-eb6019d55877
-	github.com/tuneinsight/lattigo/v6 v6.1.1
+	github.com/CDSL-EncryptedControl/CDSL v1.0.0
+	github.com/RFA0608/QQS3C/communication/go v0.0.0-20260204225441-5e4f0b4ac2a0
+	github.com/tuneinsight/lattigo/v6 v6.2.0
 )
 
 require (
 	github.com/ALTree/bigfloat v0.2.0 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
-	github.com/google/go-cmp v0.6.0 // indirect
+	github.com/google/go-cmp v0.7.0 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/stretchr/testify v1.10.0 // indirect
-	golang.org/x/crypto v0.32.0 // indirect
-	golang.org/x/exp v0.0.0-20250106191152-7588d65b2ba8 // indirect
-	golang.org/x/sys v0.29.0 // indirect
+	golang.org/x/crypto v0.45.0 // indirect
+	golang.org/x/exp v0.0.0-20250506013437-ce4c2cf36ca6 // indirect
+	golang.org/x/sys v0.38.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
