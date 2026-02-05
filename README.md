@@ -160,7 +160,7 @@ If not, you should refer to the above version and install it.
             Set-ExecutionPolicy RemoteSigned
           ```
        3. Turn off the administrator PowerShell, open a standard (non-administrator) PowerShell, and try the command again.
-   * Download all required packages using pip.
+   * Download all required packages using pip. (Need to install Quanser Python library on venv)
      ``` powershell
        pip install numpy matplotlib control openfhe
      ```
