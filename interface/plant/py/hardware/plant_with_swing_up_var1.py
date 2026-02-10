@@ -159,8 +159,7 @@ def control_loop():
     QubeClass = QubeServo3
 
     # swing-up standing gate
-    stand_run = False
-    er = 0.02
+    stand_run = True
 
     # describe #
     # ------------------------------------------------ #
