@@ -7,7 +7,7 @@ The cryptographic libraries for computational homomorphism use [Microsoft SEAL](
 > 
 > This branch is version of added C++ and Go server code, and separate encrypted controller to other computer.
 > 1. Add C++ and Go version TCP server code. (✅ 2026-02-05 clear, communication folder)
-> 2. Initially launch swing-up for pendulum inverting. (✅ 2026-02-10 clear, plant/py/hardware/plant_wit_swing_up.py)
+> 2. Initially launch swing-up for pendulum inverting. (✅ 2026-02-10 clear, plant/py/hardware/plant_with_swing_up.py)
 > 3. Separate encrypted controller code.
 > 4. Add Rust support.
 > 5. Add ARX only RLWE cryptography on Rust.
