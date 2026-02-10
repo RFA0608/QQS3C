@@ -73,7 +73,6 @@ def control_loop():
 
     # swing-up standing gate
     stand_run = False
-    er = 0.02
 
     # describe #
     # ------------------------------------------------ #
