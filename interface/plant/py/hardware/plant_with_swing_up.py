@@ -17,6 +17,7 @@ from threading import Thread
 import signal
 import time
 import math
+import control as ct
 import numpy as np
 
 # Thread hanlder initialization
@@ -81,8 +82,36 @@ def control_loop():
     set_time = 0
     switching_time = 1
 
-    # gain of full-state(use initial part of swing-up only 50hz based)
-    K = np.array([-2.0, 28.0, -1.5, 2.5]) 
+    # gain of full-state(use initial part of swing-up)
+    A = np.array([[0, 0, 1, 0],
+                  [0, 0, 0, 1],
+                  [0, 149.275096865093, -0.0130994260613721, 0],
+                  [0, 261.609107366662, -0.0129471071536817, 0]], dtype=float)
+    
+    B = np.array([[0],
+                  [0],
+                  [55.6948386963098],
+                  [55.0472242928643]], dtype=float)
+    
+    C = np.array([[1, 0, 0, 0],
+                  [0, 1, 0, 0],
+                  [0, 0, 1, 0],
+                  [0, 0, 0, 1]], dtype=float)
+    
+    D = np.array([[0],
+                  [0],
+                  [0],
+                  [0]], dtype=float)
+    
+    sys_c = ct.ss(A, B, C, D)
+    sys_d = sys_c.sample((1 / frequency), method='zoh')
+
+    Q_k = np.array([[5, 0, 0, 0],
+                    [0, 1, 0, 0],
+                    [0, 0, 1, 0],
+                    [0, 0, 0, 1]], dtype=float)
+    R_k = np.array([[1]], dtype=float)
+    K, Sk, Ek = ct.dlqr(sys_d.A, sys_d.B, Q_k, R_k)
 
     # Physical Parameters
     mp = 0.024       
@@ -158,7 +187,7 @@ def control_loop():
                             stand_run = True
                     
                     # write commands
-                    voltage = np.clip(voltage, -6, 6)
+                    voltage = np.clip(voltage, -8, 8)
                     myQube.write_voltage(voltage)
 
                     print(f"control start: {stand_run}")
