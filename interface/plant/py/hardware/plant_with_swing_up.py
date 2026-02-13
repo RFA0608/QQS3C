@@ -222,7 +222,7 @@ def control_loop():
                         print("control object: full-state on plant")
                     else:
                         # running range set
-                        if abs(alpha_deg) < 25:
+                        if abs(alpha_deg) < 15:
                             voltage = u
                         else:
                             voltage = 0
