@@ -1,6 +1,6 @@
 # ℹ️ Notice
 The library is now updating. 
-The cause of the update can be found in the schedule section of another branch of the library, "seperated_encrypted_part".
+The cause of the update can be found in the schedule section of another branch of the library, "separated_encrypted_part".
 The branch is up to date and the final deadline for its verification is by March, 2026.
 
 # QQS3C
