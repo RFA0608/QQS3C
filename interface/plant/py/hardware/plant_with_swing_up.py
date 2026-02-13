@@ -74,8 +74,6 @@ def control_loop():
     # for state estimation
     state_theta_dot = np.array([0,0], dtype=np.float64)
     state_alpha_dot = np.array([0,0], dtype=np.float64)
-    state_alpha_f_dot = np.array([0,0], dtype=np.float64)
-    state_alpha_f_2dot = np.array([0,0], dtype=np.float64)
 
     # swing-up standing gate
     stand_run = False
@@ -84,14 +82,21 @@ def control_loop():
     switching_time = 1
 
     # gain of full-state(use initial part of swing-up only 50hz based)
-    K = np.array([-2.0, 28.0, -1.5, 2.5])
+    K = np.array([-2.0, 28.0, -1.5, 2.5]) 
 
-    # gain P of swing up and bumpping gain R
-    P = 0.015
-    R = 1
+    # Physical Parameters
+    mp = 0.024       
+    Lp = 0.129       
+    l = Lp / 2       
+    g = 9.81         
+    Jp = mp * (Lp**2) / 3  
+
+    # Control Parameters
+    E_ref = 0.0      
+    mu = 150.0  
 
     # switching target angle
-    angle = 5
+    angle = 10
 
     # describe #
     # ------------------------------------------------ #
@@ -119,40 +124,31 @@ def control_loop():
                     # Calculate angular velocities with filter of 50 and 100 rad
                     theta_dot, state_theta_dot = ddt_filter(theta, state_theta_dot, 50, 1/frequency)
                     alpha_dot, state_alpha_dot = ddt_filter(alpha, state_alpha_dot, 100, 1/frequency)
-                    alpha_f_dot, state_alpha_f_dot = ddt_filter(alpha_f, state_alpha_f_dot, 100, 1/frequency)
-                    alpha_f_2dot, state_alpha_f_2dot = ddt_filter(alpha_f_dot, state_alpha_f_2dot, 100, 1/frequency)
                     states = np.array([theta, alpha, theta_dot, alpha_dot])
 
-                    # base limitation edge dectection
-                    barrier_edge = np.array([0.0, 0.0])
-                    barrier_flag = False
-                    barrier_edge[1] = barrier_edge[0]
-                    barrier_edge[0] = math.degrees(theta)
+                    # Energy Calculation
+                    E_pot = mp * g * l * (math.cos(alpha) - 1)
+                    E_kin = 0.5 * Jp * (alpha_dot**2)
+                    E_total = E_pot + E_kin
+                    E_err = E_ref - E_total
 
-                    # barrier of base set
-                    barrier_edge = np.array([0.0, 0.0])
-                    barrier_flag = False
-                    barrier_limit = 5
+                    # calc control rate
+                    term = np.sign(alpha_dot * math.cos(alpha))
+                    if abs(alpha_dot) < 0.05 and abs(math.cos(alpha)) < 0.1:
+                        term = 0
+                    u_raw = -1 * mu * E_err * term
 
                     if(alpha_deg > angle and (not change_flag)):
-                        barrier_edge[1] = barrier_edge[0]
-                        barrier_edge[0] = math.degrees(theta)
-
-                        if(barrier_edge[0] >= barrier_limit and barrier_edge[1] < barrier_limit):
-                            barrier_flag = False
-                        elif(barrier_edge[0] < -barrier_limit and barrier_edge[1] >= -barrier_limit):
-                            barrier_flag = True
-
-                        if(alpha_f_2dot > 0):
-                            if(barrier_flag):
-                                voltage = R
+                        if(-theta > 0):
+                            if(u_raw > 0):
+                                voltage = 0.0
                             else:
-                                voltage = P * abs(alpha_deg)
+                                voltage = u_raw
                         else:
-                            if(not barrier_flag):
-                                voltage = -R
+                            if(u_raw < 0):
+                                voltage = 0.0
                             else:
-                                voltage = -P * abs(alpha_deg)
+                                voltage = u_raw
                     else:
                         voltage = 1*np.dot(K, states)
         
@@ -162,6 +158,7 @@ def control_loop():
                             stand_run = True
                     
                     # write commands
+                    voltage = np.clip(voltage, -6, 6)
                     myQube.write_voltage(voltage)
 
                     print(f"control start: {stand_run}")
