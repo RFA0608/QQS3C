@@ -9,11 +9,12 @@ The cryptographic libraries for computational homomorphism use [Microsoft SEAL](
 > 1. Add C++ and Go version TCP server code. (✅ 2026-02-05 clear, communication folder)
 > 2. Initially launch swing-up for pendulum inverting. (✅ 2026-02-13 clear(modified energy based), interface/plant/py/hardware/plant_with_swing_up.py, [demonstration video hyperlink with ctrl_arx_enc.cpp](https://youtu.be/5z65PVYJA_E))
 > 3. Model information change (motor registence 8.4 to 7.5) (✅ 2026-02-13 clear, modified all controller and plant model)
-> 4. Separate encrypted controller code.
-> 5. Add Rust support.
-> 6. Add ARX only RLWE cryptography on Rust.
+> 4. Add Quarc C based hard real-time model code.
+> 5. Separate encrypted controller code.
+> 6. Add Rust support.
+> 7. Add ARX only RLWE cryptography on Rust.
 >
-> Schedule's deadline are 02-13, 02-13, 02-20, 02-27, 02-27, respectively. (month-day format)
+> Schedule's deadline are ~~02-13~~, ~~02-13~~, ~~02-13~~, 02-20, 02-27, 03-06, 03-06, respectively. (month-day format)
 
 ---
 
