@@ -1,4 +1,4 @@
-# ℹ️ Information
+# ℹ️ Announcement
 The library is now updating. 
 The cause of the update can be found in the schedule section of another branch of the library, "segregated_encrypted_part".
 The branch is up to date and the final deadline for its verification is by March, 2026.
