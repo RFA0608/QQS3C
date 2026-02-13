@@ -157,21 +157,21 @@ func Enc_for_intmat(crypto_cl *crypto) *info_enc {
 	}
 
 	G_q := [][]float64{
-		{1000, -1419},
-		{0, -11490},
-		{0, -5942},
-		{0, 5723},
+		{999, -1409},
+		{0, -11372},
+		{0, -5881},
+		{0, 5664},
 	}
 
 	H_q := [][]float64{
-		{69691, -5260, 152481, 142539},
+		{64740, -4882, 141655, 132429},
 	}
 
 	R_q := [][]float64{
 		{4},
-		{-1422},
-		{-718},
-		{702},
+		{-1571},
+		{-793},
+		{776},
 	}
 
 	ctF := RGSW.EncPack(F_q, crypto_cl.tau, crypto_cl.encryptorRGSW, crypto_cl.levelQ, crypto_cl.levelP, crypto_cl.ringQ, *crypto_cl.params)
