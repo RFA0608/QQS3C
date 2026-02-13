@@ -229,6 +229,7 @@ def control_loop():
                         print("control object: outside controller")
                     
                     # write commands
+                    voltage = np.clip(voltage, -15, 15)
                     myQube.write_voltage(voltage)
 
                 # plot to scopes
