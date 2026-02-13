@@ -1,3 +1,8 @@
+# ℹ️ Information
+The library is now updating. 
+The cause of the update can be found in the schedule section of another branch of the library, "segregated_encrypted_part".
+The branch is up to date and the final deadline for its verification is by March, 2026.
+
 # QQS3C
 QQS3C provides the drive code for encrypted control for the Quanser Qube Servo 3 model. 
 The code transforms dynamic controllers through various methods and then drives the system through homomorphic encryption. 
