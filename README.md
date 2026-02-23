@@ -9,7 +9,7 @@ This branch is version of added C++ and Go server code, and separate encrypted c
 6. Add Rust support.
 7. Add ARX only RLWE cryptography on Rust.
 
-Schedule's deadline are ~~02-13~~, ~~02-13~~, ~~02-13~~, 02-27(delayed), 02-27, 03-06, 03-06, respectively. (month-day format)
+Schedule's deadline are ~~02-13~~, ~~02-13~~, ~~02-13~~, 02-27(delayed), 02-27, N/D, N/D, respectively. (month-day format)
 
 # QQS3C
 QQS3C provides the drive code for encrypted control for the Quanser Qube Servo 3 model. 
