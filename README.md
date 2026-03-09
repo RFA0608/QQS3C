@@ -3,7 +3,7 @@ The library is now updating.
 The cause of the update can be found in the schedule section of another branch of the library, "separated_encrypted_part".
 The branch is up to date and the final deadline for its verification is by March, 2026.
 
-If you want to see latest version of encrypted control advance example, you can refer to [separate-control on GO](https://github.com/lsw23101/Encrypted_Quanser) repository, Which is made by Sangwon Lee who is contributor of this library.
+If you want to see latest version of encrypted control advance example, you can refer to [Encrypted Control Advanced](https://github.com/lsw23101/Encrypted_Quanser) repository, Which is made by Sangwon Lee who is contributor of this library.
 
 # QQS3C
 QQS3C provides the drive code for encrypted control for the Quanser Qube Servo 3 model. 
