@@ -10,6 +10,8 @@
 #include <ws2tcpip.h>
 
 #pragma comment(lib, "ws2_32.lib")
+// !!! Above linker code only can be used in Windows Visual Studio (not VS code)
+// If you want to use VS code environment, then you can use g++ and with option "-lws2_32" at compile time.
 
 using namespace std;
 
