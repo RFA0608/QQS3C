@@ -5,7 +5,7 @@ This branch is version of added C++ and Go server code, and separate encrypted c
 2. Initially launch swing-up for pendulum inverting. (✅ 2026-03-09 clear(modified energy based new video update), interface/plant/py/hardware/plant_with_swing_up.py, [demonstration video hyperlink with ctrl_arx_enc.cpp](https://youtu.be/IPi5QwssUeg))
 3. Model information change (as motor registence 8.4 to 7.5) (✅ 2026-02-13 clear, modified all controller and plant model)
 4. Add Quarc C based hard real-time model code. (delayed by needs of windows version tcp communication which not is predicted) [65% done/windows tcp server(c++) code now available with Visual Studio environment]
-5. Separate encrypted controller code.
+5. ~~Separate encrypted controller code~~ Readme update.
 6. Add Rust support.
 7. Add ARX only RLWE cryptography on Rust.
 
