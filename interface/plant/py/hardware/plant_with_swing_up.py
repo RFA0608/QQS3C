@@ -59,7 +59,10 @@ def control_loop():
     # ------------------------------------------------ #
     # qube version, using hardware, pendulum
     qubeversion = 3
-    hardware = 0
+    
+    # if you want to use Ouanser Interactive Labs, you will change to 0
+    hardware = 1
+    
     pendulum = 1
 
     # frequency of system holder and sampler
