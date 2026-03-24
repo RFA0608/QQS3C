@@ -1,6 +1,6 @@
 # ℹ️ Notice
 
-## Advance(latest version) of encrypted control\
+## Advance(latest version) of encrypted control
 If you want to see latest version of encrypted control advance example, you can refer to [Encrypted Control Advanced](https://github.com/lsw23101/Encrypted_Quanser) repository, which is made by Sangwon Lee who is contributor of this library.
 
 ## Account for branch(schedule)
