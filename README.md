@@ -299,10 +299,10 @@ One thing to note is that for it to work, both the pendulum and the base must be
 ---
 
 ## Demonstration
-1. Quanser Interactive Labs
+1. Quanser Interactive Labs Test:
 https://youtu.be/ncy-5f4BtY0
 
-2. Hardware
+2. Hardware Test:
 https://youtu.be/kVwAEByurqQ?si=HSzjDU9NrPQbe-Wl
 (This YouTube link only supports Korean)
 
