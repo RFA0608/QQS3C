@@ -306,7 +306,7 @@ https://youtu.be/ncy-5f4BtY0
 https://youtu.be/kVwAEByurqQ?si=HSzjDU9NrPQbe-Wl
 (This YouTube link only supports Korean)
 
-The flow of the video is as follows.
+The flow of the video is as follows(For Hardware only).
 1. "ctrl_fs_enc.py" for hardware demo
 2. "ctrl_arx_enc.cpp" for hardware demo
 3. "ctrl_intmat_enc.go" for hardware demo
