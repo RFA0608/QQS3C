@@ -15,7 +15,7 @@ This branch is version of added C++ and Go server code, and separate encrypted c
 6. Add Rust support.
 7. Add ARX only RLWE cryptography on Rust.
 
-Schedule's deadline are ~~02-13~~, ~~02-13~~, ~~02-13~~, 03-31(delayed), N/D, 04-10(delayed), 04-17(delayed), respectively. (month-day format) 
+Schedule's deadline are ~~02-13~~, ~~02-13~~, ~~02-13~~, 03-31(delayed), ~~N/D~~, 04-10(delayed), 04-17(delayed), respectively. (month-day format) 
 All contents will be done at least before end of April. 
 
 Sorry for delay 😢
