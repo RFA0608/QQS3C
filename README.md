@@ -33,15 +33,15 @@ The actual device consists of a single file, "plant.py" in "interface/plant/py/h
 **Code explanation and technical interpretation can be found at the link [QQS3C-obsidian](https://publish.obsidian.md/qqs3c)**
 
 ### Python version controller
-You can check the "ctrl_*.py" controller file, which is written in Python, in the "interface/controller/py" folder of the code.
-They are implemented in five technically different forms.
-Both "model.py" and "model_enc.py" are files that implement objects for controller and encrypted control.
+You can check the "ctrl_*.py" controller file, which is written in Python, ll_state_feedbin the "interface/controller/py" folder of the code.
+They are implemented in five technically different forms, which are named by state_filter, full_state_feedback, observer_form, arx_model, integer_matrix, respectively.
+In each folder, both "model.py" and "model_enc.py" are files that implement objects for controller and encrypted control.
 
-1. Using d/dt filter:
+1. **state_filter**:Using d/dt filter:
    * ctrl_sf.py
      
       ↳ Using d/dt filter from Quanser Qube Servo 3. This code is not available.
-2. Using observer for full state feedback:
+2. **full_state_feedback**:Using observer for full state feedback:
    * ctrl_fs.py
      
      ↳ "ctrl_fs.py" is an observer-based design, but it is a code in which the observer runs in the plant and the controller operates in full state.
@@ -51,7 +51,7 @@ Both "model.py" and "model_enc.py" are files that implement objects for controll
    * ctrl_fs_enc.py
      
      ↳ "ctrl_fs_enc.py" is a BGV-type encrypted version of "ctrl_fs_q.py" with openFHE.
-3. Using observer:
+3. **observer_form**:Using observer:
    * ctrl_obs.py
      
      ↳ "ctrl_obs.py" is a code that uses observer-based controller design.
@@ -61,7 +61,7 @@ Both "model.py" and "model_enc.py" are files that implement objects for controll
    * ctrl_obs_enc.py
      
      ↳ "ctrl_obs_enc.py" is a BGV-type encrypted with re-encryption method of "ctrl_obs_q.py" with openFHE. This code is not available.
-4. Using ARX transformed from observer:
+4. **arx_model**:Using ARX transformed from observer:
    * ctrl_arx.py
      
      ↳ "ctrl_arx.py" implements a controller converted from an observer-based design to an AutoRegressive & eXogenous input (ARX) model based on observability.
@@ -71,7 +71,7 @@ Both "model.py" and "model_enc.py" are files that implement objects for controll
    * ctrl_arx_enc.py
      
      ↳ "ctrl_arx_enc.py" is a BGV-type encrypted with re-encryption method of "ctrl_arx_q.py" with openFHE.
-5. Using integer matrix transformed from observer:
+5. **integer_matrix**:Using integer matrix transformed from observer:
    * ctrl_intmat.py
      
      ↳ "ctrl_intmat.py" is a code that converts the controller state matrix into an integer based on the observability of the observer-based controller.
@@ -80,21 +80,21 @@ Both "model.py" and "model_enc.py" are files that implement objects for controll
      ↳ "ctrl_intmat_q.py" is quantized version of "ctrl_intmat.py".
 
 ### C++ version controller
-You can check the "ctrl_arx_enc.cpp" controller file, which is written in C++, in the "interface/controller/cpp" folder of the code.
+You can check the "ctrl_arx_enc.cpp" controller file, which is written in C++, in the "interface/controller/cpp/arx_model/" folder of the code.
 In cpp, only the encrypted controller of "ctrl_arx_q.py" provided in Python is provided.
 "model_enc.h" contains an object of the encrypted controller.
 
-1. Using ARX:
+1. **arx_model**:Using ARX:
    * ctrl_arx_enc.cpp
      
      ↳ Unlike "ctrl_arx_enc.py" provided by Python, "ctrl_arx_enc.cpp" is encrypted using Microsoft SEAL. This allows for slightly faster sampling times.
 
 ### Go version controller
-You can check the "ctrl_intmat_enc.go" controller file, which is written in Go, in the "interface/controller/go" folder of the code.
+You can check the "ctrl_intmat_enc.go" controller file, which is written in Go, in the "interface/controller/go/integer_matrix/" folder of the code.
 In go, only "ctrl_intmat_enc.go", which is an encrypted file of "ctrl_intmat_q.py" provided by Python, is provided.
 "model_enc.go" contains a function of the encrypted controller.
 
-1. Using integer matrix:
+1. **integer_matrix**:Using integer matrix:
    * ctrl_intmat_enc.go
      
      ↳ "ctrl_intmat_enc.go" is an encrypted version of "ctrl_intmat_q.py". (An equivalent encrypted controller was not provided in Python.)
@@ -102,7 +102,7 @@ In go, only "ctrl_intmat_enc.go", which is an encrypted file of "ctrl_intmat_q.p
 --- 
 
 ## How to use
-It explains the preparations before use, how to use the simulation file, and how to use the actual hardware.
+It explains the preparations before use, how to use the simulation file, how to use the Ouanser Interactive Labs, and how to use the actual hardware.
 
 ### Before using
 This code should work for both Windows and WSL (Windows Subsystem for Linux) environments.
@@ -110,11 +110,11 @@ Please refer to the link [WSL installation method](https://learn.microsoft.com/k
 
 This requires three essential elements:
 
-1. Go version 1.25.1 or later
-2. C++ 20 compiler or later
-3. Python 3.12 or later
+1. Go version 1.25.1 or later (only install in WSL)
+2. C++ 20 compiler or later (only install in WSL)
+3. Python 3.12 or later (install both Windows, WSL)
    
-at least.
+at least. (The following description is after installing the above three elements)
 
 If WSL is installed, the appropriate Linux OS is Ubuntu-24.04 LTS version.
 
@@ -178,13 +178,26 @@ If not, you should refer to the above version and install it.
        3. Turn off the administrator PowerShell, open a standard (non-administrator) PowerShell, and try the command again.
    * Download all required packages using pip.
      ``` powershell
-       pip install numpy matplotlib control openfhe
+       pip install numpy matplotlib control openfhe PyQt6 pyqtgraph
      ```
 3. You need to check the hyper-v ip for TCP/IP communication between the Windows and WSL.
    ``` powershell
      ipconfig
    ```
    Save IPv4 address of vEthernet (WSL (Hyper-V...)).
+   
+**OPTION** if you want to use Ouanser Interactive Labs(QLab), additionally follows below.
+1. Enter the url [portal_quanser](https://portal.quanser.com/Downloads), find 'these instructions' in "For Python users" section, and find 'Get Started' in "Design Philosophy" section.
+2. Download and install Quanser Interactive Labs to click 'Windows' in "Attention" section.
+3. Download and install SDK to click 'Download Quanser SDK for Windows' in "Attention Windows" section.
+4. If you do not touch any option during installing, you can find 'quanser_api' word in "Program Files/Quanser/Quanser SDK/python" path. Just check this file.
+5. Enter the url [quanser](https://github.com/quanser/Quanser_Academic_Resources), download library(whole things) and unzip proper path(like document).
+6. In the QQS3C "interaction/plant/py/hardware", the top side, "sys.path.append(r"-")" change the path "-" to the path set in step 5.
+7. Make sure venv is on, write
+  ``` powershell
+    python -m pip install --upgrade --find-links "C:\Program Files\Quanser\Quanser SDK\python" "C:\Program Files\Quanser\Quanser SDK\python\quanser_api-2025.11.1-py2.py3-none-any.whl"
+  ```
+  on the terminal and connect the SDK (this path can find in step 4).
 
 ### Ready to operate
 There are two different executions in each environment.
@@ -201,12 +214,12 @@ There are two different executions in each environment.
      3. In that file, change 'localhost' in HOST variable to the vEthernet ip you saved earlier.
      4. Get ready to press F5 button.
    * C++
-     1. Find controller description code set which are located in "interface/controller/cpp" folder on debugger (vscode).
+     1. Find controller description code set which are located in "interface/controller/cpp/arx_model" folder on debugger (vscode).
      2. Select the controller file you want to run.
      3. In that file, change 'localhost' in HOST variable to the vEthernet ip you saved earlier.
-     4. In the bash window, move directory to "interface/controller/cpp".
+     4. In the bash window, move directory to "interface/controller/cpp/arx_model".
         ``` bash
-          cd interface/controller/cpp
+          cd interface/controller/cpp/arx_model
         ```
      5. Create a new make file using cmake.
         ``` bash
@@ -224,9 +237,9 @@ There are two different executions in each environment.
      1. Find controller description code set which are located in "interface/controller/go" folder on debugger (vscode).
      2. Select the controller file you want to run.
      3. In that file, change 'localhost' in HOST variable to the vEthernet ip you saved earlier.
-     4. In the bash window, move directory to "interface/controller/go".
+     4. In the bash window, move directory to "interface/controller/go/integer_matrix".
         ``` bash
-          cd interface/controller/go
+          cd interface/controller/go/integer_matrix
         ```
      5. Set GOPATH to the current directory.
         ``` bash
@@ -252,9 +265,15 @@ This completes the controller's preparation for operation.
      1. Find plant description code set which are located in "interface/plant/py/simulation" folder on debugger (vscode).
      2. Select the controller file named "plant.py"
      3. Get ready to press F5 button.
+   * Quanser Interactive Labs
+     1. Lanch Quanser Interactive Labs before we installed, login, and select "Qube 3 -Pendulum".
+     2. Find plant description code set which are located in "interface/plant/py/hardware" folder on debugger (vscode).
+     3. Select the controller file named "plant.py" or "plant_with_swing_up.py".
+     4. Find variable 'hardware' in "def control_loop()" and change value to 0.
+     5. Get ready to press F5 button.
    * Hardware
      1. Find plant description code set which are located in "interface/plant/py/hardware" folder on debugger (vscode).
-     2. Select the controller file named "plant.py"
+     2. Select the controller file named "plant.py" or "plant_with_swing_up.py".
      3. Get ready to press F5 button.
 
 This completes the plant's preparation for operation.
@@ -266,7 +285,9 @@ Proceed in the following order.
 
 If you ran a simulation, a graph of the output will appear in the file "plant output as sim.png" in "interface/plant/py/simulation/result" folder.
 
-If you are running real hardware, manually raise the pendulum so that control start is True while looking at the output of the debugger (vscode) running in the Windows environment.
+If you ran a Quanser Interactive Labs, you can see movement on QLabs.
+
+If you are running real hardware, there is two side of launch, first is manually raise the pendulum(use "plant.py" code), second automatically swing up the pendulum(use "plant_with_swing_up.py"), so that control start is True while looking at the output of the debugger (vscode) running in the Windows environment.
 One thing to note is that for it to work, both the pendulum and the base must be near the equilibrium point.
 
 ---
