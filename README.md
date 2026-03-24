@@ -1,5 +1,5 @@
 # ℹ️ Notice
-The library is now updating. The branch is up to date and the final deadline for its verification is by March April, 2026.
+The library is now updating. The branch is up to date and the final deadline for its verification is by ~~March~~ April, 2026.
 
 ## Advance(latest version) of encrypted control
 If you want to see latest version of encrypted control advance example, you can refer to [Encrypted Control Advanced](https://github.com/lsw23101/Encrypted_Quanser) repository, which is made by Sangwon Lee who is contributor of this library.
