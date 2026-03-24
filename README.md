@@ -1,4 +1,9 @@
-# ℹ️ Account for branch(schedule)
+# ℹ️ Notice
+
+## Advance(latest version) of encrypted control\
+If you want to see latest version of encrypted control advance example, you can refer to [Encrypted Control Advanced](https://github.com/lsw23101/Encrypted_Quanser) repository, which is made by Sangwon Lee who is contributor of this library.
+
+## Account for branch(schedule)
 This branch is version of added C++ and Go server code, and separate encrypted controller to other computer.
 
 1. Add C++ and Go version TCP server code. (✅ 2026-02-05 clear, communication folder)
