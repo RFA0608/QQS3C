@@ -1,4 +1,4 @@
-# ℹ️ Notice
+# Notice
 The library is now updating. The branch is up to date and the final deadline for its verification is by ~~March~~ April, 2026.
 
 ## Advance(latest version) of encrypted control
@@ -20,7 +20,7 @@ All contents will be done at least before end of April.
 
 Sorry for delay 😢
 
-# 🔁 QQS3C
+# QQS3C
 QQS3C provides the drive code for encrypted control for the Quanser Qube Servo 3 model. 
 The code transforms dynamic controllers through various methods and then drives the system through homomorphic encryption. 
 The cryptographic libraries for computational homomorphism use [Microsoft SEAL](https://github.com/microsoft/SEAL), [OpenFHE-python](https://github.com/openfheorg/openfhe-python), and [CDSL-EncryptedControl](https://github.com/CDSL-EncryptedControl/CDSL/tree/main) using [lattigo](https://github.com/tuneinsight/lattigo). The code uses Quanser's Qube Servo 3 model [Qube Servo 3](https://github.com/quanser/Quanser_Academic_Resources/tree/dev-windows) Python API. 
