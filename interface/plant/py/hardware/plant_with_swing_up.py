@@ -83,7 +83,8 @@ def control_loop():
     stand_run = False
     change_flag = False
     set_time = 0
-    switching_time = 1
+    switching_time = 100 * 1/frequency # full-state feedback controller on plant run time
+    transient_time = 10 * 1/frequency # stop update control input for transient phase rum time
 
     # gain of full-state(use initial part of swing-up)
     A = np.array([[0, 0, 1, 0],
@@ -224,12 +225,16 @@ def control_loop():
                         voltage = 1*np.dot(K, states)
                         print("control object: full-state on plant")
                     else:
-                        # running range set
-                        if abs(alpha_deg) < 15:
-                            voltage = u
-                        else:
+                        if(timeStamp - set_time < switching_time + transient_time):
                             voltage = 0
-                        print("control object: outside controller")
+                            print("control object: transient phase")
+                        else:
+                            # running range set
+                            if abs(alpha_deg) < 50:
+                                voltage = u
+                            else:
+                                voltage = 0
+                            print("control object: outside controller")
                     
                     # write commands
                     voltage = np.clip(voltage, -15, 15)
