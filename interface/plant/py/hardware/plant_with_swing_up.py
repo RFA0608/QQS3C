@@ -131,6 +131,9 @@ def control_loop():
     # switching target angle
     angle = 10
 
+    # reliable angle range (for hardware operate limit)
+    angle_range = 20
+
     # describe #
     # ------------------------------------------------ #
     # instance of hardware model 
@@ -230,7 +233,7 @@ def control_loop():
                             print("control object: transient phase")
                         else:
                             # running range set
-                            if abs(alpha_deg) < 50:
+                            if abs(alpha_deg) < angle_range:
                                 voltage = u
                             else:
                                 voltage = 0
