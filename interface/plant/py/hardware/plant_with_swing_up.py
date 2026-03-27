@@ -83,8 +83,8 @@ def control_loop():
     stand_run = False
     change_flag = False
     set_time = 0
-    switching_time = 100 * 1/frequency # full-state feedback controller on plant run time
-    transient_time = 10 * 1/frequency # stop update control input for transient phase rum time
+    switching_time = 100 * 1/frequency # full-state feedback controller on plant run time (stabilize state which is perturbated by swing-up phase)
+    transient_time = 10 * 1/frequency # stop update control input for transient phase rum time (set a initial value by stopping control input during a little moments)
 
     # gain of full-state(use initial part of swing-up)
     A = np.array([[0, 0, 1, 0],
