@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <cmath>
+#include <chrono>
 #include "tcp_protocol_server_windows.h"
 #include "hil.h"
 #include "quanser_timer.h"
@@ -22,31 +23,31 @@ int main()
     //     cout << "failure to connect hardware" << endl;
     //        return -1;
     // }
-   
+
     /// If you want to use virtual environment activate below
     result = hil_open("qube_servo3_usb", "0@tcpip://localhost:18923?nagle='off'", &board);
     if (result < 0)
     {
         cout << "failure to connect QLab" << endl;
-           return -1;
+        return -1;
     }
 
     // simulation_time is total run time, sample_time is sample_time.
     int simulation_time = 30;
     double sample_time = 0.02;
-    t_timeout interval;  
+    t_timeout interval;
     t_timeout timeout;
     timeout_get_timeout(&interval, sample_time);
     timeout_get_current_time(&timeout);
 
     // angle[0] = base, angle[1] = pendulum
-    double angle[2] = { 0.0, 0.0 }; 
+    double angle[2] = { 0.0, 0.0 };
     double voltage = 0.0;
     int32_t encoder_counts[2];
     uint32_t encoder_channels[2] = { 0, 1 };
-    uint32_t analog_channels[2] = { 0 }; 
+    uint32_t analog_channels[2] = { 0 };
     uint32_t digital_channels[1] = { 0 };
-    t_boolean digital_values[1] = { 1 }; 
+    t_boolean digital_values[1] = { 1 };
     hil_write_digital(board, digital_channels, 1, digital_values);
 
     // swing-up standing gate
@@ -61,8 +62,19 @@ int main()
     // TCP/IP ready
     tcp_server tcsp = tcp_server(host, port);
 
+    // Just check loop/total time
+    auto stc = chrono::high_resolution_clock::now();
+    auto edc = chrono::high_resolution_clock::now();
+    auto duration = chrono::duration_cast<chrono::nanoseconds>(edc - stc);
+    double run_time = duration.count() / 1000000;
+    double stack_time = 0.0;
+
     // control loop
-    for (int i = 0; i < (int)((double)simulation_time / sample_time); i++) {
+    for (long long i = 0; i < (long long)((double)simulation_time / sample_time); i++)
+    {
+        stc = chrono::high_resolution_clock::now();
+
+        // time sleep
         timeout_add(&timeout, &timeout, &interval);
         qtimer_sleep(&timeout);
 
@@ -81,7 +93,7 @@ int main()
             // check output 
             cout << "pendulum angle: " << alpha << endl;
             cout << "base angle: " << theta << endl;
-            
+
             if (abs(alpha) < er)
             {
                 cout << "set" << endl;
@@ -111,6 +123,12 @@ int main()
 
         // actuator write
         hil_write_analog(board, analog_channels, 1, &voltage);
+
+        edc = chrono::high_resolution_clock::now();
+        duration = chrono::duration_cast<chrono::nanoseconds>(edc - stc);
+        run_time = duration.count() / 1000000;
+        stack_time += run_time;
+        cout << "iter: " << i << " | loop time: " << run_time << "ms | total time: " << stack_time << "s" << endl;
     }
 
     tcsp.Send<string>("end");
@@ -121,9 +139,9 @@ int main()
     digital_values[0] = 0;
     hil_write_digital(board, digital_channels, 1, digital_values);
     if (board != NULL)
-    {   
+    {
         hil_close(board);
     }
-    
+
     return 0;
 }
