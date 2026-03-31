@@ -3,7 +3,7 @@
 #include <iostream>
 using namespace std;
 
-const string host = "127.0.0.1";
+const string host = "0.0.0.0";
 const int port = 9999;
 
 int main()
