@@ -198,6 +198,7 @@ If not, you should refer to the above version and install it.
      ``` powershell
        pip install -e "***/communication/py"
      ```
+   * In OPTION 1's step 7, you have to do.
 5. You need to check the hyper-v ip for TCP/IP communication between the Windows and WSL.
    ``` powershell
      ipconfig
