@@ -1,0 +1,1 @@
+If you do git clone and enter that folder, enter "pwd" in your command window and replace *** to your result "export CPATH=$CPATH:***/communication/cpp"
