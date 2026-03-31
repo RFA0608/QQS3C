@@ -224,7 +224,7 @@ If not, you should refer to the above version and install it.
 4. Put the file tcp_protocol_server_windows.h, which is located in "communication/cpp", to header file section.
 5. Enter project configuration, that is located project->Properties, Change C++ Language Standard C++17 (maybe it was C++14)
 6. Find the address of "Quanser SDK/include" and paste on C/C++->Additional Include Directories section. (maybe there's a Quanser SDK in the Quanser folder in Program Files, or there's a QUARC in it)
-7. Find the address of "Quanser SDK/lib" and paste on Linker->General->Additional Library Directories section.
+7. Find the address of "Quanser SDK/lib/win64" and paste on Linker->General->Additional Library Directories section.
 8. Move to Linker->Input->Additional Dependencies section, put 'hil.lib', 'quanser_runtime.lib', 'quanser_common.lib' in their.
 
 #### Using only Windows
