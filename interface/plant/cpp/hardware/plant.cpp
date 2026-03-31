@@ -15,23 +15,28 @@ int main()
 {
     t_card board;
     t_error result;
+    // if you want to use hardware change to 1 else 0 is virtual(QLab)
+    bool hardware = 0;
 
-    /// If you want to use hardware, activate below
-    // result = hil_open("qube_servo3_usb", "0", &board);
-    // if (result < 0)
-    // {
-    //     cout << "failure to connect hardware" << endl;
-    //        return -1;
-    // }
-
-    /// If you want to use virtual environment activate below
-    result = hil_open("qube_servo3_usb", "0@tcpip://localhost:18923?nagle='off'", &board);
-    if (result < 0)
+    if (hardware)
     {
-        cout << "failure to connect QLab" << endl;
-        return -1;
+        result = hil_open("qube_servo3_usb", "0", &board);
+        if (result < 0)
+        {
+            cout << "failure to connect hardware" << endl;
+            return -1;
+        }
     }
-
+    else
+    {
+        result = hil_open("qube_servo3_usb", "0@tcpip://localhost:18923?nagle='off'", &board);
+        if (result < 0)
+        {
+            cout << "failure to connect QLab" << endl;
+            return -1;
+        }
+    }
+   
     // simulation_time is total run time, sample_time is sample_time.
     int simulation_time = 30;
     double sample_time = 0.02;
@@ -85,7 +90,10 @@ int main()
 
         // calc output
         theta = -angle[0];
-        alpha = angle[1] - (long)(angle[1] / (2 * M_PI)) * (2 * M_PI) + M_PI;
+        alpha = fmod(angle[1], 2 * M_PI);
+        if (alpha < 0) alpha +=  2 * M_PI;
+        alpha = alpha - M_PI;
+
         alpha_deg = alpha * 180 / M_PI;
 
         if (!stand_run)
@@ -127,7 +135,7 @@ int main()
         edc = chrono::high_resolution_clock::now();
         duration = chrono::duration_cast<chrono::nanoseconds>(edc - stc);
         run_time = duration.count() / 1000000;
-        stack_time += run_time;
+        stack_time += run_time / 1000;
         cout << "iter: " << i << " | loop time: " << run_time << "ms | total time: " << stack_time << "s" << endl;
     }
 
