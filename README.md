@@ -334,11 +334,15 @@ One thing to note is that for it to work, both the pendulum and the base must be
 ---
 
 ## Demonstration
-1. Quanser Interactive Labs Test:
+1. QQS3C Installation Guide:
+https://youtu.be/01qr6Mvyikw
+(This YouTube link only supports Korean)
+   
+3. Quanser Interactive Labs Test:
 https://youtu.be/ncy-5f4BtY0
 
-2. Hardware Test:
-https://youtu.be/kVwAEByurqQ?si=HSzjDU9NrPQbe-Wl
+4. Hardware Test:
+https://youtu.be/kVwAEByurqQ
 (This YouTube link only supports Korean)
 
 The flow of the video is as follows(Hardware only).
