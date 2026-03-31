@@ -78,11 +78,14 @@ int main()
 
         if (!stand_run)
         {
+            // check output 
+            cout << "pendulum angle: " << alpha << endl;
+            cout << "base angle: " << theta << endl;
+            
             if (abs(alpha) < er)
             {
                 cout << "set" << endl;
                 stand_run = true;
-                continue;
             }
         }
         else
