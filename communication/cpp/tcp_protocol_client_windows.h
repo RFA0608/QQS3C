@@ -35,7 +35,7 @@ class tcp_client
             this->port = port;
 
             this->client.sin_family = AF_INET;
-            inet_pton(AF_INET, host.c_str(), &this->server.sin_addr);
+            inet_pton(AF_INET, host.c_str(), &this->client.sin_addr);
             // this->client.sin_addr.s_addr = inet_addr(host.c_str());
             this->client.sin_port = htons(port);
 
