@@ -115,7 +115,7 @@ class tcp_client
                 int byte_read;
                 while(true)
                 {
-                    byte_read = recv(this->socket_instance, buffer.data(), buffer.size());
+                    byte_read = recv(this->socket_instance, buffer.data(), buffer.size(), 0);
                     if (byte_read <= 0)
                     {
                         if(this->print_flag)
@@ -171,7 +171,7 @@ class tcp_client
                 int byte_read;
                 while(true)
                 {
-                    byte_read = recv(this->socket_instance, buffer.data(), buffer.size());
+                    byte_read = recv(this->socket_instance, buffer.data(), buffer.size(), 0);
                     if (byte_read <= 0)
                     {
                         if(this->print_flag)
@@ -227,7 +227,7 @@ class tcp_client
                 int byte_read;
                 while(true)
                 {
-                    byte_read = recv(this->socket_instance, buffer.data(), buffer.size());
+                    byte_read = recv(this->socket_instance, buffer.data(), buffer.size(), 0);
                     if (byte_read <= 0)
                     {
                         if(this->print_flag)
@@ -292,7 +292,7 @@ class tcp_client
             int byte_read;
             while(true)
             {
-                byte_read = recv(this->socket_instance, buffer.data(), buffer.size());
+                byte_read = recv(this->socket_instance, buffer.data(), buffer.size(), 0);
                 if (byte_read <= 0)
                 {
                     if(this->print_flag)
