@@ -311,6 +311,10 @@ This completes the controller's preparation for operation.
      1. Find plant description code set which are located in "interface/plant/py/hardware" folder on debugger (vscode).
      2. Select the controller file named "plant.py" or "plant_with_swing_up.py".
      3. Get ready to press F5 button.
+3. Additionaly, if you use only Windows environment.
+   * Controller
+     1. Choose controller code (Except for using OpenFHE-python).
+     2. And ready to press F5 button.
 
 This completes the plant's preparation for operation.
 
