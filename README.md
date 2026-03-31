@@ -325,6 +325,7 @@ If you ran a Quanser Interactive Labs, you can see movement on QLabs.
 
 If you are running real hardware, there is two side of launch, first is manually raise the pendulum(use "plant.py" code), second automatically swing up the pendulum(use "plant_with_swing_up.py"), so that control start is True while looking at the output of the debugger (vscode) running in the Windows environment.
 One thing to note is that for it to work, both the pendulum and the base must be near the equilibrium point.
+
 ---
 
 ## Demonstration
