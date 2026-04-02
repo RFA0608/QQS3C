@@ -71,52 +71,13 @@ at least. (The following description is after installing the above three element
 
 If WSL is installed, the appropriate Linux OS is Ubuntu-24.04 LTS version. 
 
-# Using Windows and WSL
-## WSL environment
-Assuming you have Python and Go installed.
-If not, you should refer to the above version and install it.
 
-1. Microsoft SEAL installation
-   * See the "SEAL installation method.txt" file on the main page.
-  
-2. Essential Python package installation
-   * First, download the relevant code via git clone on WSL bash page.
-     ``` bash
-       git clone "https://github.com/RFA0608/QQS3C.git"
-     ```
-   * Navigate to the downloaded directory.
-     ``` bash
-       cd QQS3C
-     ```
-   * Activate Python's virtual environment.
-     ``` bash
-       python3 -m venv venv
-       source ./venv/bin/activate
-     ```
-   * Download all required packages using pip.
-     ``` bash
-       pip install numpy matplotlib control openfhe
-     ```
-3. Link complier and interpreter of communication tools
-   * First, move directory to root folder.
-     ``` bash
-       cd QQS3C
-     ```
-   * Find absolute directory address(path) and memorize this.
-     ``` bash
-       pwd
-     ```
-   * Change the address(path) above to <YOUR_PATH> below. (C++ Link)
-     ``` bash
-       export CPATH=$CPATH:<YOUR_PATH>/communication/cpp
-     ```
-   * And with same address(path), change to below.
-     ``` bash
-       pip install -e "<YOUR_PATH>/communication/py"
-     ```
-4. Lattigo installation
-   * This is automatically handled by go mod tidy, so no preparation is required.
-     
+
+
+
+
+# Using Windows and WSL
+
 ## Windows environment
 1. You need to download the code via git clone on PowerShell page.
    ``` powershell
@@ -208,25 +169,57 @@ All python implementation need to apply on venv environment. (you can check (ven
     pip install -e <YOUR_PATH>
   ```
 
-**OPTION 1**: If you want to use QUARC-C based plant code (more suitable real-time interaction than python), need more setting on Visual Studio(VS 2022)
-1. Install Visual Studio and QLab(according to the above content).
-2. Make a new project.
-3. Put the file plant.cpp, which is located in "interface/plant/cpp/hardware", to source file section.
-4. Put the file tcp_protocol_server_windows.h, which is located in "communication/cpp", to header file section.
-5. Enter project configuration, that is located project->Properties, Change C++ Language Standard C++17 (maybe it was C++14)
-6. Find the address(path) of "Quanser SDK/include" and paste on C/C++->Additional Include Directories section. (maybe there's a Quanser SDK in the Quanser folder in Program Files, or there's a QUARC in it)
-7. Find the address(path) of "Quanser SDK/lib/win64" and paste on Linker->General->Additional Library Directories section.
-8. Move to Linker->Input->Additional Dependencies section, put 'hil.lib', 'quanser_runtime.lib', 'quanser_common.lib' in their.
 
-### Using only Windows
-#### Windows environment
-This is exactly the same as the Windows setting in the WSL and Windows description, and of course, the OPTION part. But I can't use OpenFHE-python wrapper here.
+## WSL environment
+Assuming you have Python and Go installed.
+If not, you should refer to the above version and install it.
 
-**OPTION 2**: If you want to use "communication/cpp" in Windows
-1. Open Visual Studio.
-2. Put the file tcp_protocol_client_windows.h, which is located in "communication/cpp", to header file section.
+1. Microsoft SEAL installation
+   * See the "SEAL installation method.txt" file on the main page.
+  
+2. Essential Python package installation
+   * First, download the relevant code via git clone on WSL bash page.
+     ``` bash
+       git clone "https://github.com/RFA0608/QQS3C.git"
+     ```
+   * Navigate to the downloaded directory.
+     ``` bash
+       cd QQS3C
+     ```
+   * Activate Python's virtual environment.
+     ``` bash
+       python3 -m venv venv
+       source ./venv/bin/activate
+     ```
+   * Download all required packages using pip.
+     ``` bash
+       pip install numpy matplotlib control openfhe
+     ```
+3. Link complier and interpreter of communication tools
+   * First, move directory to root folder.
+     ``` bash
+       cd QQS3C
+     ```
+   * Find absolute directory address(path) and memorize this.
+     ``` bash
+       pwd
+     ```
+   * Change the address(path) above to <YOUR_PATH> below. (C++ Link)
+     ``` bash
+       export CPATH=$CPATH:<YOUR_PATH>/communication/cpp
+     ```
+   * And with same address(path), change to below.
+     ``` bash
+       pip install -e "<YOUR_PATH>/communication/py"
+     ```
+4. Lattigo installation
+   * This is automatically handled by go mod tidy, so no preparation is required.
 
-## Ready to operate
+
+     
+
+
+# Ready to operate
 Execution methods vary depending on the environment.
 
 ### WSL environment
