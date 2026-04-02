@@ -40,7 +40,7 @@ you can find "interface/controller/C++/arx_model" and "interface/controller/go/i
 They are in order a version implemented in Python as Microsoft SEAL C++ by arx_model and a version implemented in Lattigo (CDSL) by integer_matrix.
 
 
-**Controller Compatibility Matrix**
+**Controller Compatibility**
 
 | Model | Language | Encryption | Security (128-bit) | Status | Python Series | Other Series |
 | :--- | :---: | :---: | :---: | :--- | :--- | :--- |
