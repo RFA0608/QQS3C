@@ -213,7 +213,7 @@ If you want to use Ouanser Interactive Labs(QLab) or Quanser Hardwares, follows 
 3. Download and install SDK to click 'Download Quanser SDK for Windows' in "Attention Windows" section.
 4. If you do not touch any option during installing, you can find 'quanser_api' word in "Program Files/Quanser/Quanser SDK/python" path. Just check this file.
 5. Enter the url [quanser](https://github.com/quanser/Quanser_Academic_Resources), download library(whole things) and unzip proper path(like document).
-6. In the QQS3C "interaction/plant/py/hardware", activate venv which is python virtual enviroment.
+6. In the QQS3C "interaction/plant/py/hardware", activate venv which is python virtual enviroment before we activated.
 7. Make sure venv is on, write (**VERY IMPORTANT: Anything on Quanser requires this, so it must be installed**)
   ``` powershell
     python -m pip install --upgrade --find-links "C:\Program Files\Quanser\Quanser SDK\python" "C:\Program Files\Quanser\Quanser SDK\python\quanser_api-2025.11.1-py2.py3-none-any.whl"
@@ -237,7 +237,7 @@ All python implementation need to apply on venv environment. (you can check (ven
   [tool.setuptools]
   packages = ["pal"]
 ```
-3. Find absolute address location `pyproject.toml`
+3. Find absolute address location of `pyproject.toml`
 4. Be careful that your environment is on venv, put the command below (change *** to address what we found step 3)
   ```
     pip install -e ***
