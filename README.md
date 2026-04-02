@@ -158,7 +158,7 @@ If not, you should refer to the above version and install it.
    ```
    Save IPv4 address of vEthernet (WSL (Hyper-V...)).
 
-**⚠️This requires two essential settings(Important)**:
+**⚠️CRITICAL: Essential Enviroment Setup**:
 
 **Installation Quanser SDK**
 If you want to use Ouanser Interactive Labs(QLab) or Quanser Hardwares, follows below.
