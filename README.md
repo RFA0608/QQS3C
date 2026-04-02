@@ -21,10 +21,10 @@ You can check the "ctrl_*.py" controller file, which is written in Python, ll_st
 They are implemented in five technically different forms, which are named by state_filter, full_state_feedback, observer_form, arx_model, integer_matrix, respectively.
 In each folder, both "model.py" and "model_enc.py" are files that implement objects for controller and encrypted control.
 
-1. ~~**state_filter**:Using d/dt filter~~:
+1. **state_filter**:Using d/dt filter:
    * ctrl_sf.py
      
-      ↳ Using d/dt filter from Quanser Qube Servo 3. This code is not available.
+      ↳ Using d/dt filter from Quanser Qube Servo 3. This code is **not available**.
 2. **full_state_feedback**:Using observer for full state feedback:
    * ctrl_fs.py
      
@@ -44,7 +44,7 @@ In each folder, both "model.py" and "model_enc.py" are files that implement obje
      ↳ "ctrl_obs_q.py" is a quantized version of "ctrl_obs.py".
    * ctrl_obs_enc.py
      
-     ↳ "ctrl_obs_enc.py" is a BGV-type encrypted with re-encryption method of "ctrl_obs_q.py" with openFHE. This code is not available.
+     ↳ "ctrl_obs_enc.py" is a BGV-type encrypted with re-encryption method of "ctrl_obs_q.py" with openFHE. This code is **not available**.
 4. **arx_model**:Using ARX transformed from observer:
    * ctrl_arx.py
      
