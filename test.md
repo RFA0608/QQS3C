@@ -127,7 +127,7 @@ If WSL is installed, the appropriate Linux OS is Ubuntu-24.04 LTS version.
 
 
 <details>
- <summary>테스트, 디버그 메모...</summary>
+ <summary> **ㅇㄴㅁㅇㄴㅁㅇ** </summary>
  
 **⚠️CRITICAL: Essential Enviroment Setup**:
 
