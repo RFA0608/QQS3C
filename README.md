@@ -21,7 +21,7 @@ You can check the "ctrl_*.py" controller file, which is written in Python, ll_st
 They are implemented in five technically different forms, which are named by state_filter, full_state_feedback, observer_form, arx_model, integer_matrix, respectively.
 In each folder, both "model.py" and "model_enc.py" are files that implement objects for controller and encrypted control.
 
-### Controller Compatibility Matrix
+**Controller Compatibility Matrix**
 
 | Model | Language | Encryption | Security (128-bit) | Status | Series |
 | :--- | :---: | :---: | :---: | :--- | :--- |
