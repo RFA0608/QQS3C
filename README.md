@@ -198,7 +198,7 @@ If not, you should refer to the above version and install it.
      ``` powershell
        pip install -e "***/communication/py"
      ```
-   * In OPTION 1's step 7, you have to do.
+   * **In OPTION 1's step 7, you have to do.**
 5. You need to check the hyper-v ip for TCP/IP communication between the Windows and WSL.
    ``` powershell
      ipconfig
@@ -318,6 +318,23 @@ This completes the controller's preparation for operation.
      2. And ready to press F5 button.
 
 This completes the plant's preparation for operation.
+
+**Additional Guide** Method Using SEAL On Windows
+1. Install vcpkg.
+   ``` powershell
+     git clone https://github.com/microsoft/vcpkg.git
+     .\vcpkg\bootstrap-vcpkg.bat
+   ```
+2. Install SEAL.
+   ``` powershell
+     .\vcpkg\vcpkg install seal:x64-windows
+     .\vcpkg\vcpkg integrate install
+   ```
+3. Onpen Visual Studio.
+4. Change project type debug to release.
+5. Enter project configuration, that is located project->Properties, Change C++ Language Standard C++17 (maybe it was C++14)
+6. In section Configuration Properties, you can find vcpkg->Use Vcpkg/Install Vcpkg Dependencies and check type is Yes. (If are not, change Yes)
+7. In section C/C++, you can find Preprocessor->Definitions and add `;NOMINMAX` at backside.
 
 ### Operation
 Proceed in the following order.
