@@ -97,7 +97,7 @@ If not, you should refer to the above version and install it.
      ```
    * Change the address above to <YOUR_PATH> below. (C++ Link)
      ``` bash
-       export CPATH=$CPATH<YOUR_PATH>communication/cpp
+       export CPATH=$CPATH:<YOUR_PATH>/communication/cpp
      ```
    * And with same address, change to below.
      ``` bash
