@@ -107,14 +107,13 @@ And next is Quanser requirement on Windows. You need to installation Quanser's a
 This requires two essential settings:
 
 #### Installation Quanser SDK
- 
-**1** if you want to use Ouanser Interactive Labs(QLab) or Quanser Hardware, follows below.
+If you want to use Ouanser Interactive Labs(QLab) or Quanser Hardware, follows below.
 1. Enter the url [portal_quanser](https://portal.quanser.com/Downloads), find 'these instructions' in "For Python users" section, and find 'Get Started' in "Design Philosophy" section.
 2. (**Only QLab/Not need hardware users**)Download and install Quanser Interactive Labs to click 'Windows' in "Attention" section.
 3. Download and install SDK to click 'Download Quanser SDK for Windows' in "Attention Windows" section.
 4. If you do not touch any option during installing, you can find 'quanser_api' word in "Program Files/Quanser/Quanser SDK/python" path. Just check this file.
 5. Enter the url [quanser](https://github.com/quanser/Quanser_Academic_Resources), download library(whole things) and unzip proper path(like document).
-6. In the QQS3C "interaction/plant/py/hardware", the top side, "sys.path.append(r"-")" change the path "-" to the path set in step 5.
+6. In the QQS3C "interaction/plant/py/hardware", activate venv which is python virtual enviroment.
 7. Make sure venv is on, write (**VERY IMPORTANT: Anything on Quanser requires this, so it must be installed**)
   ``` powershell
     python -m pip install --upgrade --find-links "C:\Program Files\Quanser\Quanser SDK\python" "C:\Program Files\Quanser\Quanser SDK\python\quanser_api-2025.11.1-py2.py3-none-any.whl"
@@ -122,7 +121,27 @@ This requires two essential settings:
   on the terminal and connect the SDK (this path can find in step 4).
 
 #### Installation Quanser library
-
+All python implementation need to apply on venv environment. (you can check (venv) word on left of your CLI area)
+1. For easy to use Quanser's python library, you can make file `pyproject.toml` on 0_libraries->python in Quanser Academic Resources, which is before we downloaded, for pip installation.
+2. Fill a text on `pyproject.toml` like below (Just copy and paste)
+```
+  [build-system]
+  requires = ["setuptools", "wheel"]
+  build-backend = "setuptools.build_meta"
+  
+  [project]
+  name = "quanser-pal"
+  version = "0.1.0"
+  description = "Quanser PAL lib"
+  
+  [tool.setuptools]
+  packages = ["pal"]
+```
+3. Find absolute address location `pyproject.toml`
+4. Be careful that your environment is on venv, put the command below (change *** to address what we found step 3)
+  ```
+    pip install -e ***
+  ```
 ### Settings for operation
 There exist two way to use this library. One is using both Windows and WSL environment, The other is using only Windows environment.
 This section introduce setting method of both side.
