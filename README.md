@@ -324,11 +324,14 @@ This completes the plant's preparation for operation.
      .\vcpkg\vcpkg install seal:x64-windows
      .\vcpkg\vcpkg integrate install
    ```
-3. Onpen Visual Studio.
-4. Change project type debug to release.
-5. Enter project configuration, that is located project->Properties, Change C++ Language Standard C++17 (maybe it was C++14)
-6. In section Configuration Properties, you can find vcpkg->Use Vcpkg/Install Vcpkg Dependencies and check type is Yes. (If are not, change Yes)
-7. In section C/C++, you can find Preprocessor->Definitions and add `;NOMINMAX` at backside.
+3. Put `ii. ` on CLI and find folder "vcpkg".
+4. Enter vcpkg->installed->x64-windows->include, and Check "seal" folder.
+   * If there is no folder name "seal" maybe you can find like "SEAL-4.1". enter that and move "seal" folder into "include" folder.
+5. Onpen Visual Studio.
+6. Change project type debug to release.
+7. Enter project configuration, that is located project->Properties, Change C++ Language Standard C++17 (maybe it was C++14)
+8. In section Configuration Properties, you can find vcpkg->Use Vcpkg/Install Vcpkg Dependencies and check type is Yes. (If are not, change Yes)
+9. In section C/C++, you can find Preprocessor->Definitions and add `;NOMINMAX` at backside.
 
 ### Operation
 Proceed in the following order.
