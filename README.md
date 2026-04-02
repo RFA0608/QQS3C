@@ -54,10 +54,10 @@ Note: Nominal refers to the controller as designed, '_q' is the quantized versio
 
 --- 
 
-## How to use
+# How to use
 It explains the preparations before use, how to use the simulation file, how to use the Ouanser Interactive Labs, and how to use the actual hardware.
 
-### Before using
+## Before using
 This project supports both Windows and WSL environments. (Note: The OpenFHE-python wrapper is unavailable in a Windows-only setup, and additional configuration is required)
 Please refer to the link [WSL installation method](https://learn.microsoft.com/ko-kr/windows/wsl/install) for instructions on installing WSL.
 
@@ -71,12 +71,12 @@ at least. (The following description is after installing the above three element
 
 If WSL is installed, the appropriate Linux OS is Ubuntu-24.04 LTS version. 
 
-### Settings for operation
+## Settings for operation
 There exist two way to use this library. One is using both Windows and WSL environment, The other is using only Windows environment.
 This section introduce setting method of both side.
 
-#### Using Windows and WSL
-##### WSL environment
+### Using Windows and WSL
+#### WSL environment
 Assuming you have Python and Go installed.
 If not, you should refer to the above version and install it.
 
@@ -121,7 +121,7 @@ If not, you should refer to the above version and install it.
 4. Lattigo installation
    * This is automatically handled by go mod tidy, so no preparation is required.
      
-##### Windows environment
+#### Windows environment
 1. You need to download the code via git clone on PowerShell page.
    ``` powershell
      git clone "https://github.com/RFA0608/QQS3C.git"
@@ -222,18 +222,18 @@ All python implementation need to apply on venv environment. (you can check (ven
 7. Find the address(path) of "Quanser SDK/lib/win64" and paste on Linker->General->Additional Library Directories section.
 8. Move to Linker->Input->Additional Dependencies section, put 'hil.lib', 'quanser_runtime.lib', 'quanser_common.lib' in their.
 
-#### Using only Windows
-##### Windows environment
+### Using only Windows
+#### Windows environment
 This is exactly the same as the Windows setting in the WSL and Windows description, and of course, the OPTION part. But I can't use OpenFHE-python wrapper here.
 
 **OPTION 2**: If you want to use "communication/cpp" in Windows
 1. Open Visual Studio.
 2. Put the file tcp_protocol_client_windows.h, which is located in "communication/cpp", to header file section.
 
-### Ready to operate
+## Ready to operate
 Execution methods vary depending on the environment.
 
-#### WSL environment
+### WSL environment
 1. Go to the previously downloaded QQS3C folder location and run the debugger (vscode) to write below.
    ``` bash
      code .
@@ -286,7 +286,7 @@ Execution methods vary depending on the environment.
         ```
 This completes the controller's preparation for operation.
 
-#### Windows environment
+### Windows environment
 1. Go to the previously downloaded QQS3C folder location and run the debugger (vscode) to write below.
     ``` powershell
        code .
@@ -333,7 +333,7 @@ This completes the plant's preparation for operation.
 8. In section Configuration Properties, you can find vcpkg->Use Vcpkg/Install Vcpkg Dependencies and check type is Yes. (If are not, change Yes)
 9. In section C/C++, you can find Preprocessor->Definitions and add `;NOMINMAX` at backside.
 
-### Operation
+## Operation
 Proceed in the following order.
 1. Press F5, which is waiting for Windows environment.
 2. Press F5 or enter to launch the controller that was waiting in WSL (or Windows).
@@ -347,7 +347,7 @@ Note: For successful control initialization, both the pendulum and the base must
 
 ---
 
-## Demonstration
+# Demonstration
 1. QQS3C Installation Guide:
 https://youtu.be/01qr6Mvyikw
 (This YouTube link only supports Korean)
