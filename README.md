@@ -58,7 +58,7 @@ Note: Nominal refers to the controller as designed, '_q' is the quantized versio
 It explains the preparations before use, how to use the simulation file, how to use the Ouanser Interactive Labs, and how to use the actual hardware.
 
 ### Before using
-This project supports both Windows and WSL environments. Note: The OpenFHE-python wrapper is unavailable in a Windows-only setup, and additional configuration is required.
+This project supports both Windows and WSL environments. (Note: The OpenFHE-python wrapper is unavailable in a Windows-only setup, and additional configuration is required)
 Please refer to the link [WSL installation method](https://learn.microsoft.com/ko-kr/windows/wsl/install) for instructions on installing WSL.
 
 This requires three essential elements:
