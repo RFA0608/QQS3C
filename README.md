@@ -46,7 +46,7 @@ They are in order a version implemented in Python as Microsoft SEAL C++ by arx_m
 | :--- | :---: | :---: | :---: | :--- | :--- | :--- |
 | **state_filter(d/dt filter)** | Python | - | - | **Not Available** | nominal | Ⅹ | 
 | **full_state_feedback** | Python | BGV (OpenFHE-python) | △ | Available | nominal, quantized(_q), encrpyted(_enc) | Ⅹ |
-| **observer_form** | Python | BGV (OpenFHE-python) | Ⅹ | Available (without enc) | nominal, quantized(_q) | Ⅹ | 
+| **observer_form** | Python | BGV (OpenFHE-python) | Ⅹ | Available (without enc) | nominal, quantized(_q), encrypted(_enc) | Ⅹ | 
 | **arx_model** | Python/C++ | BGV (OpenFHE-python/SEAL) | ◎ | Available | nominal, quantized(_q), encrypted(_enc) | encrypted(_enc) |
 | **integer_matrix** | Python/Go | RGSW (CDSL lattigo) | △ | Available | nominal, quantized(_q), encrypted(_enc) | encrypted(_enc) |
 
