@@ -125,6 +125,10 @@ If WSL is installed, the appropriate Linux OS is Ubuntu-24.04 LTS version.
    ```
    Save IPv4 address(like 172.xxx.xxx.xxx) of vEthernet (WSL (Hyper-V...)).
 
+
+<details>
+ <summary>테스트, 디버그 메모...</summary>
+ 
 **⚠️CRITICAL: Essential Enviroment Setup**:
 
 **Installation Quanser SDK**
@@ -163,7 +167,7 @@ All python implementation need to apply on venv environment. (you can check (ven
   ```
     pip install -e <YOUR_PATH>
   ```
-
+</details>
 
 ## WSL environment
 Assuming you have Python and Go installed.
