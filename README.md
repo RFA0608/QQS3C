@@ -309,7 +309,7 @@ This completes the controller's preparation for operation.
 3. Additionaly, if you use only Windows environment.
    * Controller
      1. Choose controller code (Except for using OpenFHE-python).
-     2. And ready to press F5 button.
+     2. And ready to run.
 
 This completes the plant's preparation for operation.
 
