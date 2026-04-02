@@ -106,15 +106,15 @@ If not, you should refer to the above version and install it.
      ``` bash
        cd QQS3C
      ```
-   * Find absolute directory address and memorize this.
+   * Find absolute directory address(path) and memorize this.
      ``` bash
        pwd
      ```
-   * Change the address above to <YOUR_PATH> below. (C++ Link)
+   * Change the address(path) above to <YOUR_PATH> below. (C++ Link)
      ``` bash
        export CPATH=$CPATH:<YOUR_PATH>/communication/cpp
      ```
-   * And with same address, change to below.
+   * And with same address(path), change to below.
      ``` bash
        pip install -e "<YOUR_PATH>/communication/py"
      ```
@@ -159,11 +159,11 @@ If not, you should refer to the above version and install it.
      ``` powershell
        cd QQS3C
      ```
-   * Find absolute directory address and memorize this.
+   * Find absolute directory address(path) and memorize this.
      ``` powershell
        pwd
      ```
-   * Change the address above to <YOUR_PATH> below.
+   * Change the address(path) above to <YOUR_PATH> below.
      ``` powershell
        pip install -e "<YOUR_PATH>/communication/py"
      ```
@@ -171,7 +171,7 @@ If not, you should refer to the above version and install it.
    ``` powershell
      ipconfig
    ```
-   Save IPv4 address of vEthernet (WSL (Hyper-V...)).
+   Save IPv4 address(like 172.xxx.xxx.xxx) of vEthernet (WSL (Hyper-V...)).
 
 **⚠️CRITICAL: Essential Enviroment Setup**:
 
@@ -206,8 +206,8 @@ All python implementation need to apply on venv environment. (you can check (ven
   [tool.setuptools]
   packages = ["pal"]
 ```
-3. Find absolute address location of `pyproject.toml`
-4. Be careful that your environment is on venv, put the command below (change <YOUR_PATH> to address what we found step 3)
+3. Find absolute address(path) location of `pyproject.toml`
+4. Be careful that your environment is on venv, put the command below (change <YOUR_PATH> to address(path) what we found step 3)
   ```
     pip install -e <YOUR_PATH>
   ```
@@ -218,8 +218,8 @@ All python implementation need to apply on venv environment. (you can check (ven
 3. Put the file plant.cpp, which is located in "interface/plant/cpp/hardware", to source file section.
 4. Put the file tcp_protocol_server_windows.h, which is located in "communication/cpp", to header file section.
 5. Enter project configuration, that is located project->Properties, Change C++ Language Standard C++17 (maybe it was C++14)
-6. Find the address of "Quanser SDK/include" and paste on C/C++->Additional Include Directories section. (maybe there's a Quanser SDK in the Quanser folder in Program Files, or there's a QUARC in it)
-7. Find the address of "Quanser SDK/lib/win64" and paste on Linker->General->Additional Library Directories section.
+6. Find the address(path) of "Quanser SDK/include" and paste on C/C++->Additional Include Directories section. (maybe there's a Quanser SDK in the Quanser folder in Program Files, or there's a QUARC in it)
+7. Find the address(path) of "Quanser SDK/lib/win64" and paste on Linker->General->Additional Library Directories section.
 8. Move to Linker->Input->Additional Dependencies section, put 'hil.lib', 'quanser_runtime.lib', 'quanser_common.lib' in their.
 
 #### Using only Windows
