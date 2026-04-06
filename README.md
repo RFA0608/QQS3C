@@ -107,6 +107,7 @@ In the video, each hardware demonstration is run for about 30 seconds to check w
 > - "ctrl_fs_enc.py" does not satisfy 128-bit lambda security.
 > 
 > - "ctrl_intmat_enc.go" is also like that.
+>  (If you ran that code with quarc-c based plant code, then can increase N 12 to 13, which can satisfy 128-bit lambda security.)
 > 
 > - On the other hand, "ctrl_arx_enc.cpp" sufficiently satisfies 128-bit lambda security.
 
