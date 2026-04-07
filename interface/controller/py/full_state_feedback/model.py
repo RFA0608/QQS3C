@@ -2,7 +2,7 @@ import numpy as np
 import control as ct
 
 class obs:
-    # sampling peroid
+    # sampling period
     ts = 0.1
 
     # system(state) matrix(state space linearlization - discrete model)
