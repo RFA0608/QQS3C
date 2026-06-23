@@ -25,7 +25,7 @@ def sig_handler(*args):
 signal.signal(signal.SIGINT, sig_handler)
 
 # simulation time and plotting set
-simulationTime = 10 # will run for 30 seconds
+simulationTime = 30 # will run for 30 seconds
 color = np.array([0, 1, 0], dtype=np.float64)
 
 scopePendulum = Scope(
