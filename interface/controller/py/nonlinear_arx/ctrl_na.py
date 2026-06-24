@@ -11,7 +11,7 @@ import model
 
 import numpy as np
 
-def nobs():
+def nlarx():
     # set simulation(this section have to set same with plant)
     sampling_time = 0.01
     run_signal = True
@@ -50,7 +50,7 @@ def nobs():
                 break
 
 def main():
-    nobs()
+    nlarx()
 
 if __name__ == "__main__":
     main()
