@@ -13,7 +13,7 @@ import numpy as np
 
 def nobs():
     # set simulation(this section have to set same with plant)
-    sampling_time = 0.005
+    sampling_time = 0.01
     run_signal = True
 
     # get model from model description file
