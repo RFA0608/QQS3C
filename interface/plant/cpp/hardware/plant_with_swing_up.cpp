@@ -62,7 +62,7 @@ int main()
     // swing-up standing gate
     bool stand_run = false;
     bool trans = false;
-    double er = 0.2;
+    double er = 0.12;
     int ei = int(1.0 / sample_time);
     int count = 0;
 
