@@ -129,7 +129,7 @@ class enc_for_arx
         int64_t HL_q[4][1] = {{-263},
                               {684},
                               {-187},
-                              {-590]}};
+                              {-590}};
 
         // encrypted gain that packed and encrypted like PQ_enc[0] = {HG_q[0, 0], HG_q[0, 1], HL_q[0, 0]}                              
         vector<Ciphertext> PQ_enc;
