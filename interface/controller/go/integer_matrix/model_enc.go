@@ -49,7 +49,7 @@ type info_enc struct {
 
 func Get_params() *rlwe.Parameters {
 	params, _ := rlwe.NewParametersFromLiteral(rlwe.ParametersLiteral{
-		LogN:    12,
+		LogN:    13,
 		LogQ:    []int{60},
 		LogP:    []int{60},
 		NTTFlag: true,
@@ -157,21 +157,21 @@ func Enc_for_intmat(crypto_cl *crypto) *info_enc {
 	}
 
 	G_q := [][]float64{
-		{999, -1409},
-		{0, -11372},
-		{0, -5881},
-		{0, 5664},
+		{1999, -8590},
+		{0, -14889},
+		{0, -6237},
+		{0, 7034},
 	}
 
 	H_q := [][]float64{
-		{64740, -4882, 141655, 132429},
+		{81378, 47800, 220401, 318726},
 	}
 
 	R_q := [][]float64{
-		{4},
-		{-1571},
-		{-793},
-		{776},
+		{74},
+		{-1729},
+		{-928},
+		{853},
 	}
 
 	ctF := RGSW.EncPack(F_q, crypto_cl.tau, crypto_cl.encryptorRGSW, crypto_cl.levelQ, crypto_cl.levelP, crypto_cl.ringQ, *crypto_cl.params)
@@ -180,8 +180,8 @@ func Enc_for_intmat(crypto_cl *crypto) *info_enc {
 	ctR := RGSW.EncPack(R_q, crypto_cl.tau, crypto_cl.encryptorRGSW, crypto_cl.levelQ, crypto_cl.levelP, crypto_cl.ringQ, *crypto_cl.params)
 
 	enc4intmat := info_enc{
-		r:             1000.0,
-		s:             1000.0,
+		r:             2000.0,
+		s:             2000.0,
 		L:             1000000.0,
 		params:        crypto_cl.params,
 		ringQ:         crypto_cl.ringQ,
