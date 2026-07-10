@@ -124,7 +124,16 @@ int main()
             cout << "base angle: " << theta << endl;
             cout << "control input: " << voltage << endl;
 
-            if (abs(voltage) > 15 || abs(alpha_deg) > 15)
+            if (voltage < -15)
+            {
+                voltage = -15;
+            }
+            else if(voltage > 15)
+            {
+                voltage = 15;
+            }
+
+            if (abs(alpha_deg) > 20)
             {
                 voltage = 0;
             }
