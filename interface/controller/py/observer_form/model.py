@@ -50,8 +50,8 @@ class obs:
         self.ts = ts
 
         # for gain K dlqr parameters setting
-        Q_k = np.array([[5000, 0, 0, 0],
-                        [0, 400, 0, 0],
+        Q_k = np.array([[145, 0, 0, 0],
+                        [0, 275, 0, 0],
                         [0, 0, 1, 0],
                         [0, 0, 0, 1]], dtype=float)
         R_k = np.array([[1]], dtype=float)
@@ -60,8 +60,8 @@ class obs:
         # for gain L dlqr parameters setting
         Q_l = np.array([[1, 0, 0, 0],
                         [0, 1, 0, 0],
-                        [0, 0, 500, 0],
-                        [0, 0, 0, 100]], dtype=float)
+                        [0, 0, 4350, 0],
+                        [0, 0, 0, 9500]], dtype=float)
         R_l = np.array([[1, 0],
                         [0, 1]], dtype=float)
         L, Sl, El = ct.dlqr(self.A.T, self.C.T, Q_l, R_l)
