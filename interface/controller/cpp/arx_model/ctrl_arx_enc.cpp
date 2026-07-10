@@ -25,7 +25,7 @@ int main()
     // get crypto model from model_enc.h
     crypto crypto_cl = crypto();
     enc_for_arx enc_4_arx = enc_for_arx(crypto_cl);
-    enc_4_arx.set_level(1000, 1000);
+    enc_4_arx.set_level(2000, 2000);
     arx_enc arx_enc_v = arx_enc(crypto_cl.get_crypto(), crypto_cl.get_relinkey(), crypto_cl.get_galoiskeys());
     arx_enc_v.set_pq(enc_4_arx.get_PQ_enc());
     arx_enc_v.set_io(enc_4_arx.get_Z_enc());
