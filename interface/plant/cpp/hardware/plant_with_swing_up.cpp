@@ -85,7 +85,7 @@ int main()
     vector<double> state(4);
     vector<double> state_theta_dot = { 0.0, 0.0 };
     vector<double> state_alpha_dot = { 0.0, 0.0 };
-    vector<double> K = { -0.39731635 16.94882578 -0.49200058  1.40974463 }; // this params have to already known from matlab or python. (based on 20ms)
+    vector<double> K = { -0.39731635, 16.94882578, -0.49200058, 1.40974463 }; // this params have to already known from matlab or python. (based on 20ms)
 
     // control loop
     for (int64_t i = 0; i < (int64_t)((double)simulation_time / sample_time); i++)
