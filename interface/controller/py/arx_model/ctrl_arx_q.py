@@ -21,7 +21,7 @@ def arx_quantized():
     arx_q = model.arx_q(arx.HG, arx.HL)
 
     # set quantized level and quantize matrix
-    arx_q.set_level(1000, 1000)
+    arx_q.set_level(2000, 2000)
     arx_q.quantize()
 
     # print matrix of HG_q and HL_q
