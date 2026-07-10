@@ -50,8 +50,8 @@ class obs:
         self.ts = ts
 
         # for gain K dlqr parameters setting
-        Q_k = np.array([[5000, 0, 0, 0],
-                        [0, 400, 0, 0],
+        Q_k = np.array([[145, 0, 0, 0],
+                        [0, 275, 0, 0],
                         [0, 0, 1, 0],
                         [0, 0, 0, 1]], dtype=float)
         R_k = np.array([[1]], dtype=float)
@@ -60,8 +60,8 @@ class obs:
         # for gain L dlqr parameters setting
         Q_l = np.array([[1, 0, 0, 0],
                         [0, 1, 0, 0],
-                        [0, 0, 500, 0],
-                        [0, 0, 0, 100]], dtype=float)
+                        [0, 0, 4350, 0],
+                        [0, 0, 0, 9500]], dtype=float)
         R_l = np.array([[1, 0],
                         [0, 1]], dtype=float)
         L, Sl, El = ct.dlqr(self.A.T, self.C.T, Q_l, R_l)
@@ -150,10 +150,10 @@ class intmat():
         # save converted matrix manualy from MATLAB
         # you can found the file name of "transpose_matrix2int" on /interface/controller/py/tools folder
         # copy and paste observer state matrix F, G, H to there, get and write below invertible matrix T
-        T = np.array([[1.08314828520927, -1.66955395965037, -0.00236729459240089, 0.00841047244267525],
-                      [-12.3192475520305, 21.2280825206628, 1.11207418021025, -2.55670558562088],
-                      [-6.55696463635024, 10.9797588171927, 0.590938554977826, -1.32609684315751],
-                      [6.17193488024287, -10.6209349231961, -0.557028488424479, 1.27749537728892]])
+        T = np.array([[1.01758524666287, -4.57877007176813, -0.0147076303791329, 0.0794078525248509],
+                      [-16.6061092586103, 33.2168873170719, 0.888740005952578, -1.62156313385683],
+                      [-8.75965744738319, 18.7900421112846, 0.468689116443215, -0.886773436974005],
+                      [8.31501976646758, -16.9851135872862, -0.444977630471571, 0.821042729963173]])
         
         self.F_cv = (T@(F-R@H)@np.linalg.inv(T)).round()
         self.R_cv = T@R
