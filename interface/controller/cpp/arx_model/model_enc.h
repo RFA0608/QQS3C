@@ -118,18 +118,18 @@ class enc_for_arx
     private:
         crypto& crypto_cl;
 
-        int64_t r = 1000;
-        int64_t s = 1000;
+        int64_t r = 2000;
+        int64_t s = 2000;
 
         // you can get HG_q and HL_q from controller/py/controller.py file
-        int64_t HG_q[4][2] = {{-16517, 23273},
-                              {86679, -124076},
-                              {-134363, 212506},
-                              {64740, -118706}};
-        int64_t HL_q[4][1] = {{-78},
-                              {231},
-                              {-287},
-                              {281}};
+        int64_t HG_q[4][2] = {{-3559, 15288},
+                              {21711, -87044},
+                              {-57478, 192159},
+                              {40689, -135851}};
+        int64_t HL_q[4][1] = {{-131},
+                              {342},
+                              {-93},
+                              {-295}};
 
         // encrypted gain that packed and encrypted like PQ_enc[0] = {HG_q[0, 0], HG_q[0, 1], HL_q[0, 0]}                              
         vector<Ciphertext> PQ_enc;
