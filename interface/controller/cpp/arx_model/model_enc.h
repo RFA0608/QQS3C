@@ -122,14 +122,14 @@ class enc_for_arx
         int64_t s = 2000;
 
         // you can get HG_q and HL_q from controller/py/controller.py file
-        int64_t HG_q[4][2] = {{-3559, 15288},
-                              {21711, -87044},
-                              {-57478, 192159},
-                              {40689, -135851}};
-        int64_t HL_q[4][1] = {{-131},
-                              {342},
-                              {-93},
-                              {-295}};
+        int64_t HG_q[4][2] = {{-7119, 30577},
+                              {43422, -174089},
+                              {-114957, 384319},
+                              {81378, -271703}};
+        int64_t HL_q[4][1] = {{-263},
+                              {684},
+                              {-187},
+                              {-590]}};
 
         // encrypted gain that packed and encrypted like PQ_enc[0] = {HG_q[0, 0], HG_q[0, 1], HL_q[0, 0]}                              
         vector<Ciphertext> PQ_enc;
