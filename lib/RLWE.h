@@ -1,0 +1,970 @@
+#ifndef RLWE_H
+#define RLWE_H
+
+#include <random>
+#include <ctime>
+
+#include "Struct.h"
+
+// ================================================================================ //
+//                                  Cipher Structure                                //
+// ================================================================================ //
+
+class cipher
+{
+    public:
+        std::vector<poly*> ciphertext;
+        int ring_dim;
+        int level = 0;
+        mpz_class plain_mod;
+        mpz_class cipher_mod;
+        mpz_class psi_plain;
+        mpz_class psi_cipher;
+
+        cipher(int ring_dim, mpz_class plain_mod, mpz_class cipher_mod, mpz_class psi_p, mpz_class psi_c):
+            ring_dim(ring_dim), 
+            plain_mod(plain_mod),
+            cipher_mod(cipher_mod),
+            psi_plain(psi_p),
+            psi_cipher(psi_c)
+        {}
+
+        ~cipher()
+        {
+            for(auto& factor : this->ciphertext)
+            {
+                if(factor != nullptr)
+                {
+                    delete factor;
+                    factor = nullptr;
+                }
+            }
+            this->ciphertext.clear();
+        }
+
+        cipher* clone()
+        {
+            cipher* clone = new cipher(this->ring_dim, this->plain_mod, this->cipher_mod, this->psi_plain, this->psi_cipher);
+
+            clone->level = this->level;
+            for(auto& factor : this->ciphertext)
+            {
+                if(factor != nullptr)
+                {
+                    clone->ciphertext.push_back(factor->clone());
+                }
+            }
+
+            return clone;
+        }
+};
+
+// ================================================================================ //
+//                       Matrix Represented Cipher Structure                        //
+// ================================================================================ //
+
+class mr_cipher 
+{
+    public:
+        matrix* ciphertext_1;
+        matrix* ciphertext_2;
+        int ring_dim;
+        int level = 0;
+        mpz_class plain_mod;
+        mpz_class cipher_mod;
+
+        mr_cipher(int ring_dim, mpz_class plain_mod, mpz_class cipher_mod):
+            ring_dim(ring_dim), 
+            plain_mod(plain_mod),
+            cipher_mod(cipher_mod)
+        {}
+
+        ~mr_cipher()
+        {
+            delete this->ciphertext_1;
+            delete this->ciphertext_2;
+        }
+
+        mr_cipher* clone()
+        {
+            mr_cipher* clone = new mr_cipher(this->ring_dim, this->plain_mod, this->cipher_mod);
+            
+            clone->level = this->level;
+            clone->ciphertext_1 = this->ciphertext_1->clone();
+            clone->ciphertext_2 = this->ciphertext_2->clone();
+
+            return clone;
+        }
+};
+
+// ================================================================================ //
+//                       Vector Represented Cipher Structure                        //
+// ================================================================================ //
+
+class vr_cipher 
+{
+    public:
+        poly* ciphertext_1;
+        poly* ciphertext_2;
+        poly* ciphertext_3;
+        int ring_dim;
+        int level = 0;
+        mpz_class plain_mod;
+        mpz_class cipher_mod;
+
+        vr_cipher(int ring_dim, mpz_class plain_mod, mpz_class cipher_mod):
+            ring_dim(ring_dim), 
+            plain_mod(plain_mod),
+            cipher_mod(cipher_mod)
+        {}
+
+        ~vr_cipher()
+        {
+            delete this->ciphertext_1;
+            delete this->ciphertext_2;
+            delete this->ciphertext_3;
+        }
+
+        vr_cipher* clone()
+        {
+            vr_cipher* clone = new vr_cipher(this->ring_dim, this->plain_mod, this->cipher_mod);
+
+            clone->level = this->level;
+            clone->ciphertext_1 = this->ciphertext_1->clone();
+            clone->ciphertext_2 = this->ciphertext_2->clone();
+            clone->ciphertext_3 = this->ciphertext_3->clone();
+
+            return clone;
+        }
+};
+
+// ================================================================================ //
+//                              Format Transform Handler                            //
+// ================================================================================ //
+
+class format_transform_handler
+{
+    public:
+        static int level_scaler(cipher* res, int level)
+        {
+            if(level < 0 || level > 2)
+            {
+                return -1;
+            }
+            else
+            {
+                switch(res->level)
+                {
+                    case 0:
+                    {
+                        if(level == 1)
+                        {
+                            res->level = 1;
+                            poly* L1 = new poly(res->ring_dim);
+                            poly* L2 = new poly(res->ring_dim);
+                            res->ciphertext.push_back(L1);
+                            res->ciphertext.push_back(L2);
+                        }
+                        else if(level == 2)
+                        {
+                            res->level = 2;
+                            poly* L1 = new poly(res->ring_dim);
+                            poly* L2 = new poly(res->ring_dim);
+                            poly* L3 = new poly(res->ring_dim);
+                            res->ciphertext.push_back(L1);
+                            res->ciphertext.push_back(L2);
+                            res->ciphertext.push_back(L3);
+                        }
+                        else
+                        {
+                            return -1;
+                        }
+                        break;
+                    }
+                    case 1:
+                    {
+                        if(level == 1)
+                        {
+                            //nothing
+                        }
+                        else if(level == 2)
+                        {
+                            res->level = 2;
+                            poly* L1 = new poly(res->ring_dim);
+                            res->ciphertext.push_back(L1);
+                        }
+                        else
+                        {
+                            return -1;
+                        }
+                        break;
+                    }
+                    case 2:
+                    {
+                        if(level == 1)
+                        {
+                            if(res->ciphertext[2] != nullptr)
+                            {
+                                delete res->ciphertext[2];
+                                res->ciphertext[2] = nullptr;
+                            }
+                            res->level = 1;
+                        }
+                        else if(level == 2)
+                        {
+                            //nothing
+                        }
+                        else
+                        {
+                            return -1;
+                        }
+                        break;
+                    }
+                    default:
+                    {
+                        return -1;
+                    }
+                }
+
+                return 0;
+            }
+        }
+
+        static int cipher_2_mr_cipher(cipher* op, mr_cipher* res)
+        {
+            if((op->ring_dim != res->ring_dim))
+            {
+                return -1;
+            }
+            else
+            {
+                if(op->level != 1)
+                {
+                    return -1;
+                }
+                else
+                {
+                    switch(res->level)
+                    {
+                        case 0:
+                        {
+                            res->level = 1;
+                            matrix* L1 = new matrix(op->ring_dim, op->ring_dim);
+                            res->ciphertext_1 = L1;
+                            L1->fill_zero();
+
+                            matrix* L2 = new matrix(op->ring_dim, op->ring_dim);
+                            res->ciphertext_2 = L2;
+                            L2->fill_zero();
+
+                            break;
+                        }
+                        case 1:
+                        {
+                            break;
+                        }
+                        default:
+                        {
+                            return -1;
+                        }
+                    }
+
+                    matrix* L1 = new matrix(op->ring_dim, op->ring_dim);
+                    matrix* L2 = new matrix(op->ring_dim, op->ring_dim);
+
+                    matrix_handler::poly_2_negacyclic_matrix(op->ciphertext[0], L1);
+                    matrix_handler::poly_2_negacyclic_matrix(op->ciphertext[1], L2);
+
+                    res->ciphertext_1->entry = L1->entry;
+                    res->ciphertext_2->entry = L2->entry;
+                    
+                    delete L1;
+                    delete L2;
+
+                    return 0;
+                }
+            }
+        }
+
+        static int cipher_2_vr_cipher(cipher* op, vr_cipher* res)
+        {
+            if(op->level != 1)
+            {
+                return -1;
+            }
+            else
+            {
+                if(op->ring_dim != res->ring_dim)
+                {
+                    return -1;
+                }
+                else
+                {
+                    switch(res->level)
+                    {
+                        case 0:
+                        {
+                            res->level = 1;
+                            poly* L1= new poly(op->ring_dim);
+                            res->ciphertext_1 = L1;
+
+                            poly* L2= new poly(op->ring_dim);
+                            res->ciphertext_2 = L2;
+
+                            poly* L3= new poly(op->ring_dim);
+                            res->ciphertext_3 = L3;
+                            break;
+                        }
+                        case 1:
+                        {
+                            break;
+                        }
+                        default:
+                        {
+                            return -1;
+                        }
+                    }
+
+                    res->ciphertext_1->coeff = op->ciphertext[0]->coeff;
+                    res->ciphertext_2->coeff = op->ciphertext[1]->coeff;
+                    res->ciphertext_3->fill_zero();
+
+                    return 0;
+                }
+            }
+        }      
+
+        static int vr_cipher_2_cipher(vr_cipher* op, cipher* res)
+        {
+            if(op->level != 1 && op->level != 2)
+            {
+                return -1;
+            }
+            else
+            {
+                if(op->ring_dim != res->ring_dim)
+                {
+                    return -1;
+                }
+                else
+                {
+                    format_transform_handler::level_scaler(res, op->level);
+
+                    res->ciphertext[0]->coeff = op->ciphertext_1->coeff;
+                    res->ciphertext[1]->coeff = op->ciphertext_2->coeff;
+                    res->ciphertext[2]->coeff = op->ciphertext_3->coeff;
+
+                    return 0;
+                }
+            }
+        }
+}; 
+
+// ================================================================================ //
+//                                  Random Handler                                  //
+// ================================================================================ //
+
+class random_handler
+{
+    public:
+        static void sample_cbd(std::mt19937& gen, mpz_class& res)
+        {
+            std::uniform_int_distribution<int> dist(0, 1);
+            int k = 21; 
+
+            auto sum = [&]()
+            {
+                int rand_num = 0;
+                for(int i = 0; i < k; i++)
+                {
+                    rand_num += dist(gen);
+                }
+                return rand_num;
+            };
+
+            int a = sum();
+            int b = sum();
+
+            res = a - b;
+        }
+
+        static void sample_ternary(std::mt19937& gen, mpz_class& res)
+        {
+            std::uniform_int_distribution<int> dist(-1, 1);
+
+            res = dist(gen);
+        }
+
+        static void sample_uni(const mpz_class& mod, gmp_randstate_t& state, mpz_class& res)
+        {
+            mpz_urandomm(res.get_mpz_t(), state, mod.get_mpz_t());
+        }
+
+        static void secret_key(poly* sk)
+        {
+            thread_local std::mt19937 gen(std::random_device{}());
+
+            mpz_class temp;
+
+            for(int i = 0; i < sk->ring_dim; i++)
+            {
+                sample_ternary(gen, temp);
+                sk->coeff[i] = temp;
+            }
+        }
+
+        static void public_key(const mpz_class& mod, poly* pb)
+        {
+            mpz_class temp;
+
+            for(int i = 0; i < pb->ring_dim; i++)
+            {
+                sample_uni(mod, seed_gen::get_rand_state(), temp);
+                pb->coeff[i] = temp;
+            }
+        }
+
+        static void not_zero_public_key(const mpz_class& mod, poly* pb)
+        {
+            mpz_class temp;
+
+            for(int i = 0; i < pb->ring_dim; i++)
+            {
+                sample_uni(mod - 1, seed_gen::get_rand_state(), temp);
+                pb->coeff[i] = temp + 1;
+            }
+        }
+
+        static void errors(poly* err)
+        {
+            thread_local std::mt19937 gen(std::random_device{}());
+
+            mpz_class temp;
+
+            for(int i = 0; i < err->ring_dim; i++)
+            {
+                sample_cbd(gen, temp);
+                err->coeff[i] = temp;
+            }
+        }
+};
+
+// ================================================================================ //
+//                                  Crypto Handler                                  //
+// ================================================================================ //
+
+class crypto_handler
+{
+    public:
+        static int encrypt(poly* m, poly* sk, cipher* res)
+        {
+            if((res->ring_dim != m->ring_dim) || (res->ring_dim != sk->ring_dim))
+            {
+                return -1;
+            }
+            else
+            {
+
+                switch(res->level)
+                {
+                    case 0:
+                    {
+                        res->level = 1;
+
+                        break;
+                    }
+                    case 1:
+                    {
+                        delete res->ciphertext.back();
+                        res->ciphertext.pop_back();
+                        delete res->ciphertext.back();
+                        res->ciphertext.pop_back();
+
+                        break;
+                    }
+                    default:
+                    {
+                        return -1;
+                    }
+                }
+
+                poly* a = new poly(res->ring_dim);
+                random_handler::public_key(res->cipher_mod, a);
+
+                poly* ska = new poly(res->ring_dim);
+                poly_handler::poly_mul_ntt(sk, a, res->cipher_mod, res->psi_cipher, ska);
+
+                poly* e = new poly(res->ring_dim);
+                random_handler::errors(e);
+                poly_handler::poly_scal_mul(res->plain_mod, e, e);
+
+                poly* b = new poly(res->ring_dim);
+                poly_handler::poly_add(m, ska, b);
+                poly_handler::poly_add(b, e, b);
+                poly_handler::poly_mod(b, res->cipher_mod, b);
+
+                res->ciphertext.push_back(b);
+                res->ciphertext.push_back(a);
+                
+                delete ska;
+                delete e;
+
+                return 0;
+            }
+        }
+
+        static int decrypt(cipher* c, poly* sk, poly* res)
+        {
+            if((res->ring_dim != c->ring_dim) || (res->ring_dim != sk->ring_dim))
+            {
+                return -1;
+            }
+            else
+            {
+                switch(c->level)
+                {
+                    case 1:
+                    {
+                        poly* ska = new poly(res->ring_dim);
+
+                        poly_handler::poly_mul_ntt(sk, c->ciphertext[1], c->cipher_mod, c->psi_cipher, ska);
+                        poly_handler::poly_neg(ska, ska);
+                        poly_handler::poly_add(c->ciphertext[0], ska, res);
+                        poly_handler::poly_mod(res, c->cipher_mod, res);
+                        poly_handler::poly_bias_mod(res, c->cipher_mod, res);
+                        poly_handler::poly_mod(res, c->plain_mod, res);
+                        
+                        delete ska;
+                        break;
+                    }
+                    case 2:
+                    {
+                        poly* sk2 = new poly(res->ring_dim);
+                        poly_handler::poly_mul_ntt(sk, sk, c->cipher_mod, c->psi_cipher, sk2);
+
+                        poly* term2 = new poly(res->ring_dim);
+                        poly_handler::poly_mul_ntt(c->ciphertext[2], sk2, c->cipher_mod, c->psi_cipher, term2);
+
+                        poly* term1 = new poly(res->ring_dim);
+                        poly_handler::poly_mul_ntt(c->ciphertext[1], sk, c->cipher_mod, c->psi_cipher, term1);
+
+                        poly_handler::poly_neg(term1, term1);
+                        poly_handler::poly_add(c->ciphertext[0], term1, res);
+                        poly_handler::poly_add(res, term2, res);
+                        poly_handler::poly_mod(res, c->cipher_mod, res);
+                        poly_handler::poly_bias_mod(res, c->cipher_mod, res);
+                        poly_handler::poly_mod(res, c->plain_mod, res);
+
+                        delete sk2;
+                        delete term2;
+                        delete term1;
+                        break;
+                    }
+                    default:
+                    {
+                        return -1;
+                    }
+                }
+                return 0;
+            }
+        }
+
+        static bool eval_meta_eq(cipher* op1, cipher* op2)
+        {
+            if
+            (
+                op1->ring_dim != op2->ring_dim ||
+                op1->level != op2->level ||
+                op1->plain_mod != op2->plain_mod ||
+                op1->cipher_mod != op2->cipher_mod ||
+                op1->psi_plain != op2->psi_plain ||
+                op1->psi_cipher != op2->psi_cipher
+            )
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        static int eval_add(cipher* op1, cipher* op2, cipher* res)
+        {
+            if((res->ring_dim != op1->ring_dim) || (res->ring_dim != op2->ring_dim))
+            {
+                return -1;
+            }
+            else if(!eval_meta_eq(op1, op2))
+            {
+                return -1;
+            }
+            else
+            {
+                switch(op1->level)
+                {
+                    case 1:
+                    {
+                        switch (res->level)
+                        {
+                            case 0:
+                            {
+                                res->level = 1;
+                                poly* L1 = new poly(res->ring_dim);
+                                res->ciphertext.push_back(L1);
+                                poly* L2 = new poly(res->ring_dim);
+                                res->ciphertext.push_back(L2);
+
+                                break;
+                            }
+                            case 1:
+                            {
+                                break;
+                            }
+                            case 2:
+                            {
+                                delete res->ciphertext.back();
+                                res->ciphertext.pop_back();
+                                res->level = 1;
+                                
+                                break;
+                            }
+                            default:
+                            {
+                                return -1;
+                            }
+                        }
+
+                        for(int i = 0; i < 2; i++)
+                        {
+                            poly_handler::poly_add(op1->ciphertext[i], op2->ciphertext[i], res->ciphertext[i]);
+                            poly_handler::poly_mod(res->ciphertext[i], res->cipher_mod, res->ciphertext[i]);
+                        }
+                        break;
+                    }
+                    case 2:
+                    {
+                        switch (res->level)
+                        {
+                            case 0:
+                            {
+                                res->level = 2;
+                                poly* L1 = new poly(res->ring_dim);
+                                res->ciphertext.push_back(L1);
+                                poly* L2 = new poly(res->ring_dim);
+                                res->ciphertext.push_back(L2);
+                                poly* L3 = new poly(res->ring_dim);
+                                res->ciphertext.push_back(L3);
+                                
+                                
+                                break;
+                            }
+                            case 1:
+                            {
+                                poly* L3 = new poly(res->ring_dim);
+                                res->ciphertext.push_back(L3);
+                                res->level = 2;
+
+                                break;
+                            }
+                            case 2:
+                            {
+                                break;
+                            }
+                            default:
+                            {
+                                return -1;
+                            }
+                        }
+
+                        for(int i = 0; i < 3; i++)
+                        {
+                            poly_handler::poly_add(op1->ciphertext[i], op2->ciphertext[i], res->ciphertext[i]);
+                            poly_handler::poly_mod(res->ciphertext[i], res->cipher_mod, res->ciphertext[i]);
+                        }
+                                
+                        break;
+                    }
+                    default:
+                    {
+                        return -1;
+                    }
+                }
+                
+                return 0;
+            }
+        }
+
+        static int eval_mul(cipher* op1, cipher* op2, cipher* res)
+        {
+            if((res->ring_dim != op1->ring_dim) || (res->ring_dim != op2->ring_dim))
+            {
+                return -1;
+            }
+            else if(!eval_meta_eq(op1, op2))
+            {
+                return -1;
+            }
+            else if(op1->level != 1 || op2->level != 1)
+            {
+                return -1;
+            }
+            else
+            {
+                switch (res->level)
+                {
+                    case 0:
+                    {
+                        res->level = 2;
+                        poly* L1 = new poly(res->ring_dim);
+                        res->ciphertext.push_back(L1);
+                        poly* L2 = new poly(res->ring_dim);
+                        res->ciphertext.push_back(L2);
+                        poly* L3 = new poly(res->ring_dim);
+                        res->ciphertext.push_back(L3);
+
+                        break;
+                    }
+                    case 1:
+                    {
+                        res->level = 2;
+                        poly* L3 = new poly(res->ring_dim);
+                        res->ciphertext.push_back(L3);
+
+                        break;
+                    }
+                    case 2:
+                    {
+                        break;
+                    }
+                    default:
+                    {
+                        return -1;
+                    }
+                }
+
+                cipher* clone1 = op1->clone();
+                cipher* clone2 = op2->clone();
+
+                poly_handler::poly_mul_ntt(clone1->ciphertext[0], clone2->ciphertext[0], res->cipher_mod, res->psi_cipher, res->ciphertext[0]);
+                poly_handler::poly_mod(res->ciphertext[0], res->cipher_mod, res->ciphertext[0]);
+
+                poly* temp = new poly(res->ring_dim);
+
+                poly_handler::poly_mul_ntt(clone1->ciphertext[0], clone2->ciphertext[1], res->cipher_mod, res->psi_cipher, temp);
+                poly_handler::poly_mul_ntt(clone1->ciphertext[1], clone2->ciphertext[0], res->cipher_mod, res->psi_cipher, res->ciphertext[1]);
+                poly_handler::poly_add(temp, res->ciphertext[1], res->ciphertext[1]);
+                poly_handler::poly_mod(res->ciphertext[1], res->cipher_mod, res->ciphertext[1]);
+                poly_handler::poly_mul_ntt(clone1->ciphertext[1], clone2->ciphertext[1], res->cipher_mod, res->psi_cipher, res->ciphertext[2]);
+                poly_handler::poly_mod(res->ciphertext[2], res->cipher_mod, res->ciphertext[2]);
+
+                delete clone1;
+                delete clone2;
+                delete temp;
+                
+                return 0;
+            }
+        }
+
+        static int eval_mvr_mul(mr_cipher* op1, vr_cipher* op2, vr_cipher* res)
+        {
+            if((res->ring_dim != op1->ring_dim) || (res->ring_dim != op2->ring_dim))
+            {
+                return -1;
+            }
+            else if(op2->level != 1)
+            {
+                return -1;
+            }
+            else
+            {
+                switch (res->level)
+                {
+                    case 0:
+                    {
+                        res->level = 2;
+                        poly* L1 = new poly(res->ring_dim);
+                        res->ciphertext_1 = L1;
+
+                        poly* L2 = new poly(res->ring_dim);
+                        res->ciphertext_2 = L2;
+
+                        poly* L3 = new poly(res->ring_dim);
+                        res->ciphertext_3 = L3;
+
+                        break;
+                    }
+                    case 1:
+                    {
+                        res->level = 2;
+                        break;
+                    }
+                    case 2:
+                    {
+                        break;
+                    }
+                    default:
+                    {
+                        return -1;
+                    }
+                }
+
+                mr_cipher* clone1 = op1->clone();
+                vr_cipher* clone2 = op2->clone();
+
+                matrix_handler::matrix_poly_mul(clone1->ciphertext_1, clone2->ciphertext_1, res->ciphertext_1);
+                poly_handler::poly_mod(res->ciphertext_1, res->cipher_mod, res->ciphertext_1);
+
+                poly* temp = new poly(res->ring_dim);
+
+                matrix_handler::matrix_poly_mul(clone1->ciphertext_2, clone2->ciphertext_1, res->ciphertext_2);
+                matrix_handler::matrix_poly_mul(clone1->ciphertext_1, clone2->ciphertext_2, temp);
+                poly_handler::poly_add(res->ciphertext_2, temp, res->ciphertext_2);
+                poly_handler::poly_mod(res->ciphertext_2, res->cipher_mod, res->ciphertext_2);
+
+                matrix_handler::matrix_poly_mul(clone1->ciphertext_2, clone2->ciphertext_2, res->ciphertext_3);
+                poly_handler::poly_mod(res->ciphertext_3, res->cipher_mod, res->ciphertext_3);
+                
+                delete clone1;
+                delete clone2;
+                delete temp;
+
+                return 0;
+            }
+        }
+
+        static int pval_mr_mul(poly* op1, mr_cipher* op2, poly* res)
+        {
+            if(op1->ring_dim != 3 * op2->ring_dim || res->ring_dim != 2 * op2->ring_dim)
+            {
+                return -1;
+            }
+            else
+            {
+                poly* s1 = new poly(op2->ring_dim);
+                for(int i = 0; i < op2->ring_dim; i++)
+                {
+                    s1->coeff[i] = op1->coeff[i];
+                }
+                poly* s2 = new poly(op2->ring_dim);
+                for(int i = 0; i < op2->ring_dim; i++)
+                {
+                    s2->coeff[i] = op1->coeff[i + op2->ring_dim];
+                }
+                poly* s3 = new poly(op2->ring_dim);
+                for(int i = 0; i < op2->ring_dim; i++)
+                {
+                    s3->coeff[i] = op1->coeff[i + 2 * op2->ring_dim];
+                }
+                poly* temp_res1 = new poly(op2->ring_dim);
+                poly* temp_res2 = new poly(op2->ring_dim);
+
+                poly* res1 = new poly(op2->ring_dim);
+                poly* res2 = new poly(op2->ring_dim);
+
+                matrix_handler::poly_matrix_mul(s1, op2->ciphertext_1, temp_res1);
+                matrix_handler::poly_matrix_mul(s2, op2->ciphertext_2, temp_res2);
+                poly_handler::poly_add(temp_res1, temp_res2, res1);
+                poly_handler::poly_mod(res1, op2->cipher_mod, res1);
+
+                matrix_handler::poly_matrix_mul(s2, op2->ciphertext_1, temp_res1);
+                matrix_handler::poly_matrix_mul(s3, op2->ciphertext_2, temp_res2);
+                poly_handler::poly_add(temp_res1, temp_res2, res2);
+                poly_handler::poly_mod(res2, op2->cipher_mod, res2);
+
+                poly_handler::poly_concat(res1, res2, res);
+                
+                delete s1;
+                delete s2;
+                delete s3;
+
+                delete temp_res1;
+                delete temp_res2;
+
+                delete res1;
+                delete res2;
+
+                return 0;
+            }
+        }
+
+        static int pval_mrlike_mul(poly* op1, cipher* op2, poly* res)
+        {
+            if(op1->ring_dim != 3 * op2->ring_dim || ((res->ring_dim != 2 * op2->ring_dim) && (res->ring_dim != 3 * op2->ring_dim)))
+            {
+                return -1;
+            }
+            else
+            {
+                poly* s1 = new poly(op2->ring_dim);
+                for(int i = 0; i < op2->ring_dim; i++)
+                {
+                    s1->coeff[i] = op1->coeff[i];
+                }
+                poly* s2 = new poly(op2->ring_dim);
+                for(int i = 0; i < op2->ring_dim; i++)
+                {
+                    s2->coeff[i] = op1->coeff[i + op2->ring_dim];
+                }
+                poly* s3 = new poly(op2->ring_dim);
+                for(int i = 0; i < op2->ring_dim; i++)
+                {
+                    s3->coeff[i] = op1->coeff[i + 2 * op2->ring_dim];
+                }
+                poly* temp_res1 = new poly(op2->ring_dim);
+                poly* temp_res2 = new poly(op2->ring_dim);
+
+                poly* res1 = new poly(op2->ring_dim);
+                poly* res2 = new poly(op2->ring_dim);
+
+                cipher* clone1 = op2->clone();
+                cipher* clone2 = op2->clone();
+
+                for(int i = 0; i < op2->ring_dim; i++)
+                {
+                    poly_handler::poly_dot(s1, clone1->ciphertext[0], temp_res1->coeff[i]);
+                    poly_handler::poly_negacyclic_shifter(clone1->ciphertext[0]);
+                }
+                for(int i = 0; i < op2->ring_dim; i++)
+                {
+                    poly_handler::poly_dot(s2, clone1->ciphertext[1], temp_res2->coeff[i]);
+                    poly_handler::poly_negacyclic_shifter(clone1->ciphertext[1]);
+                }
+                poly_handler::poly_add(temp_res1, temp_res2, res1);
+                poly_handler::poly_mod(res1, op2->cipher_mod, res1);
+
+                for(int i = 0; i < op2->ring_dim; i++)
+                {
+                    poly_handler::poly_dot(s2, clone2->ciphertext[0], temp_res1->coeff[i]);
+                    poly_handler::poly_negacyclic_shifter(clone2->ciphertext[0]);
+                }
+                for(int i = 0; i < op2->ring_dim; i++)
+                {
+                    poly_handler::poly_dot(s3, clone2->ciphertext[1], temp_res2->coeff[i]);
+                    poly_handler::poly_negacyclic_shifter(clone2->ciphertext[1]);
+                }
+                poly_handler::poly_add(temp_res1, temp_res2, res2);
+                poly_handler::poly_mod(res2, op2->cipher_mod, res2);
+
+                poly_handler::poly_concat_suf(res1, res2, res);
+                
+                delete s1;
+                delete s2;
+                delete s3;
+
+                delete temp_res1;
+                delete temp_res2;
+
+                delete res1;
+                delete res2;
+
+                delete clone1;
+                delete clone2;
+
+                return 0;
+            }
+        }
+
+};
+
+#endif
