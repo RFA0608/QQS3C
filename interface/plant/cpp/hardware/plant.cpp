@@ -58,7 +58,7 @@ int main()
 
     // swing-up standing gate
     bool stand_run = false;
-    double er = 0.1;
+    double er = 15;
 
     // calculation angle
     double theta = 0.0;
@@ -103,7 +103,7 @@ int main()
             cout << "pendulum angle: " << alpha << endl;
             cout << "base angle: " << theta << endl;
 
-            if (abs(alpha) < er)
+            if (abs(alpha_deg) < er)
             {
                 cout << "set" << endl;
                 stand_run = true;
