@@ -58,7 +58,7 @@ int main()
 
     // swing-up standing gate
     bool stand_run = false;
-    double er = 15;
+    double er = 6;
 
     // calculation angle
     double theta = 0.0;
