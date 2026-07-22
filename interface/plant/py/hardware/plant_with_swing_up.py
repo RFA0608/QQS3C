@@ -126,7 +126,7 @@ def control_loop():
 
     # switching target angle
     angle = 10
-    angle_v = 800
+    angle_v = 600
 
     # reliable angle range (for hardware operate limit)
     angle_range = 20
