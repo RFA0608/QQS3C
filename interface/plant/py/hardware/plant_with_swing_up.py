@@ -57,7 +57,7 @@ def control_loop():
     qubeversion = 3
     
     # if you want to use Ouanser Interactive Labs, you will change to 0
-    hardware = 1
+    hardware = 0
     
     pendulum = 1
 
@@ -122,10 +122,11 @@ def control_loop():
 
     # Control Parameters
     E_ref = 0.0      
-    mu = 150.0  
+    mu = 180.0  
 
     # switching target angle
     angle = 10
+    angle_v = 800
 
     # reliable angle range (for hardware operate limit)
     angle_range = 20
@@ -151,7 +152,7 @@ def control_loop():
                     theta = myQube.motorPosition * -1
                     alpha_f =  myQube.pendulumPosition
                     alpha = np.mod(alpha_f, 2*np.pi) - np.pi
-                    alpha_deg = abs(math.degrees(alpha))
+                    alpha_deg = alpha * 180 / np.pi
 
                     # Calculate angular velocities with filter of 50 and 100 rad
                     theta_dot, state_theta_dot = ddt_filter(theta, state_theta_dot, 50, 1/frequency)
@@ -170,7 +171,7 @@ def control_loop():
                         term = 0
                     u_raw = -1 * mu * E_err * term
 
-                    if(alpha_deg > angle and (not change_flag)):
+                    if(abs(alpha_deg) > angle and (not change_flag)):
                         if(-theta > 0):
                             if(u_raw > 0):
                                 voltage = 0.0
@@ -182,12 +183,15 @@ def control_loop():
                             else:
                                 voltage = u_raw
                     else:
-                        voltage = 1*np.dot(K, states)
-        
-                        if(not change_flag):
-                            change_flag = True
-                            set_time = timeStamp
-                            stand_run = True
+                        if(abs(alpha_dot * 180 / np.pi) > angle_v):
+                            voltage = 0
+                        else:
+                            voltage = 1*np.dot(K, states)
+            
+                            if(not change_flag):
+                                change_flag = True
+                                set_time = timeStamp
+                                stand_run = True
                     
                     # write commands
                     voltage = np.clip(voltage, -8, 8)
