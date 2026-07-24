@@ -164,6 +164,10 @@ int main()
     hil_write_analog(board, analog_channels, 1, &voltage);
     digital_values[0] = 0;
     hil_write_digital(board, digital_channels, 1, digital_values);
+
+    other_values[1] = 0;
+    other_values[0] = 1;
+    hil_write_other(board, other_channels, 3, other_values);
     if (board != NULL)
     {
         hil_task_stop_all(board);
