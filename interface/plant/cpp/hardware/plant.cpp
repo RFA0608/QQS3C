@@ -164,6 +164,8 @@ int main()
     hil_write_digital(board, digital_channels, 1, digital_values);
     if (board != NULL)
     {
+        hil_task_stop_all(board);
+        hil_task_delete_all(board);
         hil_close(board);
     }
 
