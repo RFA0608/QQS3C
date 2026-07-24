@@ -19,8 +19,9 @@ int main()
 {
     t_card board;
     t_error result;
+
     // if you want to use hardware change to 1 else 0 is virtual(QLab)
-    bool hardware = 0;
+    bool hardware = 1;
 
     if (hardware)
     {
@@ -42,7 +43,7 @@ int main()
     }
 
     // simulation_time is total run time, sample_time is sample_time.
-    int simulation_time = 30;
+    int simulation_time = 20;
     double sample_time = 0.02;
     t_timeout interval;
     t_timeout timeout;
@@ -52,18 +53,26 @@ int main()
     // angle[0] = base, angle[1] = pendulum
     double angle[2] = { 0.0, 0.0 };
     double voltage = 0.0;
-    int32_t encoder_counts[2];
+    int32_t encoder_counts[2] = { 0, 0 };
     uint32_t encoder_channels[2] = { 0, 1 };
     uint32_t analog_channels[2] = { 0 };
     uint32_t digital_channels[1] = { 0 };
     t_boolean digital_values[1] = { 1 };
     hil_write_digital(board, digital_channels, 1, digital_values);
+    hil_write_analog(board, analog_channels, 1, &voltage);
+    hil_set_encoder_counts(board, encoder_channels, 2, encoder_counts);
+
+    // operation LED (if it is running state, GREEN on)
+    uint32_t other_channels[3] = { 11000, 11001, 11002 };
+    double other_values[3] = { 0, 1, 0 };
+    hil_write_other(board, other_channels, 3, other_values);
 
     // swing-up standing gate
     bool stand_run = false;
     bool trans = false;
-    double er = 0.12;
-    int ei = int(1.0 / sample_time);
+    double er = 5;
+    double ev = 500;
+    int ei = int(3.0 / sample_time);
     int count = 0;
 
     // calculation angle
@@ -85,7 +94,7 @@ int main()
     vector<double> state(4);
     vector<double> state_theta_dot = { 0.0, 0.0 };
     vector<double> state_alpha_dot = { 0.0, 0.0 };
-    vector<double> K = { -0.39731635, 16.94882578, -0.49200058, 1.40974463 }; // this params have to already known from matlab or python. (based on 20ms)
+    vector<double> K = { -0.87865021, 18.27186509, -0.60044619,  1.53003176 }; // this params have to already known from matlab or python. (based on 20ms)
 
     // control loop
     for (int64_t i = 0; i < (int64_t)((double)simulation_time / sample_time); i++)
@@ -121,14 +130,42 @@ int main()
 
             swing_up(state, voltage);
 
-            if (abs(alpha) < er)
+            if (abs(alpha * 180 / M_PI) < er)
             {
-                cout << "ready" << endl;
-                trans = true;
+                if (abs(state[3] * 180 / M_PI) > ev)
+                {
+                    voltage = 0.0;
+                }
+                else
+                {
+                    voltage = 0.0;
+                    for (int i = 0; i < 4; i++)
+                    {
+                        voltage += K[i] * state[i];
+                    }
+                    // saturation
+                    if (voltage > 15)
+                    {
+                        voltage = 15.0;
+                    }
+                    else if (voltage < -15)
+                    {
+                        voltage = -15.0;
+                    }
+
+                    cout << "ready" << endl;
+                    trans = true;
+                }
             }
         }
         else if (!stand_run && trans)
         {
+            /*       tcsp.Send<string>("run");
+
+                   tcsp.Send<double>(-theta);
+                   tcsp.Send<double>(-alpha);*/
+
+                   //tcsp.Recv<double>();
             voltage = 0.0;
             for (int i = 0; i < 4; i++)
             {
@@ -144,10 +181,7 @@ int main()
             {
                 voltage = -15.0;
             }
-            if (abs(alpha_deg) > 20)
-            {
-                voltage = 0.0;
-            }
+
 
             if (count > ei)
             {
@@ -168,6 +202,12 @@ int main()
 
             voltage = tcsp.Recv<double>();
 
+
+            voltage = 0.0;
+            for (int i = 0; i < 4; i++)
+            {
+                voltage += K[i] * state[i];
+            }
             cout << "---------------------------------------------" << endl;
             cout << "pendulum angle: " << alpha << endl;
             cout << "base angle: " << theta << endl;
@@ -205,8 +245,14 @@ int main()
     hil_write_analog(board, analog_channels, 1, &voltage);
     digital_values[0] = 0;
     hil_write_digital(board, digital_channels, 1, digital_values);
+
+    other_values[1] = 0;
+    other_values[0] = 1;
+    hil_write_other(board, other_channels, 3, other_values);
     if (board != NULL)
     {
+        hil_task_stop_all(board);
+        hil_task_delete_all(board);
         hil_close(board);
     }
 
@@ -219,7 +265,7 @@ double ddt_filter(double u, vector<double>& state, double A, double Ts)
 
     state[0] = u;
     state[1] = y;
-   
+
     return y;
 }
 
@@ -238,8 +284,8 @@ void swing_up(vector<double>& state, double& u)
     double E_kin = 0.5 * Jp * pow(state[3], 2);
     double E_total = E_pot + E_kin;
     double E_err = E_ref - E_total;
-    
-    double term = signbit(state[3] * cos(state[1])) ? -1.0 : 1.0;
+
+    double term = (double)signbit(state[3] * cos(state[1])) ? -1.0 : 1.0;
     if (abs(state[3]) < 0.05 && abs(cos(state[1])) < 0.1)
     {
         term = 0.0;
