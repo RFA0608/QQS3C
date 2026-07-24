@@ -196,12 +196,6 @@ int main()
 
             voltage = tcsp.Recv<double>();
 
-
-            voltage = 0.0;
-            for (int i = 0; i < 4; i++)
-            {
-                voltage += K[i] * state[i];
-            }
             cout << "---------------------------------------------" << endl;
             cout << "pendulum angle: " << alpha << endl;
             cout << "base angle: " << theta << endl;
