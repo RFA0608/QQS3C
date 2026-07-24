@@ -49,12 +49,14 @@ int main()
     // angle[0] = base, angle[1] = pendulum
     double angle[2] = { 0.0, 0.0 };
     double voltage = 0.0;
-    int32_t encoder_counts[2];
+    int32_t encoder_counts[2] = { 0, 0 };
     uint32_t encoder_channels[2] = { 0, 1 };
     uint32_t analog_channels[2] = { 0 };
     uint32_t digital_channels[1] = { 0 };
     t_boolean digital_values[1] = { 1 };
     hil_write_digital(board, digital_channels, 1, digital_values);
+    hil_write_analog(board, analog_channels, 1, &voltage);
+    hil_set_encoder_counts(board, encoder_channels, 2, encoder_counts);
 
     // operation LED (if it is running state, GREEN on)
     uint32_t other_channels[3] = { 11000, 11001, 11002 };
