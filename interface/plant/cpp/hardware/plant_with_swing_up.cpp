@@ -160,12 +160,6 @@ int main()
         }
         else if (!stand_run && trans)
         {
-            /*       tcsp.Send<string>("run");
-
-                   tcsp.Send<double>(-theta);
-                   tcsp.Send<double>(-alpha);*/
-
-                   //tcsp.Recv<double>();
             voltage = 0.0;
             for (int i = 0; i < 4; i++)
             {
