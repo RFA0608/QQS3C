@@ -56,6 +56,11 @@ int main()
     t_boolean digital_values[1] = { 1 };
     hil_write_digital(board, digital_channels, 1, digital_values);
 
+    // operation LED (if it is running state, GREEN on)
+    uint32_t other_channels[3] = { 11000, 11001, 11002 };
+    double other_values[3] = { 0, 1, 0 };
+    hil_write_other(board, other_channels, 3, other_values);
+
     // swing-up standing gate
     bool stand_run = false;
     double er = 6;
